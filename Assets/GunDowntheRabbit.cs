@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GunDowntheRabbit : MonoBehaviour
 {
@@ -23,7 +24,9 @@ public class GunDowntheRabbit : MonoBehaviour
         if (distance<1)
         {
             print("end");
-            Application.Quit();
+            //Application.Quit();
+
+            SceneManager.LoadScene(1);
 
         }
     }
