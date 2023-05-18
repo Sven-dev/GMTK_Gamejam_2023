@@ -19,5 +19,12 @@ public class GunDowntheRabbit : MonoBehaviour
     {
         Vector3 direction= Vector3.MoveTowards(cop.position, character.position, copspeed*Time.deltaTime);
         cop.position = direction;
+        float distance = Vector3.Distance(cop.position, character.position);
+        if (distance<1)
+        {
+            print("end");
+            Application.Quit();
+
+        }
     }
 }
