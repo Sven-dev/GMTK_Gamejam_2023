@@ -6,6 +6,7 @@ public class Movement: MonoBehaviour
 {
     public Transform character;
     public int movementspeed;
+    public SpriteRenderer sprite;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,11 +21,12 @@ public class Movement: MonoBehaviour
         {
             
             character.position += Vector3.right * Time.deltaTime * movementspeed;
-
+            sprite.flipX = false;
         }
         if (Input.GetKey(KeyCode.A))
         {
             character.position += Vector3.left * Time.deltaTime * movementspeed;
+            sprite.flipX = true;
 
         }
         if (Input.GetKey(KeyCode.W))
