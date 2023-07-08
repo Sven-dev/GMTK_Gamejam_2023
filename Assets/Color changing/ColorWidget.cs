@@ -10,6 +10,11 @@ public class ColorWidget : MonoBehaviour
     [SerializeField] private Image Image;
     [SerializeField] private Tilemap Tilemap;
 
+    private void Awake()
+    {
+        ColorManager.OnColorUpdate.AddListener(UpdateColor);
+    }
+
     public void UpdateColor(Color color)
     {
         if (SpriteRenderer != null)

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ColorManager : MonoBehaviour
 {
+    public static UnityColorEvent OnColorUpdate = new UnityColorEvent();
+
     [SerializeField] private Color LightColor;
     [SerializeField] private Color DarkColor;
     [Space]
@@ -11,15 +13,17 @@ public class ColorManager : MonoBehaviour
     [SerializeField] private Color DarkBackground;
     [Space]
     [SerializeField] private Camera Camera;
-    [Space]
-    [SerializeField] private UnityColorEvent OnColorUpdate;
-
-
+    
     // Start is called before the first frame update
     void Start()
     {
         OnColorUpdate.Invoke(DarkColor);
         Camera.backgroundColor = DarkBackground;
+    }
+
+    private void OnDestroy()
+    {
+        OnColorUpdate.RemoveAllListeners();
     }
 
     public void SwapColors(Sides side)

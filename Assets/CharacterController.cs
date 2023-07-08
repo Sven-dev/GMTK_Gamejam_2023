@@ -222,6 +222,8 @@ public class CharacterController : MonoBehaviour
 		{
 			Rigidbody.velocity = FrozenVelocity;
 			Rigidbody.gravityScale = BaseGravity;
+			Rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+
 
 			if (PlayerSide == Sides.Left)
             {
@@ -238,6 +240,7 @@ public class CharacterController : MonoBehaviour
 			FrozenVelocity = Rigidbody.velocity;
 			Rigidbody.velocity = Vector2.zero;
 			Rigidbody.gravityScale = 0;
+			Rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
 
 			if (PlayerSide == Sides.Left)
 			{
