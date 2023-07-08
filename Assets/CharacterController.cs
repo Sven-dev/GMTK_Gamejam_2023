@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-
+	[SerializeField] private Sides PlayerSide;
+	[Space]
 	public bool MovementAllowed = true;
+
 	[Header("Walking")]
 	[SerializeField] private float Speed = 5f;
 	[Range(1, 20)]
@@ -41,20 +43,41 @@ public class CharacterController : MonoBehaviour
 	private void Start()
 	{
 		Input = new Input();
-		Input.Player1.Jump.started += OnJumpInput;
-		Input.Player1.Jump.canceled += OnJumpUpInput;
+		if (PlayerSide == Sides.Left)
+		{
+			Input.Player1.Jump.started += OnJumpInput;
+			Input.Player1.Jump.canceled += OnJumpUpInput;
 
-		Input.Player1.Enable();
+			Input.Player1.Enable();
+		}
+		else //if (Player == Players.Player2)
+        {
+			Input.Player2.Jump.started += OnJumpInput;
+			Input.Player2.Jump.canceled += OnJumpUpInput;
 
-		BaseGravity = Rigidbody.gravityScale;
+			//Input.Player2.Enable();
+		}
+
+			BaseGravity = Rigidbody.gravityScale;
 	}
 
 	private void OnDestroy()
 	{
-		Input.Player1.Disable();
+		if (PlayerSide == Sides.Left)
+		{
+			Input.Player1.Disable();
 
-		Input.Player1.Jump.started -= OnJumpInput;
-		Input.Player1.Jump.canceled -= OnJumpUpInput;
+			Input.Player1.Jump.started -= OnJumpInput;
+			Input.Player1.Jump.canceled -= OnJumpUpInput;
+		}
+		else //if (Player == Players.Player2)
+		{
+			Input.Player2.Disable();
+
+			Input.Player2.Jump.started -= OnJumpInput;
+			Input.Player2.Jump.canceled -= OnJumpUpInput;
+		}
+
 		Input = null;
 	}
 
@@ -63,7 +86,14 @@ public class CharacterController : MonoBehaviour
 		LastTimeOnGround -= Time.deltaTime;
 
 		//Getting movement input
-		MovementInput = Input.Player1.Movement.ReadValue<Vector2>().x;
+		if (PlayerSide == Sides.Left)
+		{
+			MovementInput = Input.Player1.Movement.ReadValue<Vector2>().x;
+		}
+		else //if (Player == Players.Player2)
+		{
+			MovementInput = Input.Player2.Movement.ReadValue<Vector2>().x;
+		}
 
 		//Groundcheck
 		if (Physics2D.OverlapBox(GroundCheckTransform.position, GroundCheckSize, 0, GroundCheckLayer))
@@ -185,6 +215,32 @@ public class CharacterController : MonoBehaviour
 		}
 	}
 
+	public void SideSwitch(Sides side)
+	{
+		if (side == PlayerSide)
+		{
+			if (PlayerSide == Sides.Left)
+            {
+				Input.Player1.Enable();
+			}
+			else
+            {
+				Input.Player2.Enable();
+			}
+		}
+		else
+		{
+			if (PlayerSide == Sides.Left)
+			{
+				Input.Player1.Disable();
+			}
+			else
+			{
+				Input.Player2.Disable();
+			}
+		}
+	}
+
 	#region EDITOR METHODS
 	private void OnDrawGizmosSelected()
 	{
@@ -195,10 +251,4 @@ public class CharacterController : MonoBehaviour
 		}
 	}
 	#endregion
-}
-
-public enum Players
-{
-    Player1,
-    Player2
 }

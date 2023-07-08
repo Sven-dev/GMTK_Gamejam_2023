@@ -153,7 +153,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""e75f7ad2-e36d-4862-9d95-a172540d7ce6"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -164,7 +164,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""f3b10ea4-da71-4aa4-b427-5b02d6561bab"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -175,7 +175,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""d1b803fa-94ac-444c-900d-f2a22c09ba8d"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -186,7 +186,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""6363ebb9-1863-4287-a465-3fe068eda8a0"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
