@@ -17,8 +17,7 @@ public class SideSwitcher : MonoBehaviour
     }
 
     private IEnumerator _Timer()
-    {
-        
+    {       
         while (true)
         {
             float timer = SwitchTime;
@@ -37,18 +36,29 @@ public class SideSwitcher : MonoBehaviour
                 Side = Sides.Left;
             }
 
+            yield return new WaitForSeconds(1f);
 
             print("Switching sides!");
             SwitchRoles(Side);
 
             //Wait for side transition?
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
         }
     }
 
     private void SwitchRoles(Sides side)
     {
         OnRoleSwitch?.Invoke(side);
+    }
+
+    public void OnGameOver()
+    {
+
+    }
+
+    public void OnGameWin()
+    {
+        StopCoroutine(_Timer());
     }
 }
 
