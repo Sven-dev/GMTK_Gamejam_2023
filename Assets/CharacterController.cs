@@ -166,6 +166,10 @@ public class CharacterController : MonoBehaviour
 
 			//Animation
 			Animator.SetTrigger("Jump");
+
+			//Sound
+			AudioManager.Instance.RandomizePitch("Jump", 0.9f, 1.1f);
+			AudioManager.Instance.Play("Jump");
 		}
 	}
 

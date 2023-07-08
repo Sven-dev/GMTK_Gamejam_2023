@@ -15,7 +15,6 @@ public class ConveyorBelt : MonoBehaviour, IActivatable
     {
         if (On && collision.tag == "Player")
         {
-            print("In trigger");
             Rigidbody2D rigidbody = collision.GetComponent<Rigidbody2D>();
             if (Direction == Sides.Right)
             {

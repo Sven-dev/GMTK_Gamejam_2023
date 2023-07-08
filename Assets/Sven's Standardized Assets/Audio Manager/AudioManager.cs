@@ -470,19 +470,26 @@ public class AudioManager : MonoBehaviour
     {
         Sound sound = GetSound(name);
 
-        sound.Source.Play();
+        if (!sound.Source.isPlaying)
+        {
+            sound.Source.Play();
+        }
         StartCoroutine(_SetVolume(sound, 0, 1, time));
     }
 
     /// <summary>
     /// Changes the volume level of name from 1 to 0
     /// </summary>
-    public void FadeOut(string name, float time)
+    public void FadeOut(string name, float time, bool stop = true)
     {
         Sound sound = GetSound(name);
 
         StartCoroutine(_SetVolume(sound, 1, 0, time));
-        StartCoroutine(_Stop(sound, time));
+
+        if (stop)
+        {
+            StartCoroutine(_Stop(sound, time));
+        }
     }
 
     private IEnumerator _SetVolume(Sound sound, float from, float to, float time)

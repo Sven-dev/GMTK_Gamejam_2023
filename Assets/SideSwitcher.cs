@@ -8,10 +8,14 @@ public class SideSwitcher : MonoBehaviour
     public static SideSwitcher Instance;
 
     [SerializeField] private int SwitchTime = 1;
+    [SerializeField] private List<CharacterController> Characters;
     [Space]
     [SerializeField] private UnitySideEvent OnRoleSwitch;
     [Space]
+    [SerializeField] private UnityFloatEvent OnTimerChange;
+    [Space]
     [SerializeField] private UnityEvent OnVictory;
+
 
     private Sides Side = Sides.Left;
 
@@ -33,8 +37,13 @@ public class SideSwitcher : MonoBehaviour
             float timer = SwitchTime;
             while (timer > 0)
             {
-                timer -= Time.deltaTime;
-                yield return null;
+                timer -= 1;
+
+                float timePassed = timer / SwitchTime;
+                OnTimerChange?.Invoke(timePassed);
+
+                yield return new WaitForSeconds(1);
+
             }
           
             if (Side == Sides.Left)
@@ -44,6 +53,11 @@ public class SideSwitcher : MonoBehaviour
             else // if (PlayerTurn == Sides.Right)
             {
                 Side = Sides.Left;
+            }
+
+            foreach (CharacterController character in Characters)
+            {
+                character.SideSwitch(Side);
             }
 
             yield return new WaitForSeconds(1f);

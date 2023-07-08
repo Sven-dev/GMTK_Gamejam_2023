@@ -15,6 +15,7 @@ public class LerpCurves : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public float Linear(float time)

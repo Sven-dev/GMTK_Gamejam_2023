@@ -21,6 +21,7 @@ public class Button : MonoBehaviour
         if (collision.tag == "Player")
         {
             Activate();
+            AudioManager.Instance.Play("Button Press");
         }
     }
 

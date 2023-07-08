@@ -13,14 +13,8 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -66,6 +60,8 @@ public class LevelManager : MonoBehaviour
     {
         Animator.SetTrigger(transition.ToString());
         yield return new WaitForSeconds(TransitionTime);
+
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(index);
         Animator.SetTrigger("End");
     }
@@ -74,5 +70,6 @@ public class LevelManager : MonoBehaviour
 public enum Transition
 {
     None,
-    Crossfade
+    Crossfade,
+    Heart
 }
