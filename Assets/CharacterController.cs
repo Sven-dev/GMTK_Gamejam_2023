@@ -254,9 +254,26 @@ public class CharacterController : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-			print("endGame");
+			SideSwitcher.Instance.OnGameWin();
         }
     }
+
+	public void Victory()
+    {
+		Rigidbody.velocity = Vector2.zero;
+		Rigidbody.gravityScale = 0;
+
+		if (PlayerSide == Sides.Left)
+		{
+			Input.Player1.Disable();
+		}
+		else
+		{
+			Input.Player2.Disable();
+		}
+
+		//Play an animation
+	}
 
     #region EDITOR METHODS
     private void OnDrawGizmosSelected()

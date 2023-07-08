@@ -1,19 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SideSwitcher : MonoBehaviour
 {
+    public static SideSwitcher Instance;
+
     [SerializeField] private int SwitchTime = 1;
     [Space]
     [SerializeField] private UnitySideEvent OnRoleSwitch;
+    [Space]
+    [SerializeField] private UnityEvent OnVictory;
 
     private Sides Side = Sides.Left;
+
+    private IEnumerator TimerCoroutine;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(_Timer());
+        Instance = this;
+
+        TimerCoroutine = _Timer();
+        StartCoroutine(TimerCoroutine);
     }
 
     private IEnumerator _Timer()
@@ -51,14 +61,11 @@ public class SideSwitcher : MonoBehaviour
         OnRoleSwitch?.Invoke(side);
     }
 
-    public void OnGameOver()
-    {
-
-    }
-
     public void OnGameWin()
     {
-        StopCoroutine(_Timer());
+        StopCoroutine(TimerCoroutine);
+        OnVictory?.Invoke();
+        print("You win");
     }
 }
 
