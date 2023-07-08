@@ -37,11 +37,12 @@ public class SideSwitcher : MonoBehaviour
                 Side = Sides.Left;
             }
 
+
             print("Switching sides!");
             SwitchRoles(Side);
 
             //Wait for side transition?
-            yield return null;
+            yield return new WaitForSeconds(2f);
         }
     }
 

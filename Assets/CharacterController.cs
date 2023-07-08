@@ -32,6 +32,7 @@ public class CharacterController : MonoBehaviour
 	private float LastTimeOnGround = 0f;
 
 	private float BaseGravity;
+	private Vector2 FrozenVelocity = Vector2.zero;
 
 	private Input Input;
 
@@ -219,9 +220,13 @@ public class CharacterController : MonoBehaviour
 	{
 		if (side == PlayerSide)
 		{
+			Rigidbody.velocity = FrozenVelocity;
+			Rigidbody.gravityScale = BaseGravity;
+
 			if (PlayerSide == Sides.Left)
             {
 				Input.Player1.Enable();
+				
 			}
 			else
             {
@@ -230,6 +235,10 @@ public class CharacterController : MonoBehaviour
 		}
 		else
 		{
+			FrozenVelocity = Rigidbody.velocity;
+			Rigidbody.velocity = Vector2.zero;
+			Rigidbody.gravityScale = 0;
+
 			if (PlayerSide == Sides.Left)
 			{
 				Input.Player1.Disable();
@@ -241,8 +250,16 @@ public class CharacterController : MonoBehaviour
 		}
 	}
 
-	#region EDITOR METHODS
-	private void OnDrawGizmosSelected()
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+			print("endGame");
+        }
+    }
+
+    #region EDITOR METHODS
+    private void OnDrawGizmosSelected()
 	{
 		if (GroundCheckTransform)
 		{
