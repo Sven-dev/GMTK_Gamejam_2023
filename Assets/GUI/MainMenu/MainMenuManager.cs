@@ -29,7 +29,13 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnOptionsbutton()
     {
+        
+    }
 
+    public void OnCreditsButton()
+    {
+        AudioManager.Instance.FadeOut("Main Menu", 1f);
+        LevelManager.Instance.LoadLevel(5, Transition.Heart);
     }
 
     public void OnQuitButton()

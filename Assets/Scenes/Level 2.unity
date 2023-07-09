@@ -412,8 +412,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe2855e6470e4ad48b2a7a5881db4bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftMusic: A1
-  RightMusic: B1
+  LeftMusic: A2
+  RightMusic: B2
 --- !u!114 &534885969 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6095109430282191068, guid: 6992fc501f9a4ed4eb2f9e51bd5d1198,
@@ -2219,7 +2219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96b4a714cee1bba40b4d9e9c29cf7335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Level: 2
+  Level: 4
   Transition: 2
 --- !u!1 &1336178968
 GameObject:
