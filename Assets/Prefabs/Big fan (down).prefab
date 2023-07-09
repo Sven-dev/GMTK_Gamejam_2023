@@ -49,9 +49,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Direction: -1
-  Speed: 30
+  Speed: 35
   WindTrigger: {fileID: 6095109430282191041}
   Animator: {fileID: 6095109430282191043}
+  On: 0
 --- !u!114 &6095109430282191069
 MonoBehaviour:
   m_ObjectHideFlags: 0

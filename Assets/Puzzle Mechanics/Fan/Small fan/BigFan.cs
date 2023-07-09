@@ -10,7 +10,13 @@ public class BigFan : MonoBehaviour, IActivatable
     [SerializeField] private Collider2D WindTrigger;
     [SerializeField] private Animator Animator;
 
-    private bool On = false;
+    [SerializeField] private bool On = false;
+
+    private void Start()
+    {
+        WindTrigger.enabled = On;
+        Animator.SetBool("Moving", On);
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {

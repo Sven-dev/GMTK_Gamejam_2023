@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 4216899661318057328}
   - component: {fileID: 4216899661318057330}
   - component: {fileID: 4216899661318057329}
+  - component: {fileID: 5601262421353782475}
   m_Layer: 8
   m_Name: Gate
   m_TagString: Untagged
@@ -138,6 +139,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 3.125}
   m_EdgeRadius: 0
+--- !u!114 &5601262421353782475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4216899661318057331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cf4d21bf49e75949b6b902204bf0c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpriteRenderer: {fileID: 4216899661318057330}
+  Image: {fileID: 0}
+  Tilemap: {fileID: 0}
 --- !u!1 &4216899661354777989
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,3 +233,4 @@ MonoBehaviour:
   GateTransform: {fileID: 4216899661318057328}
   ActivePivot: {fileID: 4216899659753163695}
   InactivePivot: {fileID: 4216899661354777988}
+  On: 0

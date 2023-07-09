@@ -14,7 +14,7 @@ public class Button : MonoBehaviour
     [SerializeField] private UnityBoolEvent OnToggle;
 
     private int CycleCount = 0;
-    private bool Pressed = false;
+    private bool On = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -28,7 +28,7 @@ public class Button : MonoBehaviour
     private void Activate()
     {
         CycleCount = 2;
-        Pressed = true;      
+        On = true;      
         OnToggle?.Invoke(true);
 
         Renderer.sprite = DownSprite;
@@ -37,7 +37,7 @@ public class Button : MonoBehaviour
     }
     private void Deactivate()
     {
-        Pressed = false;
+        On = false;
         OnToggle?.Invoke(false);
 
         Renderer.sprite = UpSprite;
@@ -48,7 +48,7 @@ public class Button : MonoBehaviour
     public void OnRoleSwitch()
     {
         CycleCount--;
-        if (CycleCount <= 0)
+        if (CycleCount == 0)
         {
             Deactivate();
         }

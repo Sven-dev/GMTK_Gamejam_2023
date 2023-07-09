@@ -9,7 +9,12 @@ public class ConveyorBelt : MonoBehaviour, IActivatable
     [Space]
     [SerializeField] private Animator Animator;
 
-    private bool On = false;
+    [SerializeField] private bool On = false;
+
+    private void Start()
+    {
+        Animator.SetBool("Moving", On);
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {

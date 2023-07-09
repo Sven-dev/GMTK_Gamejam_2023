@@ -9,11 +9,18 @@ public class Gate : MonoBehaviour, IActivatable
     [SerializeField] private Transform ActivePivot;
     [SerializeField] private Transform InactivePivot;
 
-    private bool On = false;
+    [SerializeField] private bool On = false;
 
     private void Start()
     {
-        transform.position = InactivePivot.position;
+        if (On)
+        {
+            GateTransform.position = ActivePivot.position;
+        }
+        else
+        {
+            GateTransform.position = InactivePivot.position;
+        }
     }
 
     public void Toggle(bool state)
