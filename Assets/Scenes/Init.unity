@@ -244,6 +244,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4989836045423086356, guid: 776fc9e671bb2504abca7ee04e2417bd,
         type: 3}
+      propertyPath: _MusicVolume
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989836045423086356, guid: 776fc9e671bb2504abca7ee04e2417bd,
+        type: 3}
+      propertyPath: _SoundVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989836045423086356, guid: 776fc9e671bb2504abca7ee04e2417bd,
+        type: 3}
       propertyPath: Music.Array.size
       value: 8
       objectReference: {fileID: 0}

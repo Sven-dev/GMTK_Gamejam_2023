@@ -885,10 +885,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aa6ca17c5c6a8c4ead09d0c5b0fefd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LightColor: {r: 0.4245283, g: 0.21241248, b: 0.13817194, a: 1}
-  DarkColor: {r: 0.9764706, g: 0.63529414, b: 0.019607844, a: 1}
-  LightBackground: {r: 0.27171594, g: 0.46411604, b: 0.8113208, a: 1}
-  DarkBackground: {r: 0.05882353, g: 0.13725491, b: 0.16470589, a: 1}
+  LightColor: {r: 0, g: 0, b: 0, a: 1}
+  DarkColor: {r: 1, g: 1, b: 1, a: 1}
+  LightBackground: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
+  DarkBackground: {r: 0, g: 0, b: 0, a: 1}
   Camera: {fileID: 519420031}
 --- !u!114 &519420034
 MonoBehaviour:
