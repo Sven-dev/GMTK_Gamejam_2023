@@ -4,22 +4,16 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private bool Clicked = false;
 
     public void OnStartButton()
     {
-        LevelManager.Instance.LoadLevel(2, Transition.Heart);
-        AudioManager.Instance.FadeOut("Main Menu", 2f);
+        if (!Clicked)
+        {
+            Clicked = true;
+            LevelManager.Instance.LoadLevel(2, Transition.Heart);
+            AudioManager.Instance.FadeOut("Main Menu", 2f);
+        }
     }
 
     public void OnControlsButton()
@@ -34,8 +28,12 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnCreditsButton()
     {
-        AudioManager.Instance.FadeOut("Main Menu", 1f);
-        LevelManager.Instance.LoadLevel(5, Transition.Heart);
+        if (!Clicked)
+        {
+            Clicked = true;
+            AudioManager.Instance.FadeOut("Main Menu", 1f);
+            LevelManager.Instance.LoadLevel(5, Transition.Heart);
+        }
     }
 
     public void OnQuitButton()

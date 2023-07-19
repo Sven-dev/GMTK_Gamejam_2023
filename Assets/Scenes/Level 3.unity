@@ -915,7 +915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LightColor: {r: 0, g: 0, b: 0, a: 1}
-  DarkColor: {r: 1, g: 1, b: 1, a: 1}
+  DarkColor: {r: 0.9254902, g: 0.9254902, b: 0.9254902, a: 1}
   LightBackground: {r: 0.9254902, g: 0.9254902, b: 0.9254902, a: 1}
   DarkBackground: {r: 0, g: 0, b: 0, a: 1}
   Camera: {fileID: 519420031}

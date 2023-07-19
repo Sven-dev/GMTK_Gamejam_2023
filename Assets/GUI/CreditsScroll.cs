@@ -50,6 +50,8 @@ public class CreditsScroll : MonoBehaviour
 
         AudioManager.Instance.FadeOut("Credits", 1);
         LevelManager.Instance.LoadLevel(1, Transition.Heart);
+
+        AudioManager.Instance.Play("Kiss");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

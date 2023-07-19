@@ -269,6 +269,7 @@ public class CharacterController : MonoBehaviour
     {
 		Rigidbody.velocity = Vector2.zero;
 		Rigidbody.gravityScale = 0;
+		Rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
 
 		if (PlayerSide == Sides.Left)
 		{
@@ -278,8 +279,6 @@ public class CharacterController : MonoBehaviour
 		{
 			Input.Player2.Disable();
 		}
-
-		//Play an animation
 	}
 
     #region EDITOR METHODS
