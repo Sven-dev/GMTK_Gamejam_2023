@@ -360,6 +360,34 @@ public partial class @Input : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Switching"",
+            ""id"": ""e3b7fef4-624f-44b0-9768-46ec1505357c"",
+            ""actions"": [
+                {
+                    ""name"": ""Switch"",
+                    ""type"": ""Button"",
+                    ""id"": ""eab6a1bf-a8e8-4222-b6a6-ac8490f5e7df"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8edf2246-39f9-4923-9b15-6be6e04be14c"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -372,6 +400,9 @@ public partial class @Input : IInputActionCollection2, IDisposable
         m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
         m_Player2_Movement = m_Player2.FindAction("Movement", throwIfNotFound: true);
         m_Player2_Jump = m_Player2.FindAction("Jump", throwIfNotFound: true);
+        // Switching
+        m_Switching = asset.FindActionMap("Switching", throwIfNotFound: true);
+        m_Switching_Switch = m_Switching.FindAction("Switch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -509,6 +540,39 @@ public partial class @Input : IInputActionCollection2, IDisposable
         }
     }
     public Player2Actions @Player2 => new Player2Actions(this);
+
+    // Switching
+    private readonly InputActionMap m_Switching;
+    private ISwitchingActions m_SwitchingActionsCallbackInterface;
+    private readonly InputAction m_Switching_Switch;
+    public struct SwitchingActions
+    {
+        private @Input m_Wrapper;
+        public SwitchingActions(@Input wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Switch => m_Wrapper.m_Switching_Switch;
+        public InputActionMap Get() { return m_Wrapper.m_Switching; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SwitchingActions set) { return set.Get(); }
+        public void SetCallbacks(ISwitchingActions instance)
+        {
+            if (m_Wrapper.m_SwitchingActionsCallbackInterface != null)
+            {
+                @Switch.started -= m_Wrapper.m_SwitchingActionsCallbackInterface.OnSwitch;
+                @Switch.performed -= m_Wrapper.m_SwitchingActionsCallbackInterface.OnSwitch;
+                @Switch.canceled -= m_Wrapper.m_SwitchingActionsCallbackInterface.OnSwitch;
+            }
+            m_Wrapper.m_SwitchingActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Switch.started += instance.OnSwitch;
+                @Switch.performed += instance.OnSwitch;
+                @Switch.canceled += instance.OnSwitch;
+            }
+        }
+    }
+    public SwitchingActions @Switching => new SwitchingActions(this);
     public interface IPlayer1Actions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -518,5 +582,9 @@ public partial class @Input : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+    }
+    public interface ISwitchingActions
+    {
+        void OnSwitch(InputAction.CallbackContext context);
     }
 }

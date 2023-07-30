@@ -16,68 +16,55 @@ public class SideSwitcher : MonoBehaviour
     [Space]
     [SerializeField] private UnityEvent OnVictory;
 
-
+    private Input Input;
     private Sides Side = Sides.Left;
 
-    private IEnumerator TimerCoroutine;
+    //private IEnumerator TimerCoroutine;
 
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
 
-        TimerCoroutine = _Timer();
-        StartCoroutine(TimerCoroutine);
+        Input = new Input();
+        Input.Switching.Switch.started += SwitchRoles;
+        Input.Switching.Enable();
     }
 
-    private IEnumerator _Timer()
-    {       
-        while (true)
-        {
-            float timer = SwitchTime;
-            while (timer > 0)
-            {
-                timer -= 1;
-
-                float timePassed = timer / SwitchTime;
-                OnTimerChange?.Invoke(timePassed);
-
-                yield return new WaitForSeconds(1);
-
-            }
-          
-            if (Side == Sides.Left)
-            {
-                Side = Sides.Right;
-            }
-            else // if (PlayerTurn == Sides.Right)
-            {
-                Side = Sides.Left;
-            }
-
-            foreach (CharacterController character in Characters)
-            {
-                character.SideSwitch(Side);
-            }
-
-            yield return new WaitForSeconds(1f);
-
-            print("Switching sides!");
-            SwitchRoles(Side);
-
-            //Wait for side transition?
-            yield return new WaitForSeconds(3f);
-        }
-    }
-
-    private void SwitchRoles(Sides side)
+    private void OnDestroy()
     {
-        OnRoleSwitch?.Invoke(side);
+        Input.Switching.Disable();
+    }
+
+    private void SwitchRoles(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+    {
+        StartCoroutine(_SwitchRoles());
+    }
+
+    private IEnumerator _SwitchRoles()
+    {
+        if (Side == Sides.Left)
+        {
+            Side = Sides.Right;
+            OnRoleSwitch?.Invoke(Side);
+
+            Characters[0].SideSwitch(Side);
+            yield return new WaitForSeconds(1f);
+            Characters[1].SideSwitch(Side);
+        }
+        else //if (PlayerTurn == Sides.Right)
+        {
+            Side = Sides.Left;
+            OnRoleSwitch?.Invoke(Side);
+
+            Characters[1].SideSwitch(Side);
+            yield return new WaitForSeconds(1f);
+            Characters[0].SideSwitch(Side);
+        }  
     }
 
     public void OnGameWin()
     {
-        StopCoroutine(TimerCoroutine);
         OnVictory?.Invoke();
         print("You win");
     }
