@@ -30,6 +30,7 @@ public class CharacterController : MonoBehaviour
 
 	private float CoyoteTime = 0.2f;
 	private float LastTimeOnGround = 0f;
+	private float JustJumped = 0.2f;
 
 	private float BaseGravity;
 	private Vector2 FrozenVelocity = Vector2.zero;
@@ -85,6 +86,7 @@ public class CharacterController : MonoBehaviour
 	private void Update()
 	{
 		LastTimeOnGround -= Time.deltaTime;
+		JustJumped -= Time.deltaTime;
 
 		//Getting movement input
 		if (PlayerSide == Sides.Left)
@@ -97,7 +99,7 @@ public class CharacterController : MonoBehaviour
 		}
 
 		//Groundcheck
-		if (Physics2D.OverlapBox(GroundCheckTransform.position, GroundCheckSize, 0, GroundCheckLayer))
+		if (JustJumped < 0 && Physics2D.OverlapBox(GroundCheckTransform.position, GroundCheckSize, 0, GroundCheckLayer))
 		{
 			if (LastTimeOnGround < -0.01f)
 			{
@@ -107,6 +109,10 @@ public class CharacterController : MonoBehaviour
 
 			LastTimeOnGround = CoyoteTime;
 		}
+		else
+        {
+			print("not on ground");
+        }
 	}
 
 	private void FixedUpdate()
@@ -161,8 +167,12 @@ public class CharacterController : MonoBehaviour
 	{
 		if (LastTimeOnGround >= 0)
 		{
+			print("jump");
+			JustJumped = CoyoteTime;
+
 			Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, 0);
 			Rigidbody.AddForce(Vector2.up * JumpForce, ForceMode2D.Force);
+			LastTimeOnGround -= 10;
 
 			//Animation
 			Animator.SetTrigger("Jump");
