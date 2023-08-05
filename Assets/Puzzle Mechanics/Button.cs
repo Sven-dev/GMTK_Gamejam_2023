@@ -20,9 +20,17 @@ public class Button : MonoBehaviour
     private int CycleCount = 0;
     private bool On = false;
 
+    private string ButtonPress;
+
     private void Start()
     {
         Label.text = ActiveTime.ToString();
+        ButtonPress = AudioManager.Instance.CreateSound("Button Press");
+    }
+
+    private void OnDestroy()
+    {
+        AudioManager.Instance.DestroySound(ButtonPress);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,7 +38,8 @@ public class Button : MonoBehaviour
         if (collision.tag == "Player")
         {
             Activate();
-            AudioManager.Instance.Play("Button Press");
+            AudioManager.Instance.SetPitch(ButtonPress, 1f);
+            AudioManager.Instance.Play(ButtonPress);
         }
     }
 
@@ -49,19 +58,26 @@ public class Button : MonoBehaviour
 
     private IEnumerator _Timer()
     {
-        yield return new WaitForSeconds(1);
-
         int time = ActiveTime;
-        while (time > 0)
-        {    
-            time -= 1;
-            Label.text = time.ToString();
-
+        while (time > -1)
+        {
             yield return new WaitForSeconds(1);
+
+            time -= 1;
+            Label.text = time.ToString();        
         }
 
         Label.text = ActiveTime.ToString();
-        Deactivate();
+
+        //Check if the player is still standing on the button
+        if (Physics2D.OverlapBox(transform.position + Vector3.up * 0.35f, Vector3.right * 0.8f + Vector3.up * 0.6f, 0, LayerMask.GetMask("Player")))
+        {
+            StartCoroutine(_Timer());
+        }
+        else
+        {
+            Deactivate();
+        }
     }
 
     private void Deactivate()
@@ -72,6 +88,14 @@ public class Button : MonoBehaviour
         Renderer.sprite = UpSprite;
         Trigger.enabled = true;
         Collider.enabled = true;
+
+        AudioManager.Instance.SetPitch(ButtonPress, 0.7f);
+        AudioManager.Instance.Play(ButtonPress);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(transform.position + Vector3.up * 0.35f, Vector3.right * 0.8f + Vector3.up * 0.6f);
     }
 }
 
