@@ -9,6 +9,6 @@ public class LevelTrigger : MonoBehaviour
 
     public void SwitchLevel()
     {
-        LevelManager.Instance.LoadLevel(Level, Transition);
+        LevelManager.Instance.LoadNextLevel(Transition);
     }
 }

@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    [Range(0, 1f)]
+    [Range(1, 20f)]
     [SerializeField] private float MovementSmoothing = 0.5f;
     [SerializeField] private List<CharacterController> Characters;
 
     private CharacterController ActiveCharacter;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         ActiveCharacter = Characters[0];
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         FollowCharacter();
     }
@@ -27,9 +27,10 @@ public class CameraManager : MonoBehaviour
         Vector3 characterPosition = ActiveCharacter.transform.position;
         characterPosition.z = transform.position.z;
 
-        Vector3 movement = Vector3.MoveTowards(transform.position, characterPosition, MovementSmoothing);
-
-        transform.position = movement;
+        if (transform.position != characterPosition)
+        {
+            transform.position += (characterPosition - transform.position) / MovementSmoothing;
+        }
     }
 
     public void SwitchActiveCharacter(Sides side)

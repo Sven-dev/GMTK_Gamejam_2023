@@ -49,8 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Direction: 1
-  Speed: 50
+  Speed: 63
   Animator: {fileID: 6593937635020829784}
+  On: 0
 --- !u!61 &6593937635020829778
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -118,6 +119,7 @@ MonoBehaviour:
   SpriteRenderer: {fileID: 6593937635020829783}
   Image: {fileID: 0}
   Tilemap: {fileID: 0}
+  Text: {fileID: 0}
 --- !u!212 &6593937635020829783
 SpriteRenderer:
   m_ObjectHideFlags: 0
