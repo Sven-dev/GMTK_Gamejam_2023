@@ -50,14 +50,28 @@ public class Button : MonoBehaviour
         OnToggle?.Invoke(true);
 
         Renderer.sprite = DownSprite;
-        Trigger.enabled = false;
         Collider.enabled = false;
 
-        StartCoroutine(_Timer());
+        StopCoroutine("_Timer");
+        StartCoroutine("_Timer");
     }
 
     private IEnumerator _Timer()
     {
+        Label.text = ActiveTime.ToString();
+
+        //Make sure the timer doesn't move until the player moves off the button
+        bool standingOnButton = true;
+        while (standingOnButton)
+        {
+            if (!Physics2D.OverlapBox(transform.position + Vector3.up * 0.35f, Vector3.right * 0.8f + Vector3.up * 0.6f, 0, LayerMask.GetMask("Player")))
+            {
+                standingOnButton = false;
+            }
+
+            yield return null;
+        }
+
         int time = ActiveTime;
         while (time > -1)
         {
@@ -66,18 +80,8 @@ public class Button : MonoBehaviour
             time -= 1;
             Label.text = time.ToString();        
         }
-
-        Label.text = ActiveTime.ToString();
-
-        //Check if the player is still standing on the button
-        if (Physics2D.OverlapBox(transform.position + Vector3.up * 0.35f, Vector3.right * 0.8f + Vector3.up * 0.6f, 0, LayerMask.GetMask("Player")))
-        {
-            StartCoroutine(_Timer());
-        }
-        else
-        {
-            Deactivate();
-        }
+       
+        Deactivate();
     }
 
     private void Deactivate()
@@ -86,8 +90,9 @@ public class Button : MonoBehaviour
         OnToggle?.Invoke(false);
 
         Renderer.sprite = UpSprite;
-        Trigger.enabled = true;
         Collider.enabled = true;
+
+        Label.text = ActiveTime.ToString();
 
         AudioManager.Instance.SetPitch(ButtonPress, 0.7f);
         AudioManager.Instance.Play(ButtonPress);
