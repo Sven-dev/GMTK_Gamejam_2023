@@ -7,19 +7,18 @@ public class SideSwitcher : MonoBehaviour
 {
     public static SideSwitcher Instance;
 
-    [SerializeField] private int SwitchTime = 1;
-    [SerializeField] private List<CharacterController> Characters;
+    [SerializeField] private Character1Controller Character1;
+    [SerializeField] private Character2Controller Character2;
+    [SerializeField] private CameraManager CameraManager;
     [Space]
-    [SerializeField] private UnitySideEvent OnRoleSwitch;
+    [SerializeField] private UnityBoolEvent OnCharacterSwitch;
     [Space]
     [SerializeField] private UnityFloatEvent OnTimerChange;
     [Space]
     [SerializeField] private UnityEvent OnVictory;
 
     private Input Input;
-    private Sides Side = Sides.Left;
-
-    //private IEnumerator TimerCoroutine;
+    private bool Player1 = true;
 
     // Start is called before the first frame update
     void Start()
@@ -27,51 +26,45 @@ public class SideSwitcher : MonoBehaviour
         Instance = this;
 
         Input = new Input();
-        Input.Switching.Switch.started += SwitchRoles;
-        Input.Switching.Enable();
+        Input.Switch.Switch.started += SwitchRoles;
+        Input.Switch.Enable();
     }
 
     private void OnDestroy()
     {
-        Input.Switching.Disable();
+        Input.Switch.Disable();
     }
 
-    private void SwitchRoles(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+    public void SwitchRoles(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
     {
         StartCoroutine(_SwitchRoles());
     }
 
     private IEnumerator _SwitchRoles()
     {
-        if (Side == Sides.Left)
-        {
-            Side = Sides.Right;
-            OnRoleSwitch?.Invoke(Side);
+        Player1 = !Player1;
+        OnCharacterSwitch?.Invoke(Player1);
 
-            Characters[0].SideSwitch(Side);
+        if (Player1)
+        {
+            CameraManager.SetTarget(Character1.transform);
+
+            Character2.DisableCharacter();
             yield return new WaitForSeconds(1f);
-            Characters[1].SideSwitch(Side);
+            Character1.EnableCharacter();
         }
-        else //if (PlayerTurn == Sides.Right)
+        else //if (!player1)
         {
-            Side = Sides.Left;
-            OnRoleSwitch?.Invoke(Side);
+            CameraManager.SetTarget(Character2.transform);
 
-            Characters[1].SideSwitch(Side);
+            Character1.DisableCharacter();
             yield return new WaitForSeconds(1f);
-            Characters[0].SideSwitch(Side);
+            Character2.EnableCharacter();
         }  
     }
 
     public void OnGameWin()
     {
         OnVictory?.Invoke();
-        print("You win");
     }
-}
-
-public enum Sides
-{
-    Left,
-    Right
 }

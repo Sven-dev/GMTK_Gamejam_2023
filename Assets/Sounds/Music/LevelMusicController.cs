@@ -13,9 +13,9 @@ public class LevelMusicController : MonoBehaviour
         AudioManager.Instance.FadeIn(LeftMusic, 0.5f);
     }
 
-    public void OnSwitch(Sides side)
+    public void OnSwitch(bool player1)
     {
-        if (side == Sides.Left)
+        if (player1)
         {
             AudioManager.Instance.FadeOut(RightMusic, 1f, false);
             AudioManager.Instance.FadeIn(LeftMusic, 1f);

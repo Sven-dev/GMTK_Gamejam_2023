@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee507b638b795147b2064190829d9e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Direction: 1
+  Left: 0
   Speed: 50
   WindTrigger: {fileID: 7069715487805311988}
   Animator: {fileID: 7069715487805311883}
@@ -67,6 +67,7 @@ MonoBehaviour:
   SpriteRenderer: {fileID: 7069715487805311880}
   Image: {fileID: 0}
   Tilemap: {fileID: 0}
+  Text: {fileID: 0}
 --- !u!212 &7069715487805311880
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -108,7 +109,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 8147576527432926863, guid: 1c818099574b0b1409db419f64ec4837,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.32941177, g: 0.32941177, b: 0.32941177, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

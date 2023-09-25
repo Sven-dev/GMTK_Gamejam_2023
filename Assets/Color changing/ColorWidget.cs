@@ -14,7 +14,7 @@ public class ColorWidget : MonoBehaviour
 
     private void Awake()
     {
-        ColorManager.OnColorUpdate.AddListener(UpdateColor);
+        //ColorManager.OnColorUpdate.AddListener(UpdateColor);
     }
 
     public void UpdateColor(Color color)

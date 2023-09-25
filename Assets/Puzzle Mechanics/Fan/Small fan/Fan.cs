@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fan : MonoBehaviour, IActivatable
 {
-    [SerializeField] private Sides Direction = Sides.Right;
+    [SerializeField] private bool Left;
     [SerializeField] private float Speed = 1f;
     [Space]
     [SerializeField] private Collider2D WindTrigger;
@@ -17,13 +17,13 @@ public class Fan : MonoBehaviour, IActivatable
         if (On && collision.tag == "Player")
         {
             Rigidbody2D rigidbody = collision.GetComponent<Rigidbody2D>();
-            if (Direction == Sides.Right)
-            {
-                rigidbody.AddForce(Vector2.right * Speed * Time.deltaTime, ForceMode2D.Impulse);
-            }
-            else //if (Direction == Sides.Left)
+            if (Left)
             {
                 rigidbody.AddForce(Vector2.left * Speed * Time.deltaTime, ForceMode2D.Impulse);
+            }
+            else
+            {
+                rigidbody.AddForce(Vector2.right * Speed * Time.deltaTime, ForceMode2D.Impulse);
             }
         }
     }

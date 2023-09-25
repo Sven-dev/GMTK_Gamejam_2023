@@ -25,8 +25,6 @@ public class UnitySpriteEvent : UnityEvent<Sprite> { }
 #endregion
 
 #region Custom
-[System.Serializable]
-public class UnitySideEvent : UnityEvent<Sides> { }
 
 [System.Serializable]
 public class UnityColorEvent : UnityEvent<Color> { }

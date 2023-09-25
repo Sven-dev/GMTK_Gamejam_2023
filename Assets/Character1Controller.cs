@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class Character1Controller : MonoBehaviour
 {
-	[SerializeField] private Sides PlayerSide;
-	[Space]
 	public bool MovementAllowed = true;
 
 	[Header("Walking")]
@@ -45,40 +43,19 @@ public class CharacterController : MonoBehaviour
 	private void Start()
 	{
 		Input = new Input();
-		if (PlayerSide == Sides.Left)
-		{
-			Input.Player1.Jump.started += OnJumpInput;
-			Input.Player1.Jump.canceled += OnJumpUpInput;
+		Input.Player1.Jump.started += OnJumpInput;
+		Input.Player1.Jump.canceled += OnJumpUpInput;
 
-			Input.Player1.Enable();
-		}
-		else //if (Player == Players.Player2)
-        {
-			Input.Player2.Jump.started += OnJumpInput;
-			Input.Player2.Jump.canceled += OnJumpUpInput;
+		Input.Player1.Enable();
 
-			//Input.Player2.Enable();
-		}
-
-			BaseGravity = Rigidbody.gravityScale;
+		BaseGravity = Rigidbody.gravityScale;
 	}
 
 	private void OnDestroy()
 	{
-		if (PlayerSide == Sides.Left)
-		{
-			Input.Player1.Disable();
-
-			Input.Player1.Jump.started -= OnJumpInput;
-			Input.Player1.Jump.canceled -= OnJumpUpInput;
-		}
-		else //if (Player == Players.Player2)
-		{
-			Input.Player2.Disable();
-
-			Input.Player2.Jump.started -= OnJumpInput;
-			Input.Player2.Jump.canceled -= OnJumpUpInput;
-		}
+		Input.Player1.Disable();
+		Input.Player1.Jump.started -= OnJumpInput;
+		Input.Player1.Jump.canceled -= OnJumpUpInput;
 
 		Input = null;
 	}
@@ -89,14 +66,7 @@ public class CharacterController : MonoBehaviour
 		JustJumped -= Time.deltaTime;
 
 		//Getting movement input
-		if (PlayerSide == Sides.Left)
-		{
-			MovementInput = Input.Player1.Movement.ReadValue<Vector2>().x;
-		}
-		else //if (Player == Players.Player2)
-		{
-			MovementInput = Input.Player2.Movement.ReadValue<Vector2>().x;
-		}
+		MovementInput = Input.Player1.Movement.ReadValue<Vector2>().x;
 
 		//Groundcheck
 		if (JustJumped < 0 && Physics2D.OverlapBox(GroundCheckTransform.position, GroundCheckSize, 0, GroundCheckLayer))
@@ -230,41 +200,27 @@ public class CharacterController : MonoBehaviour
 		}
 	}
 
-	public void SideSwitch(Sides side)
-	{
-		if (side == PlayerSide)
-		{
-			Rigidbody.velocity = FrozenVelocity;
-			Rigidbody.gravityScale = BaseGravity;
-			Rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+	public void EnableCharacter()
+    {
+		Rigidbody.velocity = FrozenVelocity;
+		Rigidbody.gravityScale = BaseGravity;
+		Rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
 
+		Renderer.color = new Color(0.66f, 0.66f, 0.66f, 1f);
 
-			if (PlayerSide == Sides.Left)
-            {
-				Input.Player1.Enable();
-				
-			}
-			else
-            {
-				Input.Player2.Enable();
-			}
-		}
-		else
-		{
-			FrozenVelocity = Rigidbody.velocity;
-			Rigidbody.velocity = Vector2.zero;
-			Rigidbody.gravityScale = 0;
-			Rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+		Input.Player1.Enable();
+	}
 
-			if (PlayerSide == Sides.Left)
-			{
-				Input.Player1.Disable();
-			}
-			else
-			{
-				Input.Player2.Disable();
-			}
-		}
+	public void DisableCharacter()
+    {
+		FrozenVelocity = Rigidbody.velocity;
+		Rigidbody.velocity = Vector2.zero;
+		Rigidbody.gravityScale = 0;
+		Rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+
+		Renderer.color = new Color(0.33f, 0.33f, 0.33f, 1f);
+
+		Input.Player1.Disable();
 	}
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -274,22 +230,6 @@ public class CharacterController : MonoBehaviour
 			SideSwitcher.Instance.OnGameWin();
         }
     }
-
-	public void Victory()
-    {
-		Rigidbody.velocity = Vector2.zero;
-		Rigidbody.gravityScale = 0;
-		Rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-
-		if (PlayerSide == Sides.Left)
-		{
-			Input.Player1.Disable();
-		}
-		else
-		{
-			Input.Player2.Disable();
-		}
-	}
 
     #region EDITOR METHODS
     private void OnDrawGizmosSelected()

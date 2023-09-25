@@ -114,64 +114,9 @@ public partial class @Input : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""Arrow keys"",
-                    ""id"": ""a810f1a4-2d3d-4f4f-9640-7368ecb1de35"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""17829b07-0b3b-4495-be89-42f569611135"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""edd656b5-c931-4081-aabf-9cb91c661c73"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""52d19db9-bcd3-4207-a17c-5a5746851584"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""fef2cab2-7b0e-4acf-babf-43708f6b75be"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""ea515864-f4b4-42e4-97f3-0d4c04914b6b"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -217,7 +162,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""Arrow keys"",
+                    ""name"": ""WASD"",
                     ""id"": ""5aa18620-3506-485a-b26d-e5dcd71c8d41"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
@@ -230,72 +175,6 @@ public partial class @Input : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""e75f7ad2-e36d-4862-9d95-a172540d7ce6"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""f3b10ea4-da71-4aa4-b427-5b02d6561bab"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""d1b803fa-94ac-444c-900d-f2a22c09ba8d"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""6363ebb9-1863-4287-a465-3fe068eda8a0"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ca54ae5e-2015-4b87-a02e-acee447b412f"",
-                    ""path"": ""<Gamepad>/dpad"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""WASD"",
-                    ""id"": ""b03c64ca-c716-4c8d-8d4b-6f97584a7b87"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""a3b2a367-6e1d-49a3-82fe-270e2cda72ab"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -306,7 +185,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""8a426207-c6b1-4547-99a9-cbd5db9a986e"",
+                    ""id"": ""f3b10ea4-da71-4aa4-b427-5b02d6561bab"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -317,7 +196,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""cc7304b8-431c-461d-8258-5f68a76f8ceb"",
+                    ""id"": ""d1b803fa-94ac-444c-900d-f2a22c09ba8d"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -328,7 +207,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""df0f6fcd-5643-4a46-baf7-450405f59e66"",
+                    ""id"": ""6363ebb9-1863-4287-a465-3fe068eda8a0"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -339,8 +218,19 @@ public partial class @Input : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""ca54ae5e-2015-4b87-a02e-acee447b412f"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""6ff7821a-2c18-47ba-847f-6935ba8243d9"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -362,13 +252,13 @@ public partial class @Input : IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Switching"",
-            ""id"": ""e3b7fef4-624f-44b0-9768-46ec1505357c"",
+            ""name"": ""Switch"",
+            ""id"": ""f8640aa9-24a0-40cf-beae-937e7732f89d"",
             ""actions"": [
                 {
                     ""name"": ""Switch"",
                     ""type"": ""Button"",
-                    ""id"": ""eab6a1bf-a8e8-4222-b6a6-ac8490f5e7df"",
+                    ""id"": ""4d2081e5-1c08-4c8a-a406-f541ba0c6c30"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -378,7 +268,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""8edf2246-39f9-4923-9b15-6be6e04be14c"",
+                    ""id"": ""661127e3-b235-4c14-960a-0348e87160b3"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -400,9 +290,9 @@ public partial class @Input : IInputActionCollection2, IDisposable
         m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
         m_Player2_Movement = m_Player2.FindAction("Movement", throwIfNotFound: true);
         m_Player2_Jump = m_Player2.FindAction("Jump", throwIfNotFound: true);
-        // Switching
-        m_Switching = asset.FindActionMap("Switching", throwIfNotFound: true);
-        m_Switching_Switch = m_Switching.FindAction("Switch", throwIfNotFound: true);
+        // Switch
+        m_Switch = asset.FindActionMap("Switch", throwIfNotFound: true);
+        m_Switch_Switch = m_Switch.FindAction("Switch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -541,29 +431,29 @@ public partial class @Input : IInputActionCollection2, IDisposable
     }
     public Player2Actions @Player2 => new Player2Actions(this);
 
-    // Switching
-    private readonly InputActionMap m_Switching;
-    private ISwitchingActions m_SwitchingActionsCallbackInterface;
-    private readonly InputAction m_Switching_Switch;
-    public struct SwitchingActions
+    // Switch
+    private readonly InputActionMap m_Switch;
+    private ISwitchActions m_SwitchActionsCallbackInterface;
+    private readonly InputAction m_Switch_Switch;
+    public struct SwitchActions
     {
         private @Input m_Wrapper;
-        public SwitchingActions(@Input wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Switch => m_Wrapper.m_Switching_Switch;
-        public InputActionMap Get() { return m_Wrapper.m_Switching; }
+        public SwitchActions(@Input wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Switch => m_Wrapper.m_Switch_Switch;
+        public InputActionMap Get() { return m_Wrapper.m_Switch; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(SwitchingActions set) { return set.Get(); }
-        public void SetCallbacks(ISwitchingActions instance)
+        public static implicit operator InputActionMap(SwitchActions set) { return set.Get(); }
+        public void SetCallbacks(ISwitchActions instance)
         {
-            if (m_Wrapper.m_SwitchingActionsCallbackInterface != null)
+            if (m_Wrapper.m_SwitchActionsCallbackInterface != null)
             {
-                @Switch.started -= m_Wrapper.m_SwitchingActionsCallbackInterface.OnSwitch;
-                @Switch.performed -= m_Wrapper.m_SwitchingActionsCallbackInterface.OnSwitch;
-                @Switch.canceled -= m_Wrapper.m_SwitchingActionsCallbackInterface.OnSwitch;
+                @Switch.started -= m_Wrapper.m_SwitchActionsCallbackInterface.OnSwitch;
+                @Switch.performed -= m_Wrapper.m_SwitchActionsCallbackInterface.OnSwitch;
+                @Switch.canceled -= m_Wrapper.m_SwitchActionsCallbackInterface.OnSwitch;
             }
-            m_Wrapper.m_SwitchingActionsCallbackInterface = instance;
+            m_Wrapper.m_SwitchActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Switch.started += instance.OnSwitch;
@@ -572,7 +462,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
             }
         }
     }
-    public SwitchingActions @Switching => new SwitchingActions(this);
+    public SwitchActions @Switch => new SwitchActions(this);
     public interface IPlayer1Actions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -583,7 +473,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
     }
-    public interface ISwitchingActions
+    public interface ISwitchActions
     {
         void OnSwitch(InputAction.CallbackContext context);
     }
