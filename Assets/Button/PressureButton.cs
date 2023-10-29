@@ -8,7 +8,7 @@ public class PressureButton : MonoBehaviour
     [SerializeField] private float UnpressSpeed = 1;
     [Space]
     [SerializeField] private UnityFloatEvent OnButtonUpdate;
-    private float PressValue = 0;
+    [SerializeField] private float PressValue = 0;
 
     [Header("Detection")]
     [SerializeField] private LayerMask DetectionLayer;
@@ -36,7 +36,7 @@ public class PressureButton : MonoBehaviour
             foreach (Collider2D col in playerColliders)
             {
                 //The charactercontrollers need to be rewritten to only have one so this can be a bit easier.
-                Character1Controller player1 = col.GetComponent<Character1Controller>();
+                CharacterController player1 = col.GetComponent<CharacterController>();
                 if (player1 != null && player1.Grounded)
                 {
                     pressMultiplier++;
@@ -66,9 +66,10 @@ public class PressureButton : MonoBehaviour
         {
             Platform.position = Vector2.Lerp(UnpressedPivot.position, PressedPivot.position, currentPressValue);
             OnButtonUpdate?.Invoke(currentPressValue);
-            PressValue = currentPressValue;
 
             Background.size = new Vector2(Background.size.x, Mathf.Lerp(Height, 0, PressValue));
+
+            PressValue = currentPressValue;          
         }     
     }
 
@@ -76,5 +77,11 @@ public class PressureButton : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(DetectionPivot.position, new Vector3(2, 2, 0));
+    }
+
+    [ExecuteInEditMode]
+    private void test()
+    {
+        Platform.position = new Vector2(Platform.position.x, Height);
     }
 }

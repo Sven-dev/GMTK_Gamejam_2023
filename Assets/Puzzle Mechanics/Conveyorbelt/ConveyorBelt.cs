@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConveyorBelt : MonoBehaviour, IActivatable
+public class ConveyorBelt : MonoBehaviour
 {
     [SerializeField] private bool Left;
     [SerializeField] private float Speed = 1f;

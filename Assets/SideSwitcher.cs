@@ -7,27 +7,29 @@ public class SideSwitcher : MonoBehaviour
 {
     public static SideSwitcher Instance;
 
-    [SerializeField] private Character1Controller Character1;
-    [SerializeField] private Character2Controller Character2;
+    [SerializeField] private Character ActiveCharacter = Character.Combined;
+    [Space]
+    [SerializeField] private CharacterController CombinedCharacter;
+    [SerializeField] private CharacterController TopCharacter;
+    [SerializeField] private CharacterController BottomCharacter;
+    [Space]
     [SerializeField] private CameraManager CameraManager;
-    [Space]
-    [SerializeField] private UnityBoolEvent OnCharacterSwitch;
-    [Space]
-    [SerializeField] private UnityFloatEvent OnTimerChange;
-    [Space]
-    [SerializeField] private UnityEvent OnVictory;
 
     private Input Input;
-    private bool Player1 = true;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Instance = this;
 
         Input = new Input();
         Input.Switch.Switch.started += SwitchRoles;
         Input.Switch.Enable();
+
+        //temp
+        ActiveCharacter = Character.SplitTop;
+        BottomCharacter.DisableCharacter();
+        TopCharacter.EnableCharacter();
+        CameraManager.SetTarget(TopCharacter.transform);
     }
 
     private void OnDestroy()
@@ -35,36 +37,35 @@ public class SideSwitcher : MonoBehaviour
         Input.Switch.Disable();
     }
 
+    /// <summary>
+    /// Switches between top and bottom halves, when the character is split into halves
+    /// </summary>
     public void SwitchRoles(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
     {
-        StartCoroutine(_SwitchRoles());
-    }
-
-    private IEnumerator _SwitchRoles()
-    {
-        Player1 = !Player1;
-        OnCharacterSwitch?.Invoke(Player1);
-
-        if (Player1)
+        if (ActiveCharacter == Character.SplitTop)
         {
-            CameraManager.SetTarget(Character1.transform);
+            TopCharacter.DisableCharacter();
+            BottomCharacter.EnableCharacter();
 
-            Character2.DisableCharacter();
-            yield return new WaitForSeconds(1f);
-            Character1.EnableCharacter();
+            CameraManager.SetTarget(BottomCharacter.transform);
+
+            ActiveCharacter = Character.SplitBottom;        
         }
-        else //if (!player1)
+        else if (ActiveCharacter == Character.SplitBottom)
         {
-            CameraManager.SetTarget(Character2.transform);
+            BottomCharacter.DisableCharacter();
+            TopCharacter.EnableCharacter();
 
-            Character1.DisableCharacter();
-            yield return new WaitForSeconds(1f);
-            Character2.EnableCharacter();
-        }  
-    }
+            CameraManager.SetTarget(TopCharacter.transform);
 
-    public void OnGameWin()
-    {
-        OnVictory?.Invoke();
+            ActiveCharacter = Character.SplitTop;
+        }
     }
+}
+
+public enum Character
+{
+    Combined,
+    SplitTop,
+    SplitBottom
 }

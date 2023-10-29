@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character1Controller : MonoBehaviour
+public class CharacterController : MonoBehaviour
 {
 	public bool MovementAllowed = true;
 	public bool Grounded = false;
@@ -31,9 +31,6 @@ public class Character1Controller : MonoBehaviour
 	private float LastTimeOnGround = 0f;
 	private float JustJumped = 0.2f;
 
-	private float BaseGravity;
-	private Vector2 FrozenVelocity = Vector2.zero;
-
 	private Input Input;
 
 	[Space]
@@ -47,9 +44,7 @@ public class Character1Controller : MonoBehaviour
 		Input.Player1.Jump.started += OnJumpInput;
 		Input.Player1.Jump.canceled += OnJumpUpInput;
 
-		Input.Player1.Enable();
-
-		BaseGravity = Rigidbody.gravityScale;
+		//Input.Player1.Enable();
 	}
 
 	private void OnDestroy()
@@ -63,14 +58,28 @@ public class Character1Controller : MonoBehaviour
 
 	private void Update()
 	{
-		LastTimeOnGround -= Time.deltaTime;
-		JustJumped -= Time.deltaTime;
-
 		//Getting movement input
 		MovementInput = Input.Player1.Movement.ReadValue<Vector2>().x;
 
 		//Groundcheck
-		if (JustJumped < 0 && Physics2D.OverlapBox(GroundCheckTransform.position, GroundCheckSize, 0, GroundCheckLayer))
+		Collider2D ground = Physics2D.OverlapBox(GroundCheckTransform.position, GroundCheckSize, 0, GroundCheckLayer);
+		
+		//Groundcheck (messaging)
+		if (ground != null)
+        {
+			transform.SetParent(ground.transform);
+			Grounded = true;
+        }
+		else
+        {
+			transform.SetParent(null);
+			Grounded = false;
+        }
+
+		//Groundcheck (physics)
+		LastTimeOnGround -= Time.deltaTime;
+		JustJumped -= Time.deltaTime;
+		if (JustJumped < 0 && ground != null)
 		{
 			if (LastTimeOnGround < -0.01f)
 			{
@@ -79,11 +88,9 @@ public class Character1Controller : MonoBehaviour
 			}
 
 			LastTimeOnGround = CoyoteTime;
-			Grounded = true;
 		}
 		else
         {
-			Grounded = false;
 			print("not on ground");
         }
 	}
@@ -182,11 +189,11 @@ public class Character1Controller : MonoBehaviour
 		while (progress < 1)
 		{
 			progress = Mathf.Clamp01(progress + 2 * Time.deltaTime);
-			Rigidbody.gravityScale = Mathf.Lerp(0, BaseGravity, progress);
+			Rigidbody.gravityScale = Mathf.Lerp(0, Rigidbody.gravityScale, progress);
 			yield return null;
 		}
 
-		Rigidbody.gravityScale = BaseGravity;
+		Rigidbody.gravityScale = Rigidbody.gravityScale;
 	}
 
 	private IEnumerator _RegainMovementControl()
@@ -205,34 +212,15 @@ public class Character1Controller : MonoBehaviour
 
 	public void EnableCharacter()
     {
-		Rigidbody.velocity = FrozenVelocity;
-		Rigidbody.gravityScale = BaseGravity;
-		Rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-
 		Renderer.color = new Color(0.66f, 0.66f, 0.66f, 1f);
-
 		Input.Player1.Enable();
 	}
 
 	public void DisableCharacter()
     {
-		FrozenVelocity = Rigidbody.velocity;
-		Rigidbody.velocity = Vector2.zero;
-		Rigidbody.gravityScale = 0;
-		Rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-
 		Renderer.color = new Color(0.33f, 0.33f, 0.33f, 1f);
-
 		Input.Player1.Disable();
 	}
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.transform.tag == "Player")
-        {
-			SideSwitcher.Instance.OnGameWin();
-        }
-    }
 
     #region EDITOR METHODS
     private void OnDrawGizmosSelected()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gate : MonoBehaviour, IActivatable
+public class Gate : MonoBehaviour
 {
     [SerializeField] private Transform GateTransform;
     [Space]

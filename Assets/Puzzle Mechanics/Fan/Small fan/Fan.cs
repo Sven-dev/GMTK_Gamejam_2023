@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fan : MonoBehaviour, IActivatable
+public class Fan : MonoBehaviour
 {
     [SerializeField] private bool Left;
     [SerializeField] private float Speed = 1f;

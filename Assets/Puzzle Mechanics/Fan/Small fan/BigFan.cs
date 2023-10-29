@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BigFan : MonoBehaviour, IActivatable
+public class BigFan : MonoBehaviour
 {
     [SerializeField] private int Direction = 1;
     [SerializeField] private float Speed = 1f;
