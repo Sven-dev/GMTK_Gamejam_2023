@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character2Controller : MonoBehaviour
 {
 	public bool MovementAllowed = true;
+	public bool Grounded = false;
 
 	[Header("Walking")]
 	[SerializeField] private float Speed = 5f;
@@ -81,9 +82,11 @@ public class Character2Controller : MonoBehaviour
 			}
 
 			LastTimeOnGround = CoyoteTime;
+			Grounded = true;
 		}
 		else
         {
+			Grounded = false;
 			print("not on ground");
         }
 	}
