@@ -10,7 +10,7 @@ public class PressureButton : MonoBehaviour
     [Space]
     [SerializeField] private UnityFloatEvent OnButtonUpdate;
     
-    private float PressValue = 0;
+    [SerializeField] private float PressValue = 0;
 
     [Header("Detection")]
     [SerializeField] private LayerMask DetectionLayer;
@@ -46,21 +46,11 @@ public class PressureButton : MonoBehaviour
             float pressMultiplier = 0;
             foreach (Collider2D col in playerColliders)
             {
-                //The charactercontrollers need to be rewritten to only have one so this can be a bit easier.
-                CharacterController player1 = col.GetComponent<CharacterController>();
-                if (player1 != null && player1.Grounded)
+                CharacterController character = col.GetComponent<CharacterController>();
+                if (character.Grounded)
                 {
                     pressMultiplier++;
                 }
-
-                /*
-                Character2Controller player2 = col.GetComponent<Character2Controller>();
-                if (player2 != null)
-                {
-                    pressMultiplier++;
-                    continue;
-                }
-                */
             }
 
             //Increase PressValue based on the amount of characters pressing onto it until it reaches 1
@@ -70,6 +60,12 @@ public class PressureButton : MonoBehaviour
         {
             //Decrease PressValue until it is back at 0
             currentPressValue = Mathf.Clamp01(currentPressValue - UnpressSpeed * Time.fixedDeltaTime);
+            
+            //For some reason Clamp01 sometimes leaves the number at a very small value instead of 0, annoying.
+            if (currentPressValue < 0.001f)
+            {
+                currentPressValue = 0;
+            }
         }
 
         //If currentPressValue is not the same as PressValue, the position and state of the button needs to be updated

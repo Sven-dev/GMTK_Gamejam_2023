@@ -9,7 +9,7 @@ public class ConveyorBelt : MonoBehaviour
     private float Speed = 1f;
     [SerializeField] private Direction Facing = Direction.Right;
 
-    private float PowerLevel = 0;
+    [SerializeField] private float PowerLevel = 0;
     private enum Direction
     {
         Left,
