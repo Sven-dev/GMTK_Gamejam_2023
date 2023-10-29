@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6593937635020829780}
   - component: {fileID: 6593937635020829783}
   - component: {fileID: 6593937635020829784}
+  - component: {fileID: 4219985961792195322}
   m_Layer: 8
   m_Name: Conveyorbelt
   m_TagString: Untagged
@@ -48,10 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2331b8a7082099849b4ea64b9692beab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Left: 0
+  Length: 1
   Speed: 63
+  Direction: 1
   Animator: {fileID: 6593937635020829784}
-  On: 0
+  Powered: 1
 --- !u!61 &6593937635020829778
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -65,18 +67,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.5, y: 0}
+  m_Offset: {x: 0.5, y: 0.375}
   m_SpriteTilingProperty:
     border: {x: 0.5, y: 0, z: 0.5, w: 0}
-    pivot: {x: 0.25, y: 0.5}
+    pivot: {x: 0, y: 0}
     oldSize: {x: 2, y: 0.75}
-    newSize: {x: 2, y: 0.75}
+    newSize: {x: 1, y: 0.75}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 0.75}
+  m_Size: {x: 1, y: 0.75}
   m_EdgeRadius: 0
 --- !u!61 &6593937635020829779
 BoxCollider2D:
@@ -91,18 +93,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.50356627, y: 0.40941203}
+  m_Offset: {x: 0.5, y: 0.775}
   m_SpriteTilingProperty:
     border: {x: 0.5, y: 0, z: 0.5, w: 0}
-    pivot: {x: 0.25, y: 0.5}
+    pivot: {x: 0, y: 0}
     oldSize: {x: 2, y: 0.75}
-    newSize: {x: 2, y: 0.75}
+    newSize: {x: 1, y: 0.75}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.9358091, y: 0.06803298}
+  m_Size: {x: 1, y: 0.05}
   m_EdgeRadius: 0
 --- !u!114 &6593937635020829780
 MonoBehaviour:
@@ -165,7 +167,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 2, y: 0.75}
+  m_Size: {x: 1, y: 0.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -190,3 +192,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4219985961792195322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593937635020829785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 892283bacb7cbf9469838ca41930ed5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpriteRenderer: {fileID: 6593937635020829783}
+  BaseCollider: {fileID: 6593937635020829778}
+  MovementTrigger: {fileID: 6593937635020829779}
+  ConveyorBelt: {fileID: 6593937635020829782}

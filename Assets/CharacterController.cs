@@ -70,7 +70,6 @@ public class CharacterController : MonoBehaviour
 
 	private void GroundCheck()
     {
-
 		//Groundcheck
 		Collider2D ground = Physics2D.OverlapBox(GroundCheckTransform.position, GroundCheckSize, 0, GroundCheckLayer);
 

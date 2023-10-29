@@ -24,6 +24,11 @@ public class PressureButton : MonoBehaviour
     [Header("Visual")]
     [SerializeField] private SpriteRenderer Background;
 
+    private void Start()
+    {
+        OnButtonUpdate?.Invoke(PressValue);
+    }
+
     private void Update()
     {
         Background.size = new Vector2(Background.size.x, Mathf.Lerp(Height, 0, PressValue));

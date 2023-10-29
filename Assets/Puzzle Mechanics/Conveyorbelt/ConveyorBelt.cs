@@ -4,24 +4,27 @@ using UnityEngine;
 
 public class ConveyorBelt : MonoBehaviour
 {
-    [SerializeField] private bool Left;
-    [SerializeField] private float Speed = 1f;
-    [Space]
-    [SerializeField] private Animator Animator;
+    [Range(1, 10)] public int Length = 1;
+    [SerializeField] [Range(25, 100)] [Tooltip("Note: player characters run at about 63 speed.")] 
+    private float Speed = 1f;
+    [SerializeField] private Direction Facing = Direction.Right;
 
-    [SerializeField] private bool On = false;
-
-    private void Start()
+    private float PowerLevel = 0;
+    private enum Direction
     {
-        Animator.SetBool("Moving", On);
+        Left,
+        Right,
     }
+
+    [Header("Visuals")]
+    [SerializeField] private Animator Animator;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (On && collision.tag == "Player")
+        if (collision.tag == "Player" && PowerLevel > 0)
         {
             Rigidbody2D rigidbody = collision.GetComponent<Rigidbody2D>();
-            if (Left)
+            if (Facing == Direction.Left)
             {
                 rigidbody.AddForce(Vector2.left * Speed * Time.deltaTime, ForceMode2D.Impulse);
             }
@@ -32,9 +35,16 @@ public class ConveyorBelt : MonoBehaviour
         }
     }
 
-    public void Toggle(bool state)
+    public void UpdatePower(float power)
     {
-        On = !On;
-        Animator.SetBool("Moving", On);
+        PowerLevel = power;
+        if (power == 0)
+        {
+            Animator.SetBool("Moving", false);
+        }
+        else
+        {
+            Animator.SetBool("Moving", true);
+        }
     }
 }
