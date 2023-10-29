@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-	public bool MovementAllowed = true;
+	public bool Active = false;
 	public bool Grounded = false;
 
 	[Header("Walking")]
@@ -60,21 +60,41 @@ public class CharacterController : MonoBehaviour
 	{
 		//Getting movement input
 		MovementInput = Input.Player1.Movement.ReadValue<Vector2>().x;
+	}
+
+	private void FixedUpdate()
+	{
+		GroundCheck();
+		Walk();
+	}
+
+	private void GroundCheck()
+    {
 
 		//Groundcheck
 		Collider2D ground = Physics2D.OverlapBox(GroundCheckTransform.position, GroundCheckSize, 0, GroundCheckLayer);
-		
-		//Groundcheck (messaging)
+
+		//Groundcheck (logic)
 		if (ground != null)
-        {
-			transform.SetParent(ground.transform);
+		{
+
 			Grounded = true;
-        }
+
+			//Set the parent to the object it is grounded on so it moves with platforms and stuff
+			transform.SetParent(ground.transform);
+
+			//If the object is no longer active, disable the physics
+			if (!Active)
+			{
+				Rigidbody.velocity = Vector2.zero;
+				Rigidbody.bodyType = RigidbodyType2D.Kinematic;
+			}
+		}
 		else
-        {
+		{
 			transform.SetParent(null);
 			Grounded = false;
-        }
+		}
 
 		//Groundcheck (physics)
 		LastTimeOnGround -= Time.deltaTime;
@@ -90,14 +110,9 @@ public class CharacterController : MonoBehaviour
 			LastTimeOnGround = CoyoteTime;
 		}
 		else
-        {
+		{
 			print("not on ground");
-        }
-	}
-
-	private void FixedUpdate()
-	{
-		Walk();
+		}
 	}
 
 	private void Walk()
@@ -210,16 +225,24 @@ public class CharacterController : MonoBehaviour
 		}
 	}
 
-	public void EnableCharacter()
+	public void ActivateCharacter()
     {
-		Renderer.color = new Color(0.66f, 0.66f, 0.66f, 1f);
+		
+
+		
+		Rigidbody.bodyType = RigidbodyType2D.Dynamic;
 		Input.Player1.Enable();
+
+		Renderer.color = new Color(0.66f, 0.66f, 0.66f, 1f);
+		Active = true;
 	}
 
-	public void DisableCharacter()
+	public void DeactivateCharacter()
     {
-		Renderer.color = new Color(0.33f, 0.33f, 0.33f, 1f);
 		Input.Player1.Disable();
+
+		Renderer.color = new Color(0.33f, 0.33f, 0.33f, 1f);
+		Active = false;		
 	}
 
     #region EDITOR METHODS

@@ -27,8 +27,8 @@ public class SideSwitcher : MonoBehaviour
 
         //temp
         ActiveCharacter = Character.SplitTop;
-        BottomCharacter.DisableCharacter();
-        TopCharacter.EnableCharacter();
+        BottomCharacter.DeactivateCharacter();
+        TopCharacter.ActivateCharacter();
         CameraManager.SetTarget(TopCharacter.transform);
     }
 
@@ -44,8 +44,8 @@ public class SideSwitcher : MonoBehaviour
     {
         if (ActiveCharacter == Character.SplitTop)
         {
-            TopCharacter.DisableCharacter();
-            BottomCharacter.EnableCharacter();
+            TopCharacter.DeactivateCharacter();
+            BottomCharacter.ActivateCharacter();
 
             CameraManager.SetTarget(BottomCharacter.transform);
 
@@ -53,8 +53,8 @@ public class SideSwitcher : MonoBehaviour
         }
         else if (ActiveCharacter == Character.SplitBottom)
         {
-            BottomCharacter.DisableCharacter();
-            TopCharacter.EnableCharacter();
+            BottomCharacter.DeactivateCharacter();
+            TopCharacter.ActivateCharacter();
 
             CameraManager.SetTarget(TopCharacter.transform);
 

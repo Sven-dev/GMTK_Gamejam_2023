@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PressureButton : MonoBehaviour
 {
+    [Range(1, 10)] public int Height = 2;
     [SerializeField] private float PressSpeed = 1;
     [SerializeField] private float UnpressSpeed = 1;
     [Space]
     [SerializeField] private UnityFloatEvent OnButtonUpdate;
-    [SerializeField] private float PressValue = 0;
+    
+    private float PressValue = 0;
 
     [Header("Detection")]
     [SerializeField] private LayerMask DetectionLayer;
@@ -19,9 +21,13 @@ public class PressureButton : MonoBehaviour
     [SerializeField] private Transform UnpressedPivot;
     [SerializeField] private Transform PressedPivot;
 
-    [Header("Background")]
-    [SerializeField] private float Height = 2;
+    [Header("Visual")]
     [SerializeField] private SpriteRenderer Background;
+
+    private void Update()
+    {
+        Background.size = new Vector2(Background.size.x, Mathf.Lerp(Height, 0, PressValue));
+    }
 
     private void FixedUpdate()
     {
@@ -67,8 +73,6 @@ public class PressureButton : MonoBehaviour
             Platform.position = Vector2.Lerp(UnpressedPivot.position, PressedPivot.position, currentPressValue);
             OnButtonUpdate?.Invoke(currentPressValue);
 
-            Background.size = new Vector2(Background.size.x, Mathf.Lerp(Height, 0, PressValue));
-
             PressValue = currentPressValue;          
         }     
     }
@@ -77,11 +81,5 @@ public class PressureButton : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(DetectionPivot.position, new Vector3(2, 2, 0));
-    }
-
-    [ExecuteInEditMode]
-    private void test()
-    {
-        Platform.position = new Vector2(Platform.position.x, Height);
     }
 }
