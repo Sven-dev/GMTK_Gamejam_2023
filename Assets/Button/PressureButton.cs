@@ -5,12 +5,13 @@ using UnityEngine;
 public class PressureButton : MonoBehaviour
 {
     [Range(1, 10)] public int Height = 2;
+    [Range(1, 10)] public int PlatformSize;
     [SerializeField] private float PressSpeed = 1;
     [SerializeField] private float UnpressSpeed = 1;
     [Space]
     [SerializeField] private UnityFloatEvent OnButtonUpdate;
     
-    [SerializeField] private float PressValue = 0;
+    private float PressValue = 0;
 
     [Header("Detection")]
     [SerializeField] private LayerMask DetectionLayer;
@@ -39,7 +40,7 @@ public class PressureButton : MonoBehaviour
         float currentPressValue = PressValue;
 
         //Check if there's any players above the button
-        Collider2D[] playerColliders = Physics2D.OverlapBoxAll(DetectionPivot.position, Vector2.one * 2, 0, DetectionLayer);
+        Collider2D[] playerColliders = Physics2D.OverlapBoxAll(DetectionPivot.position, new Vector2(PlatformSize, 2f), 0, DetectionLayer);
         if (playerColliders.Length > 0)
         {
             //Check how many players are standing on top of the button
@@ -81,6 +82,6 @@ public class PressureButton : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(DetectionPivot.position, new Vector3(2, 2, 0));
+        Gizmos.DrawWireCube(DetectionPivot.position, new Vector2(PlatformSize, 2f));
     }
 }
