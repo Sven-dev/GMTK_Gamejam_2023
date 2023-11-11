@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConveyorBelt : MonoBehaviour
+public class ConveyorBelt : Powerable
 {
     [Range(1, 10)] public int Length = 1;
     [SerializeField] [Range(25, 100)] [Tooltip("Note: player characters run at about 63 speed.")] 
@@ -19,6 +19,25 @@ public class ConveyorBelt : MonoBehaviour
     [Header("Visuals")]
     [SerializeField] private Animator Animator;
 
+    private void Start()
+    {
+        UpdatePower(0);
+    }
+
+    public override void UpdatePower(float power)
+    {
+        print(power);
+        PowerLevel = power;
+        if (power == 0)
+        {
+            Animator.SetBool("Moving", false);
+        }
+        else
+        {
+            Animator.SetBool("Moving", true);
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "Player" && PowerLevel > 0)
@@ -32,19 +51,6 @@ public class ConveyorBelt : MonoBehaviour
             {
                 rigidbody.AddForce(Vector2.right * Speed * Time.deltaTime, ForceMode2D.Impulse);
             }
-        }
-    }
-
-    public void UpdatePower(float power)
-    {
-        PowerLevel = power;
-        if (power == 0)
-        {
-            Animator.SetBool("Moving", false);
-        }
-        else
-        {
-            Animator.SetBool("Moving", true);
         }
     }
 }

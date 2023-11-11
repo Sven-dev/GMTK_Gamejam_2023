@@ -12,9 +12,10 @@ public class ConveyorBeltEditor : MonoBehaviour
     [SerializeField] private ConveyorBelt ConveyorBelt;
 
     private int Length = 1;
+    private Vector3 Position;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (ConveyorBelt != null && ConveyorBelt.Length != Length)
         {
@@ -27,5 +28,17 @@ public class ConveyorBeltEditor : MonoBehaviour
             MovementTrigger.size = new Vector2(Length, MovementTrigger.size.y);
             MovementTrigger.offset = new Vector2(Length/2f, MovementTrigger.offset.y);
         }
+
+        /*
+        if (ConveyorBelt.transform.position != Position)
+        {
+            ConveyorBelt.transform.position = new Vector3(
+                    (int)ConveyorBelt.transform.position.x,
+                    (int)ConveyorBelt.transform.position.y,
+                    (int)ConveyorBelt.transform.position.z);
+
+            Position = ConveyorBelt.transform.position;
+        }
+        */
     }
 }

@@ -110,7 +110,7 @@ public class CharacterController : MonoBehaviour
 		}
 		else
 		{
-			print("not on ground");
+			//print("not on ground");
 		}
 	}
 

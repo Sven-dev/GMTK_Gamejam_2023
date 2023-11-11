@@ -115,6 +115,7 @@ MonoBehaviour:
   OnButtonUpdate:
     m_PersistentCalls:
       m_Calls: []
+  PressValue: 0
   DetectionLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -314,7 +315,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 8728546838407461791}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b2a1be3b0f3c33d41badaee7c7b604a2, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

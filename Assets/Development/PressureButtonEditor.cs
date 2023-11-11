@@ -38,6 +38,7 @@ public class PressureButtonEditor : MonoBehaviour
             Position = Vector3.zero;
         }
 
+        /*
         if (PressureButton.transform.position != Position)
         {
             float xpos = (int)PressureButton.transform.position.x;
@@ -59,5 +60,6 @@ public class PressureButtonEditor : MonoBehaviour
 
             Position = PressureButton.transform.position;
         }
+        */
     }
 }

@@ -9,9 +9,9 @@ public class PressureButton : MonoBehaviour
     [SerializeField] private float PressSpeed = 1;
     [SerializeField] private float UnpressSpeed = 1;
     [Space]
-    [SerializeField] private UnityFloatEvent OnButtonUpdate;
+    [SerializeField] private List<Powerable> PoweredObjects;
     
-    private float PressValue = 0;
+    private float PowerValue = 0;
 
     [Header("Detection")]
     [SerializeField] private LayerMask DetectionLayer;
@@ -25,19 +25,14 @@ public class PressureButton : MonoBehaviour
     [Header("Visual")]
     [SerializeField] private SpriteRenderer Background;
 
-    private void Start()
-    {
-        OnButtonUpdate?.Invoke(PressValue);
-    }
-
     private void Update()
     {
-        Background.size = new Vector2(Background.size.x, Mathf.Lerp(Height, 0, PressValue));
+        Background.size = new Vector2(Background.size.x, Mathf.Lerp(Height, 0, PowerValue));
     }
 
     private void FixedUpdate()
     {
-        float currentPressValue = PressValue;
+        float currentPressValue = PowerValue;
 
         //Check if there's any players above the button
         Collider2D[] playerColliders = Physics2D.OverlapBoxAll(DetectionPivot.position, new Vector2(PlatformSize, 2f), 0, DetectionLayer);
@@ -70,12 +65,15 @@ public class PressureButton : MonoBehaviour
         }
 
         //If currentPressValue is not the same as PressValue, the position and state of the button needs to be updated
-        if (currentPressValue != PressValue)
+        if (currentPressValue != PowerValue)
         {
             Platform.position = Vector2.Lerp(UnpressedPivot.position, PressedPivot.position, currentPressValue);
-            OnButtonUpdate?.Invoke(currentPressValue);
+            foreach (Powerable obj in PoweredObjects)
+            {
+                obj.UpdatePower(currentPressValue);
+            }
 
-            PressValue = currentPressValue;          
+            PowerValue = currentPressValue;          
         }     
     }
 
@@ -84,4 +82,9 @@ public class PressureButton : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(DetectionPivot.position, new Vector2(PlatformSize, 2f));
     }
+}
+
+public abstract class Powerable: MonoBehaviour
+{
+    public abstract void UpdatePower(float power);
 }

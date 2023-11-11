@@ -2,37 +2,71 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fan : MonoBehaviour
+public class Fan : Powerable
 {
-    [SerializeField] private bool Left;
-    [SerializeField] private float Speed = 1f;
+    public Face Direction = Face.Right;
+    [Range(1, 10)] public int Range = 3;
+
+    [SerializeField] private float Strength = 1f;
     [Space]
     [SerializeField] private Collider2D WindTrigger;
     [SerializeField] private Animator Animator;
+    [SerializeField] private SpriteRenderer WindAnimation;
 
-    private bool On = false;
+    private float PowerLevel = 0;
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void Start()
     {
-        if (On && collision.tag == "Player")
+        UpdatePower(0);
+    }
+
+    public override void UpdatePower(float power)
+    {
+        PowerLevel = power;
+        if (power > 0)
         {
-            Rigidbody2D rigidbody = collision.GetComponent<Rigidbody2D>();
-            if (Left)
-            {
-                rigidbody.AddForce(Vector2.left * Speed * Time.deltaTime, ForceMode2D.Impulse);
-            }
-            else
-            {
-                rigidbody.AddForce(Vector2.right * Speed * Time.deltaTime, ForceMode2D.Impulse);
-            }
+            Animator.SetBool("Moving", true);
+            WindAnimation.enabled = true;
+        }
+        else
+        {
+            Animator.SetBool("Moving", false);
+            WindAnimation.enabled = false;
         }
     }
 
-    public void Toggle(bool state)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        On = !On;
-        Animator.SetBool("Moving", On);
+        if (PowerLevel > 0 && collision.tag == "Player")
+        {
+            Rigidbody2D rigidbody = collision.GetComponent<Rigidbody2D>();
 
-        WindTrigger.enabled = On;
+            Vector2 dir = Vector2.zero;
+            switch (Direction)
+            {
+                case Face.Right:
+                    dir = Vector2.right;
+                    break;
+                case Face.Up:
+                    dir = Vector2.up;
+                    break;
+                case Face.Left:
+                    dir = Vector2.left;
+                    break;
+                case Face.Down:
+                    dir = Vector2.down;
+                    break;
+            }
+
+            rigidbody.AddForce(dir * Strength * PowerLevel * Time.deltaTime, ForceMode2D.Impulse);
+        }
     }
+}
+
+public enum Face
+{
+    Up,
+    Down,
+    Left,
+    Right
 }

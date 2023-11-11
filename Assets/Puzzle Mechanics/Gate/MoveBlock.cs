@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveBlock : MonoBehaviour
+public class MoveBlock : Powerable
 {  
     [SerializeField] [Range(1, 10)] private int Length = 3;
     [SerializeField] private Face Direction = Face.Right;
@@ -20,10 +20,15 @@ public class MoveBlock : MonoBehaviour
         Right
     }
 
-    public void UpdatePower(float power)
+    private void Start()
+    {
+        UpdatePower(0);
+    }
+
+    public override void UpdatePower(float power)
     {
         PowerLevel = power;
-        Block.position = Vector3.Lerp(transform.localPosition, transform.localPosition + FaceToVector(Direction) * Length, power);
+        Block.position = Vector3.Lerp(transform.position, transform.position + FaceToVector(Direction) * Length, power);
     }
 
     private Vector3 FaceToVector(Face face)

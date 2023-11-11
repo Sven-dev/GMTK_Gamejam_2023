@@ -54,6 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4216899661819638731}
   - component: {fileID: 4216899661819637812}
+  - component: {fileID: 3139711523699651991}
   m_Layer: 0
   m_Name: MoveBlock
   m_TagString: Untagged
@@ -91,6 +92,19 @@ MonoBehaviour:
   Length: 7
   Direction: 3
   Block: {fileID: 1606684182439465470}
+--- !u!114 &3139711523699651991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4216899661819637813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6ae2ddb9a67f44e8805dcbea24bb83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveBlock: {fileID: 4216899661819637812}
 --- !u!1 &8832590321047306517
 GameObject:
   m_ObjectHideFlags: 0
