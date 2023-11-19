@@ -31,7 +31,7 @@ public class PressureButton : MonoBehaviour
         float currentPressValue = PowerValue;
 
         //Check if there's any players above the button
-        Collider2D[] playerColliders = Physics2D.OverlapBoxAll(DetectionPivot.position, new Vector2(PlatformSize, 2f), 0, DetectionLayer);
+        Collider2D[] playerColliders = Physics2D.OverlapBoxAll(DetectionPivot.position, new Vector2(PlatformSize - 0.2f, 0.2f), 0, DetectionLayer);
         if (playerColliders.Length > 0)
         {
             //Check how many players are standing on top of the button
@@ -79,7 +79,7 @@ public class PressureButton : MonoBehaviour
             Platform.position = Vector2.Lerp(UnpressedPivot.position, PressedPivot.position, currentPressValue);
             foreach (Powerable obj in PoweredObjects)
             {
-                obj.UpdatePower(currentPressValue);
+                obj.UpdatePower(currentPressValue - PowerValue);
             }
 
             //Update the pole connecting the platform to the floor
@@ -92,11 +92,20 @@ public class PressureButton : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(DetectionPivot.position, new Vector2(PlatformSize, 2f));
+        Gizmos.DrawWireCube(DetectionPivot.position, new Vector2(PlatformSize - 0.2f, 0.2f));
     }
 }
 
 public abstract class Powerable: MonoBehaviour
 {
-    public abstract void UpdatePower(float power);
+    [Header("Power variables")]
+    [SerializeField] protected bool Powered = false;
+    [SerializeField] [Tooltip("For debugging, not meant to be changed manually")]
+    protected float PowerLevel = 0;
+
+    public virtual void UpdatePower(float power)
+    {
+        print(power);
+        PowerLevel += power;
+    }
 }

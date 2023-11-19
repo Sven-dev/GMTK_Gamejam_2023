@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class ConveyorBelt : Powerable
 {
+    [Header("Conveyorbelt variables")]
     [Range(1, 10)] public int Length = 1;
     [SerializeField] [Range(25, 100)] [Tooltip("Note: player characters run at about 63 speed.")] 
     private float Speed = 1f;
     [SerializeField] private Direction Facing = Direction.Right;
 
-    [SerializeField] private float PowerLevel = 0;
     private enum Direction
     {
         Left,
         Right,
     }
 
-    [Header("Visuals")]
+    [Space]
     [SerializeField] private SpriteRenderer Renderer;
     [SerializeField] private Animator Animator;
 
@@ -27,8 +27,8 @@ public class ConveyorBelt : Powerable
 
     public override void UpdatePower(float power)
     {
-        PowerLevel = power;
-        if (power > 0)
+        base.UpdatePower(power);
+        if (PowerLevel > 0)
         {
             Renderer.color = ColorDictionary.Instance.Powered;
             Animator.SetBool("Moving", true);

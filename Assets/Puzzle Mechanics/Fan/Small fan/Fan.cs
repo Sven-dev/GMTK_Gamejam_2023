@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class Fan : Powerable
 {
+    [Header("Fan variables")]
     public Face Direction = Face.Right;
     [Range(1, 10)] public int Range = 3;
-
     [SerializeField] private float Strength = 1f;
-    [Space]
+
+    [Header("System variables")]
     [SerializeField] private SpriteRenderer Renderer;
     [SerializeField] private Animator Animator;
     [SerializeField] private Collider2D WindTrigger;
     [SerializeField] private SpriteRenderer WindAnimation;
-
-    private float PowerLevel = 0;
 
     private void Start()
     {
@@ -23,8 +22,8 @@ public class Fan : Powerable
 
     public override void UpdatePower(float power)
     {
-        PowerLevel = power;
-        if (power > 0)
+        base.UpdatePower(power);
+        if (PowerLevel > 0)
         {
             Renderer.color = ColorDictionary.Instance.Powered;
             Animator.SetBool("Moving", true);

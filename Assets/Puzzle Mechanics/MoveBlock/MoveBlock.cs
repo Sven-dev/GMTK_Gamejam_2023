@@ -4,17 +4,14 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class MoveBlock : Powerable
-{  
+{
+    [Header("Moveblock variables")]
     [SerializeField] [Range(1, 10)] private int Length = 3;
     [SerializeField] private Face Direction = Face.Right;
-    
-    [Header("Physics")]
+
+    [Header("System variables")]
     [SerializeField] private Transform Block;
-
-    [Space]
     [SerializeField] private Tilemap Renderer;
-
-    private float PowerLevel = 0;
 
     private enum Face
     {
@@ -31,7 +28,7 @@ public class MoveBlock : Powerable
 
     public override void UpdatePower(float power)
     {
-        if (power > PowerLevel)
+        if (PowerLevel + power > PowerLevel)
         {
             Renderer.color = ColorDictionary.Instance.Powered;
         }
@@ -40,8 +37,8 @@ public class MoveBlock : Powerable
             Renderer.color = ColorDictionary.Instance.Unpowered;
         }
 
-        PowerLevel = power;
-        Block.position = Vector3.Lerp(transform.position, transform.position + FaceToVector(Direction) * Length, power);
+        base.UpdatePower(power);
+        Block.position = Vector3.Lerp(transform.position, transform.position + FaceToVector(Direction) * Length, PowerLevel);
     }
 
     private Vector3 FaceToVector(Face face)
