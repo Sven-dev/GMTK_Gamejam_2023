@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BigGuyController : MonoBehaviour
+public class BodyController : MonoBehaviour
 {
 	public bool Active = false;
 	public bool Grounded = false;
@@ -39,7 +39,11 @@ public class BigGuyController : MonoBehaviour
 	[SerializeField] private SpriteRenderer Renderer;
 
 	[Space]
-	[SerializeField] private LittleGuyController LittleGuy;
+	[SerializeField] private Collider2D CombinedCollider;
+	[SerializeField] private Collider2D SplitCollider;
+
+	[Space]
+	[SerializeField] private HeadController LittleGuy;
 	[SerializeField] private float LaunchForce = 100f;
 
 	private void Start()
@@ -168,7 +172,6 @@ public class BigGuyController : MonoBehaviour
 	{
 		if (LastTimeOnGround >= 0)
 		{
-			print("jump");
 			JustJumped = CoyoteTime;
 
 			Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, 0);
@@ -245,7 +248,9 @@ public class BigGuyController : MonoBehaviour
 		Input.Bigguy.Enable();
 		Animator.SetTrigger("Combine");
 
-		Renderer.color = new Color(0.66f, 0.66f, 0.66f, 1f);
+		SplitCollider.enabled = false;
+		CombinedCollider.enabled = true;
+
 		Active = true;
 	}
 
@@ -254,7 +259,9 @@ public class BigGuyController : MonoBehaviour
 		Input.Bigguy.Disable();
 		Animator.SetTrigger("Split");
 
-		Renderer.color = new Color(0.33f, 0.33f, 0.33f, 1f);
+		CombinedCollider.enabled = false;
+		SplitCollider.enabled = true;
+
 		Active = false;		
 	}
 

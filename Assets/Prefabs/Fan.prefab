@@ -113,7 +113,6 @@ GameObject:
   - component: {fileID: 7069715487805311881}
   - component: {fileID: 7069715487805311991}
   - component: {fileID: 6274870125629503291}
-  - component: {fileID: 7069715487805311990}
   - component: {fileID: 7069715487805311988}
   m_Layer: 0
   m_Name: Fan
@@ -153,8 +152,9 @@ MonoBehaviour:
   Direction: 3
   Range: 1
   Strength: 3
-  WindTrigger: {fileID: 7069715487805311988}
+  Renderer: {fileID: 7728646861220199076}
   Animator: {fileID: 4194521945310492348}
+  WindTrigger: {fileID: 7069715487805311988}
   WindAnimation: {fileID: 6340783651124541550}
 --- !u!114 &6274870125629503291
 MonoBehaviour:
@@ -171,22 +171,6 @@ MonoBehaviour:
   Fan: {fileID: 7069715487805311991}
   WindTrigger: {fileID: 7069715487805311988}
   WindAnimation: {fileID: 6340783651124541550}
---- !u!114 &7069715487805311990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7069715487805311882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cf4d21bf49e75949b6b902204bf0c6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpriteRenderer: {fileID: 7728646861220199076}
-  Image: {fileID: 0}
-  Tilemap: {fileID: 0}
-  Text: {fileID: 0}
 --- !u!61 &7069715487805311988
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -313,7 +297,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 5177923272183623428, guid: 59b2628b54ca21f4f83f4432a7c23d16,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.58431375, g: 0.22352941, b: 0.48235294, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

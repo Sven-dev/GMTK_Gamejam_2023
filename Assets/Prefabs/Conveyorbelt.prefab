@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6593937635020829782}
   - component: {fileID: 6593937635020829778}
   - component: {fileID: 6593937635020829779}
-  - component: {fileID: 6593937635020829780}
   - component: {fileID: 6593937635020829783}
   - component: {fileID: 6593937635020829784}
   - component: {fileID: 4219985961792195322}
@@ -51,9 +50,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Length: 1
   Speed: 63
-  Direction: 1
+  Facing: 1
+  PowerLevel: 0
+  Renderer: {fileID: 6593937635020829783}
   Animator: {fileID: 6593937635020829784}
-  Powered: 1
 --- !u!61 &6593937635020829778
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -106,22 +106,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.05}
   m_EdgeRadius: 0
---- !u!114 &6593937635020829780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6593937635020829785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cf4d21bf49e75949b6b902204bf0c6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpriteRenderer: {fileID: 6593937635020829783}
-  Image: {fileID: 0}
-  Tilemap: {fileID: 0}
-  Text: {fileID: 0}
 --- !u!212 &6593937635020829783
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -163,7 +147,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 8240346150551473097, guid: 1a419ab14db32b44686982250c7cb6d2,
     type: 3}
-  m_Color: {r: 0.32941177, g: 0.32941177, b: 0.32941177, a: 1}
+  m_Color: {r: 0.58431375, g: 0.22352941, b: 0.48235294, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2

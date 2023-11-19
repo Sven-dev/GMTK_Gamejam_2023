@@ -17,6 +17,7 @@ public class ConveyorBelt : Powerable
     }
 
     [Header("Visuals")]
+    [SerializeField] private SpriteRenderer Renderer;
     [SerializeField] private Animator Animator;
 
     private void Start()
@@ -27,13 +28,15 @@ public class ConveyorBelt : Powerable
     public override void UpdatePower(float power)
     {
         PowerLevel = power;
-        if (power == 0)
+        if (power > 0)
         {
-            Animator.SetBool("Moving", false);
+            Renderer.color = ColorDictionary.Instance.Powered;
+            Animator.SetBool("Moving", true);
         }
         else
         {
-            Animator.SetBool("Moving", true);
+            Renderer.color = ColorDictionary.Instance.Unpowered;
+            Animator.SetBool("Moving", false);
         }
     }
 

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2461358459896900835}
   - component: {fileID: 2461358459896900822}
-  - component: {fileID: 2461358459896900829}
   - component: {fileID: 2461358459896900828}
   - component: {fileID: 2461358459896900831}
   - component: {fileID: 2461358459896900825}
@@ -53,22 +52,6 @@ MonoBehaviour:
   WindTrigger: {fileID: 2461358459896900825}
   Animator: {fileID: 2461358459896900831}
   On: 0
---- !u!114 &2461358459896900829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2461358459896900824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cf4d21bf49e75949b6b902204bf0c6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpriteRenderer: {fileID: 2461358459896900828}
-  Image: {fileID: 0}
-  Tilemap: {fileID: 0}
-  Text: {fileID: 0}
 --- !u!212 &2461358459896900828
 SpriteRenderer:
   m_ObjectHideFlags: 0

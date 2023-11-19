@@ -92,6 +92,7 @@ MonoBehaviour:
   Length: 7
   Direction: 3
   Block: {fileID: 1606684182439465470}
+  Renderer: {fileID: 4589092791975909853}
 --- !u!114 &3139711523699651991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +120,6 @@ GameObject:
   - component: {fileID: 4210037811760883966}
   - component: {fileID: 6437790425440574203}
   - component: {fileID: 7883605788534191899}
-  - component: {fileID: 2675646309176471818}
   m_Layer: 8
   m_Name: Block
   m_TagString: Untagged
@@ -199,7 +199,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.58431375, g: 0.22352941, b: 0.48235294, a: 1}
   m_Origin: {x: -1, y: -2, z: 0}
   m_Size: {x: 1, y: 3, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -341,19 +341,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2675646309176471818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8832590321047306517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cf4d21bf49e75949b6b902204bf0c6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpriteRenderer: {fileID: 0}
-  Image: {fileID: 0}
-  Tilemap: {fileID: 4589092791975909853}
-  Text: {fileID: 0}

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LittleGuyController : MonoBehaviour
+public class HeadController : MonoBehaviour
 {
 	public bool Active = false;
 	public bool Grounded = false;
@@ -91,8 +91,8 @@ public class LittleGuyController : MonoBehaviour
 			transform.position = new Vector2(player.transform.position.x, transform.position.y);
 			transform.SetParent(player.transform);
 
-			BigGuyController bigGuy = player.GetComponent<BigGuyController>();
-			bigGuy.ActivateCharacter();
+			BodyController Body = player.GetComponent<BodyController>();
+			Body.ActivateCharacter();
 			DeactivateCharacter();
         }
 	}
@@ -178,7 +178,6 @@ public class LittleGuyController : MonoBehaviour
 	{
 		if (LastTimeOnGround >= 0)
 		{
-			print("jump");
 			JustJumped = CoyoteTime;
 
 			Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, 0);
@@ -247,12 +246,7 @@ public class LittleGuyController : MonoBehaviour
 	public void ActivateCharacter()
     {
 		gameObject.SetActive(true);
-		Input.Littleguy.Enable();
-		
-		//Rigidbody.bodyType = RigidbodyType2D.Dynamic;
-		//Input.Littleguy.Enable();
-
-		//Renderer.color = new Color(0.66f, 0.66f, 0.66f, 1f);
+		Input.Littleguy.Enable();		
 		Active = true;
 	}
 
@@ -260,10 +254,6 @@ public class LittleGuyController : MonoBehaviour
     {
 		Input.Littleguy.Disable();
 		gameObject.SetActive(false);
-		//Rigidbody.bodyType = RigidbodyType2D.Kinematic;
-		//Collider.enabled = false;
-
-		//Renderer.color = new Color(0.33f, 0.33f, 0.33f, 1f);
 		Active = false;		
 	}
 

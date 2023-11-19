@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class MoveBlock : Powerable
 {  
@@ -9,6 +10,9 @@ public class MoveBlock : Powerable
     
     [Header("Physics")]
     [SerializeField] private Transform Block;
+
+    [Space]
+    [SerializeField] private Tilemap Renderer;
 
     private float PowerLevel = 0;
 
@@ -27,6 +31,15 @@ public class MoveBlock : Powerable
 
     public override void UpdatePower(float power)
     {
+        if (power > PowerLevel)
+        {
+            Renderer.color = ColorDictionary.Instance.Powered;
+        }
+        else
+        {
+            Renderer.color = ColorDictionary.Instance.Unpowered;
+        }
+
         PowerLevel = power;
         Block.position = Vector3.Lerp(transform.position, transform.position + FaceToVector(Direction) * Length, power);
     }

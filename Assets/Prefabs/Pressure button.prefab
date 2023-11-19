@@ -112,10 +112,7 @@ MonoBehaviour:
   PlatformSize: 4
   PressSpeed: 0.5
   UnpressSpeed: 0.5
-  OnButtonUpdate:
-    m_PersistentCalls:
-      m_Calls: []
-  PressValue: 0
+  PoweredObjects: []
   DetectionLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -123,6 +120,7 @@ MonoBehaviour:
   Platform: {fileID: 3013509523781481856}
   UnpressedPivot: {fileID: 1937149524364556788}
   PressedPivot: {fileID: 6028619040226608787}
+  Renderer: {fileID: 1447762369490980840}
   Background: {fileID: 2454086007100115592}
 --- !u!114 &875165391498479532
 MonoBehaviour:
@@ -212,7 +210,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 189867049435060741, guid: 5b8c8f326fef94546ba623621ec723dd, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.58431375, g: 0.22352941, b: 0.48235294, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
@@ -296,7 +294,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 5057024943449097027, guid: 5b8c8f326fef94546ba623621ec723dd,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.58431375, g: 0.22352941, b: 0.48235294, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2

@@ -23,12 +23,8 @@ public class PressureButton : MonoBehaviour
     [SerializeField] private Transform PressedPivot;
 
     [Header("Visual")]
+    [SerializeField] private SpriteRenderer Renderer;
     [SerializeField] private SpriteRenderer Background;
-
-    private void Update()
-    {
-        Background.size = new Vector2(Background.size.x, Mathf.Lerp(Height, 0, PowerValue));
-    }
 
     private void FixedUpdate()
     {
@@ -42,15 +38,15 @@ public class PressureButton : MonoBehaviour
             float pressMultiplier = 0;
             foreach (Collider2D col in playerColliders)
             {
-                BigGuyController body = col.GetComponent<BigGuyController>();
+                BodyController body = col.GetComponent<BodyController>();
                 if (body != null && body.Grounded)
                 {
                     pressMultiplier++;
                 }
                 else
                 {
-                    LittleGuyController head = col.GetComponent<LittleGuyController>();
-                    if (head != null && body.Grounded)
+                    HeadController head = col.GetComponent<HeadController>();
+                    if (head != null && head.Grounded)
                     {
                         pressMultiplier++;
                     }
@@ -59,6 +55,8 @@ public class PressureButton : MonoBehaviour
 
             //Increase PressValue based on the amount of characters pressing onto it until it reaches 1
             currentPressValue = Mathf.Clamp01(currentPressValue + PressSpeed * pressMultiplier * Time.fixedDeltaTime);
+            Renderer.color = ColorDictionary.Instance.Powered;
+            Background.color = ColorDictionary.Instance.Powered;
         }
         else if (Platform.position != UnpressedPivot.position)
         {
@@ -70,6 +68,9 @@ public class PressureButton : MonoBehaviour
             {
                 currentPressValue = 0;
             }
+
+            Renderer.color = ColorDictionary.Instance.Unpowered;
+            Background.color = ColorDictionary.Instance.Unpowered;
         }
 
         //If currentPressValue is not the same as PressValue, the position and state of the button needs to be updated
@@ -81,8 +82,11 @@ public class PressureButton : MonoBehaviour
                 obj.UpdatePower(currentPressValue);
             }
 
-            PowerValue = currentPressValue;          
-        }     
+            //Update the pole connecting the platform to the floor
+            Background.size = new Vector2(Background.size.x, Mathf.Lerp(Height, 0, currentPressValue));
+
+            PowerValue = currentPressValue;
+        }
     }
 
     private void OnDrawGizmos()
