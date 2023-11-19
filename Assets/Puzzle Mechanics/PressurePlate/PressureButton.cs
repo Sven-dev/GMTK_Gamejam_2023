@@ -105,7 +105,6 @@ public abstract class Powerable: MonoBehaviour
 
     public virtual void UpdatePower(float power)
     {
-        print(power);
         PowerLevel += power;
     }
 }
