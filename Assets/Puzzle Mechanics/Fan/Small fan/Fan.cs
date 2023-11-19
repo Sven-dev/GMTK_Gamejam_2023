@@ -61,7 +61,7 @@ public class Fan : Powerable
                     break;
             }
 
-            rigidbody.AddForce(dir * Strength * PowerLevel * Time.deltaTime, ForceMode2D.Impulse);
+            rigidbody.AddForce(dir * Strength * Time.deltaTime, ForceMode2D.Impulse);
         }
     }
 }
