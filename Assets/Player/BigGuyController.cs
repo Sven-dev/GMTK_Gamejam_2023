@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class BigGuyController : MonoBehaviour
 {
 	public bool Active = false;
 	public bool Grounded = false;
@@ -38,20 +38,27 @@ public class CharacterController : MonoBehaviour
 	[SerializeField] private Animator Animator;
 	[SerializeField] private SpriteRenderer Renderer;
 
+	[Space]
+	[SerializeField] private LittleGuyController LittleGuy;
+	[SerializeField] private float LaunchForce = 100f;
+
 	private void Start()
 	{
 		Input = new Input();
-		Input.Player1.Jump.started += OnJumpInput;
-		Input.Player1.Jump.canceled += OnJumpUpInput;
+		Input.Bigguy.Jump.started += OnJumpInput;
+		Input.Bigguy.Jump.canceled += OnJumpUpInput;
+		Input.Bigguy.Switch.started += OnSwitchCharacter;
 
-		//Input.Player1.Enable();
+		Input.Bigguy.Enable();
 	}
 
 	private void OnDestroy()
 	{
-		Input.Player1.Disable();
-		Input.Player1.Jump.started -= OnJumpInput;
-		Input.Player1.Jump.canceled -= OnJumpUpInput;
+		Input.Bigguy.Disable();
+
+		Input.Bigguy.Jump.started -= OnJumpInput;
+		Input.Bigguy.Jump.canceled -= OnJumpUpInput;
+		Input.Bigguy.Switch.started -= OnSwitchCharacter;
 
 		Input = null;
 	}
@@ -59,7 +66,7 @@ public class CharacterController : MonoBehaviour
 	private void Update()
 	{
 		//Getting movement input
-		MovementInput = Input.Player1.Movement.ReadValue<Vector2>().x;
+		MovementInput = Input.Bigguy.Movement.ReadValue<Vector2>().x;
 	}
 
 	private void FixedUpdate()
@@ -203,11 +210,11 @@ public class CharacterController : MonoBehaviour
 		while (progress < 1)
 		{
 			progress = Mathf.Clamp01(progress + 2 * Time.deltaTime);
-			Rigidbody.gravityScale = Mathf.Lerp(0, Rigidbody.gravityScale, progress);
+			Rigidbody.gravityScale = Mathf.Lerp(0, 3, progress);
 			yield return null;
 		}
 
-		Rigidbody.gravityScale = Rigidbody.gravityScale;
+		Rigidbody.gravityScale = 3;
 	}
 
 	private IEnumerator _RegainMovementControl()
@@ -224,13 +231,19 @@ public class CharacterController : MonoBehaviour
 		}
 	}
 
-	public void ActivateCharacter()
-    {
-		
+	public void OnSwitchCharacter(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+	{
+		LittleGuy.ActivateCharacter();
+		LittleGuy.ApplyPhysicsForce(Vector2.up * LaunchForce);
 
-		
+		DeactivateCharacter();
+	}
+
+	public void ActivateCharacter()
+    {		
 		Rigidbody.bodyType = RigidbodyType2D.Dynamic;
-		Input.Player1.Enable();
+		Input.Bigguy.Enable();
+		Animator.SetTrigger("Combine");
 
 		Renderer.color = new Color(0.66f, 0.66f, 0.66f, 1f);
 		Active = true;
@@ -238,7 +251,8 @@ public class CharacterController : MonoBehaviour
 
 	public void DeactivateCharacter()
     {
-		Input.Player1.Disable();
+		Input.Bigguy.Disable();
+		Animator.SetTrigger("Split");
 
 		Renderer.color = new Color(0.33f, 0.33f, 0.33f, 1f);
 		Active = false;		

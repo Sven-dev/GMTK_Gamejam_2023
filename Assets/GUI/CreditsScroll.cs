@@ -16,7 +16,7 @@ public class CreditsScroll : MonoBehaviour
     void Start()
     {
         Input = new Input();
-        Input.Player1.Enable();
+        //Input.Player1.Enable();
 
         BaseScrollSpeed = ScrollSpeed;
 
@@ -26,6 +26,7 @@ public class CreditsScroll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.Player1.Jump.IsPressed())
         {
             BaseScrollSpeed = ScrollSpeed * 4;
@@ -34,6 +35,7 @@ public class CreditsScroll : MonoBehaviour
         {
             BaseScrollSpeed = ScrollSpeed;
         }
+        */
     }
 
     private IEnumerator _Scroll()

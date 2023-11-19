@@ -42,10 +42,18 @@ public class PressureButton : MonoBehaviour
             float pressMultiplier = 0;
             foreach (Collider2D col in playerColliders)
             {
-                CharacterController character = col.GetComponent<CharacterController>();
-                if (character.Grounded)
+                BigGuyController body = col.GetComponent<BigGuyController>();
+                if (body != null && body.Grounded)
                 {
                     pressMultiplier++;
+                }
+                else
+                {
+                    LittleGuyController head = col.GetComponent<LittleGuyController>();
+                    if (head != null && body.Grounded)
+                    {
+                        pressMultiplier++;
+                    }
                 }
             }
 

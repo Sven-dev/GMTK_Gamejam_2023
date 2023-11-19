@@ -5,13 +5,14 @@ using UnityEngine.Events;
 
 public class SideSwitcher : MonoBehaviour
 {
+    /*
     public static SideSwitcher Instance;
 
     [SerializeField] private Character ActiveCharacter = Character.Combined;
     [Space]
-    [SerializeField] private CharacterController CombinedCharacter;
-    [SerializeField] private CharacterController TopCharacter;
-    [SerializeField] private CharacterController BottomCharacter;
+    [SerializeField] private BigGuyController CombinedCharacter;
+    [SerializeField] private BigGuyController TopCharacter;
+    [SerializeField] private BigGuyController BottomCharacter;
     [Space]
     [SerializeField] private CameraManager CameraManager;
 
@@ -22,8 +23,8 @@ public class SideSwitcher : MonoBehaviour
         Instance = this;
 
         Input = new Input();
-        Input.Switch.Switch.started += SwitchRoles;
-        Input.Switch.Enable();
+        //Input.Switch.Switch.started += SwitchRoles;
+        //Input.Switch.Enable();
 
         //temp
         ActiveCharacter = Character.SplitTop;
@@ -34,7 +35,7 @@ public class SideSwitcher : MonoBehaviour
 
     private void OnDestroy()
     {
-        Input.Switch.Disable();
+        //Input.Switch.Disable();
     }
 
     /// <summary>
@@ -61,6 +62,7 @@ public class SideSwitcher : MonoBehaviour
             ActiveCharacter = Character.SplitTop;
         }
     }
+    */
 }
 
 public enum Character

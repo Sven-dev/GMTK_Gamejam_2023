@@ -24,7 +24,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
     ""name"": ""Input"",
     ""maps"": [
         {
-            ""name"": ""Player1"",
+            ""name"": ""Big guy"",
             ""id"": ""c9a8d400-b15a-4313-adee-4a24aa0f8cbf"",
             ""actions"": [
                 {
@@ -40,6 +40,15 @@ public partial class @Input : IInputActionCollection2, IDisposable
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""f97ff433-d4b0-44c8-a58c-56c353d0969d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Switch"",
+                    ""type"": ""Button"",
+                    ""id"": ""e8a63758-ef2a-4f40-86ca-a7ecfe4abd02"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -134,11 +143,22 @@ public partial class @Input : IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fdc00e2b-c1a5-4b9a-8c16-ff87ff921f86"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
         {
-            ""name"": ""Player2"",
+            ""name"": ""Little guy"",
             ""id"": ""d0ababbc-c7a1-48a0-93fa-31a0dfa01f26"",
             ""actions"": [
                 {
@@ -250,49 +270,19 @@ public partial class @Input : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Switch"",
-            ""id"": ""f8640aa9-24a0-40cf-beae-937e7732f89d"",
-            ""actions"": [
-                {
-                    ""name"": ""Switch"",
-                    ""type"": ""Button"",
-                    ""id"": ""4d2081e5-1c08-4c8a-a406-f541ba0c6c30"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""661127e3-b235-4c14-960a-0348e87160b3"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Switch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": []
 }");
-        // Player1
-        m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
-        m_Player1_Movement = m_Player1.FindAction("Movement", throwIfNotFound: true);
-        m_Player1_Jump = m_Player1.FindAction("Jump", throwIfNotFound: true);
-        // Player2
-        m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
-        m_Player2_Movement = m_Player2.FindAction("Movement", throwIfNotFound: true);
-        m_Player2_Jump = m_Player2.FindAction("Jump", throwIfNotFound: true);
-        // Switch
-        m_Switch = asset.FindActionMap("Switch", throwIfNotFound: true);
-        m_Switch_Switch = m_Switch.FindAction("Switch", throwIfNotFound: true);
+        // Big guy
+        m_Bigguy = asset.FindActionMap("Big guy", throwIfNotFound: true);
+        m_Bigguy_Movement = m_Bigguy.FindAction("Movement", throwIfNotFound: true);
+        m_Bigguy_Jump = m_Bigguy.FindAction("Jump", throwIfNotFound: true);
+        m_Bigguy_Switch = m_Bigguy.FindAction("Switch", throwIfNotFound: true);
+        // Little guy
+        m_Littleguy = asset.FindActionMap("Little guy", throwIfNotFound: true);
+        m_Littleguy_Movement = m_Littleguy.FindAction("Movement", throwIfNotFound: true);
+        m_Littleguy_Jump = m_Littleguy.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -349,34 +339,39 @@ public partial class @Input : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Player1
-    private readonly InputActionMap m_Player1;
-    private IPlayer1Actions m_Player1ActionsCallbackInterface;
-    private readonly InputAction m_Player1_Movement;
-    private readonly InputAction m_Player1_Jump;
-    public struct Player1Actions
+    // Big guy
+    private readonly InputActionMap m_Bigguy;
+    private IBigguyActions m_BigguyActionsCallbackInterface;
+    private readonly InputAction m_Bigguy_Movement;
+    private readonly InputAction m_Bigguy_Jump;
+    private readonly InputAction m_Bigguy_Switch;
+    public struct BigguyActions
     {
         private @Input m_Wrapper;
-        public Player1Actions(@Input wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_Player1_Movement;
-        public InputAction @Jump => m_Wrapper.m_Player1_Jump;
-        public InputActionMap Get() { return m_Wrapper.m_Player1; }
+        public BigguyActions(@Input wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_Bigguy_Movement;
+        public InputAction @Jump => m_Wrapper.m_Bigguy_Jump;
+        public InputAction @Switch => m_Wrapper.m_Bigguy_Switch;
+        public InputActionMap Get() { return m_Wrapper.m_Bigguy; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(Player1Actions set) { return set.Get(); }
-        public void SetCallbacks(IPlayer1Actions instance)
+        public static implicit operator InputActionMap(BigguyActions set) { return set.Get(); }
+        public void SetCallbacks(IBigguyActions instance)
         {
-            if (m_Wrapper.m_Player1ActionsCallbackInterface != null)
+            if (m_Wrapper.m_BigguyActionsCallbackInterface != null)
             {
-                @Movement.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMovement;
-                @Jump.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnJump;
+                @Movement.started -= m_Wrapper.m_BigguyActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_BigguyActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_BigguyActionsCallbackInterface.OnMovement;
+                @Jump.started -= m_Wrapper.m_BigguyActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_BigguyActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_BigguyActionsCallbackInterface.OnJump;
+                @Switch.started -= m_Wrapper.m_BigguyActionsCallbackInterface.OnSwitch;
+                @Switch.performed -= m_Wrapper.m_BigguyActionsCallbackInterface.OnSwitch;
+                @Switch.canceled -= m_Wrapper.m_BigguyActionsCallbackInterface.OnSwitch;
             }
-            m_Wrapper.m_Player1ActionsCallbackInterface = instance;
+            m_Wrapper.m_BigguyActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Movement.started += instance.OnMovement;
@@ -385,96 +380,63 @@ public partial class @Input : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-            }
-        }
-    }
-    public Player1Actions @Player1 => new Player1Actions(this);
-
-    // Player2
-    private readonly InputActionMap m_Player2;
-    private IPlayer2Actions m_Player2ActionsCallbackInterface;
-    private readonly InputAction m_Player2_Movement;
-    private readonly InputAction m_Player2_Jump;
-    public struct Player2Actions
-    {
-        private @Input m_Wrapper;
-        public Player2Actions(@Input wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_Player2_Movement;
-        public InputAction @Jump => m_Wrapper.m_Player2_Jump;
-        public InputActionMap Get() { return m_Wrapper.m_Player2; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(Player2Actions set) { return set.Get(); }
-        public void SetCallbacks(IPlayer2Actions instance)
-        {
-            if (m_Wrapper.m_Player2ActionsCallbackInterface != null)
-            {
-                @Movement.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMovement;
-                @Jump.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnJump;
-            }
-            m_Wrapper.m_Player2ActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Movement.started += instance.OnMovement;
-                @Movement.performed += instance.OnMovement;
-                @Movement.canceled += instance.OnMovement;
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
-            }
-        }
-    }
-    public Player2Actions @Player2 => new Player2Actions(this);
-
-    // Switch
-    private readonly InputActionMap m_Switch;
-    private ISwitchActions m_SwitchActionsCallbackInterface;
-    private readonly InputAction m_Switch_Switch;
-    public struct SwitchActions
-    {
-        private @Input m_Wrapper;
-        public SwitchActions(@Input wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Switch => m_Wrapper.m_Switch_Switch;
-        public InputActionMap Get() { return m_Wrapper.m_Switch; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(SwitchActions set) { return set.Get(); }
-        public void SetCallbacks(ISwitchActions instance)
-        {
-            if (m_Wrapper.m_SwitchActionsCallbackInterface != null)
-            {
-                @Switch.started -= m_Wrapper.m_SwitchActionsCallbackInterface.OnSwitch;
-                @Switch.performed -= m_Wrapper.m_SwitchActionsCallbackInterface.OnSwitch;
-                @Switch.canceled -= m_Wrapper.m_SwitchActionsCallbackInterface.OnSwitch;
-            }
-            m_Wrapper.m_SwitchActionsCallbackInterface = instance;
-            if (instance != null)
-            {
                 @Switch.started += instance.OnSwitch;
                 @Switch.performed += instance.OnSwitch;
                 @Switch.canceled += instance.OnSwitch;
             }
         }
     }
-    public SwitchActions @Switch => new SwitchActions(this);
-    public interface IPlayer1Actions
+    public BigguyActions @Bigguy => new BigguyActions(this);
+
+    // Little guy
+    private readonly InputActionMap m_Littleguy;
+    private ILittleguyActions m_LittleguyActionsCallbackInterface;
+    private readonly InputAction m_Littleguy_Movement;
+    private readonly InputAction m_Littleguy_Jump;
+    public struct LittleguyActions
+    {
+        private @Input m_Wrapper;
+        public LittleguyActions(@Input wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_Littleguy_Movement;
+        public InputAction @Jump => m_Wrapper.m_Littleguy_Jump;
+        public InputActionMap Get() { return m_Wrapper.m_Littleguy; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LittleguyActions set) { return set.Get(); }
+        public void SetCallbacks(ILittleguyActions instance)
+        {
+            if (m_Wrapper.m_LittleguyActionsCallbackInterface != null)
+            {
+                @Movement.started -= m_Wrapper.m_LittleguyActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_LittleguyActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_LittleguyActionsCallbackInterface.OnMovement;
+                @Jump.started -= m_Wrapper.m_LittleguyActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_LittleguyActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_LittleguyActionsCallbackInterface.OnJump;
+            }
+            m_Wrapper.m_LittleguyActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Movement.started += instance.OnMovement;
+                @Movement.performed += instance.OnMovement;
+                @Movement.canceled += instance.OnMovement;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+            }
+        }
+    }
+    public LittleguyActions @Littleguy => new LittleguyActions(this);
+    public interface IBigguyActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-    }
-    public interface IPlayer2Actions
-    {
-        void OnMovement(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
-    }
-    public interface ISwitchActions
-    {
         void OnSwitch(InputAction.CallbackContext context);
+    }
+    public interface ILittleguyActions
+    {
+        void OnMovement(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }

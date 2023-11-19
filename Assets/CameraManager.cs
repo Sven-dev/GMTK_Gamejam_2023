@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
+    public static CameraManager Instance;
+
     [Range(1, 20f)]
     [SerializeField] private float MovementSmoothing = 0.5f;
     [SerializeField] private Transform Target;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void FixedUpdate()
     {

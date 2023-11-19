@@ -26,7 +26,6 @@ public class ConveyorBelt : Powerable
 
     public override void UpdatePower(float power)
     {
-        print(power);
         PowerLevel = power;
         if (power == 0)
         {

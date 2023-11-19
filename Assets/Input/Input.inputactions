@@ -2,7 +2,7 @@
     "name": "Input",
     "maps": [
         {
-            "name": "Player1",
+            "name": "Big guy",
             "id": "c9a8d400-b15a-4313-adee-4a24aa0f8cbf",
             "actions": [
                 {
@@ -18,6 +18,15 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "f97ff433-d4b0-44c8-a58c-56c353d0969d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Switch",
+                    "type": "Button",
+                    "id": "e8a63758-ef2a-4f40-86ca-a7ecfe4abd02",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -112,11 +121,22 @@
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fdc00e2b-c1a5-4b9a-8c16-ff87ff921f86",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "Player2",
+            "name": "Little guy",
             "id": "d0ababbc-c7a1-48a0-93fa-31a0dfa01f26",
             "actions": [
                 {
@@ -224,34 +244,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Switch",
-            "id": "f8640aa9-24a0-40cf-beae-937e7732f89d",
-            "actions": [
-                {
-                    "name": "Switch",
-                    "type": "Button",
-                    "id": "4d2081e5-1c08-4c8a-a406-f541ba0c6c30",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "661127e3-b235-4c14-960a-0348e87160b3",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Switch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
