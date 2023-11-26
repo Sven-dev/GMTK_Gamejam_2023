@@ -17,7 +17,10 @@ public class CameraManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        FollowCharacter();
+        if (Target != null)
+        {
+            FollowCharacter();
+        }
     }
 
     public void SetTarget(Transform newTarget)
