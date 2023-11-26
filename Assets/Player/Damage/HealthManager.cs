@@ -11,7 +11,7 @@ public class HealthManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SpawnManager.Instance.DestroyPlayer();
+        SpawnManager.Instance.Death();
         Destroy(gameObject);
     }
 }

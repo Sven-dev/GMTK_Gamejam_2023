@@ -6,11 +6,11 @@ public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager Instance;
 
-    [SerializeField] private Transform RespawnLocation;
-    [Space]
-    [SerializeField] private CameraManager Camera;
-    [Space]
+    [SerializeField] private List<Checkpoint> Checkpoints;
+    private int ActiveCheckpoint = 0;
+
     [SerializeField] private BodyController PlayerPrefab;
+    [SerializeField] private CameraManager Camera;
 
     private BodyController Body;
     private HeadController Head;
@@ -19,8 +19,12 @@ public class SpawnManager : MonoBehaviour
     {
         Instance = this;
 
-        //Load latest respawn position from save file     
+        //Temp code, replace this with a hardcoded list of checkpoint before release.
+        Checkpoints = new List<Checkpoint>();
+        Checkpoints.AddRange(FindObjectsOfType<Checkpoint>());
 
+        //Load latest respawn position from save file
+        ActiveCheckpoint = SavefileManager.Instance.Checkpoint;
     }
 
     private void Start()
@@ -28,7 +32,7 @@ public class SpawnManager : MonoBehaviour
         SpawnPlayer();
     }
 
-    public void DestroyPlayer()
+    public void Death()
     {
         if (Body != null)
         {
@@ -47,12 +51,13 @@ public class SpawnManager : MonoBehaviour
     {
         //Spawn the player prefab at the loaded checkpoint
         //Keep reference to both controllers so we can destroy them when one gets damaged
-        Body = Instantiate(PlayerPrefab, RespawnLocation.position, Quaternion.identity);
-        Head = Body.GetComponentInChildren<HeadController>();
-
+        Body = Instantiate(PlayerPrefab, Checkpoints[ActiveCheckpoint].RespawnPivot.position, Quaternion.identity);
+        
+        //For some reason I can't get the headcontroller out of body easily.
+        //This could be improved but works for now.
+        //Head = Body.GetComponentInChildren<HeadController>();
         foreach(Transform child in Body.transform)
         {
-            print(child.name);
             Head = child.GetComponent<HeadController>();
             if (Head != null)
             {
@@ -63,10 +68,19 @@ public class SpawnManager : MonoBehaviour
         Camera.SetTarget(Head.transform);
     }
 
-    public void UpdateCheckPoint(Transform location)
+    public void UpdateCheckPoints(Checkpoint activeCheckpoint)
     {
-        RespawnLocation = location;
-
-        //Save updated respawn position to save file
+        for (int i = 0; i < Checkpoints.Count; i++)
+        {
+            if (Checkpoints[i] == activeCheckpoint)
+            {
+                ActiveCheckpoint = i;
+                SavefileManager.Instance.UpdateCheckpoint(i);
+            }
+            else
+            {
+                Checkpoints[i].Deactivate();
+            }
+        }
     }
 }
