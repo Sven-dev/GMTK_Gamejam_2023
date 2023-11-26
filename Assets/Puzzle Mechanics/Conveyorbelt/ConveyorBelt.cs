@@ -20,11 +20,6 @@ public class ConveyorBelt : Powerable
     [SerializeField] private SpriteRenderer Renderer;
     [SerializeField] private Animator Animator;
 
-    private void Start()
-    {
-        UpdatePower(0);
-    }
-
     public override void UpdatePower(float power)
     {
         base.UpdatePower(power);

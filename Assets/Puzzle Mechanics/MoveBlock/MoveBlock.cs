@@ -21,11 +21,6 @@ public class MoveBlock : Powerable
         Right
     }
 
-    private void Start()
-    {
-        UpdatePower(0);
-    }
-
     public override void UpdatePower(float power)
     {
         if (PowerLevel + power > PowerLevel)

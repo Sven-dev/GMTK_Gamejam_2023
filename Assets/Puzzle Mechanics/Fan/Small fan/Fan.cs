@@ -15,11 +15,6 @@ public class Fan : Powerable
     [SerializeField] private Collider2D WindTrigger;
     [SerializeField] private SpriteRenderer WindAnimation;
 
-    private void Start()
-    {
-        UpdatePower(0);
-    }
-
     public override void UpdatePower(float power)
     {
         base.UpdatePower(power);
