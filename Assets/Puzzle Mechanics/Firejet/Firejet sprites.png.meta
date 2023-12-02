@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: -5924745543076401198
     second: Firejet sprites_1
+  - first:
+      213: 2034618989192990335
+    second: Firejet sprites_2
+  - first:
+      213: 4111628582407400251
+    second: Firejet sprites_3
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -147,6 +153,48 @@ TextureImporter:
       bones: []
       spriteID: 2df2a58b15317cda0800000000000000
       internalID: -5924745543076401198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Firejet sprites_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 16
+      alignment: 9
+      pivot: {x: -0, y: 0.5}
+      border: {x: 5, y: 0, z: 14, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7ecc18d03b6c3c10800000000000000
+      internalID: 2034618989192990335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Firejet sprites_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 6
+        height: 16
+      alignment: 9
+      pivot: {x: -0, y: 0.5}
+      border: {x: 5, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3b6cbe49607f0930800000000000000
+      internalID: 4111628582407400251
       vertices: []
       indices: 
       edges: []

@@ -47,6 +47,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -149,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee507b638b795147b2064190829d9e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PowerLevel: 0
   Direction: 3
   Range: 1
   Strength: 3
@@ -170,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Fan: {fileID: 7069715487805311991}
   WindTrigger: {fileID: 7069715487805311988}
-  WindAnimation: {fileID: 6340783651124541550}
+  WindRenderer: {fileID: 6340783651124541550}
 --- !u!61 &7069715487805311988
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -271,6 +273,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

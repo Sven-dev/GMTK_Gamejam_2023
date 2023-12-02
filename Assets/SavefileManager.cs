@@ -6,13 +6,20 @@ public class SavefileManager : MonoBehaviour
 {
     public static SavefileManager Instance;
 
+    [SerializeField] private bool Reset = false;
     public int Checkpoint { get; private set; }
 
     void Awake()
     {
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        Load();
+
+        if (Reset)
+        {
+            ResetSave();
+        }
+
+        Load();           
     }
 
     public void UpdateCheckpoint(int value)
@@ -29,5 +36,10 @@ public class SavefileManager : MonoBehaviour
     private void Save()
     {
         PlayerPrefs.SetInt("Checkpoint", Checkpoint);
+    }
+
+    private void ResetSave()
+    {
+        PlayerPrefs.DeleteKey("Checkpoint");
     }
 }

@@ -1,24 +1,25 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class FanEditor : MonoBehaviour
+public class FirejetEditor : MonoBehaviour
 {
-    [SerializeField] private Fan Fan;
+    [SerializeField] private Firejet Firejet;
     [Space]
-    [SerializeField] private BoxCollider2D WindTrigger;
-    [SerializeField] private SpriteRenderer WindRenderer;
+    [SerializeField] private BoxCollider2D FireTrigger;
+    [SerializeField] private SpriteRenderer FireRenderer;
 
-    private Face Direction = Face.Right;
+    private Face Direction;
     private int Range = 0;
 
+    // Update is called once per frame
     private void Update()
     {
-        if (Fan.Direction != Direction)
+        if (Firejet.Direction != Direction)
         {
             Vector3 rotation = Vector3.zero;
-            switch(Fan.Direction)
+            switch (Firejet.Direction)
             {
                 case Face.Right:
                     rotation = Vector3.forward * 0;
@@ -34,25 +35,25 @@ public class FanEditor : MonoBehaviour
                     break;
             }
 
-            Fan.transform.eulerAngles = rotation;
-            Direction = Fan.Direction;
+            transform.eulerAngles = rotation;
+            Direction = Firejet.Direction;
         }
 
-        if (Fan.Range != Range)
+        if (Firejet.Range != Range)
         {
-            Range = Fan.Range;
+            Range = Firejet.Range;
 
             //On even ranges, there needs to be an offset of 0.5 more
             float offset = 0;
-            if (Range %2 != 0)
+            if (Range % 2 != 0)
             {
                 offset = 0.5f;
             }
 
-            WindTrigger.size = new Vector2(Range, 1);
-            WindTrigger.offset = new Vector2(0.5f + Range / 2 + offset, 0);
+            FireTrigger.size = new Vector2(Range, 1);
+            FireTrigger.offset = new Vector2(Range / 2 + offset, 0);
 
-            WindRenderer.size = new Vector2(Range, 1);
+            FireRenderer.size = new Vector2(Range, 1);
         }
     }
 }
