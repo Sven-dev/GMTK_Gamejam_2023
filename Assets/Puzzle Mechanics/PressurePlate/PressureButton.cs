@@ -98,8 +98,13 @@ public class PressureButton : MonoBehaviour
 
 public abstract class Powerable: MonoBehaviour
 {
-    [SerializeField] [Tooltip("For debugging, not meant to be changed manually")]
+    [Tooltip("For debugging, not meant to be changed manually")]
     protected float PowerLevel = 0;
+
+    protected void Start()
+    {
+        UpdatePower(PowerLevel);
+    }
 
     public virtual void UpdatePower(float power)
     {
