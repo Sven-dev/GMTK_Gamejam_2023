@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PowerLevel: 0
+  AutoPower: 0
   Direction: 3
   Range: 1
   Strength: 3
@@ -189,11 +190,11 @@ BoxCollider2D:
   m_Offset: {x: 1, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
@@ -212,7 +213,7 @@ GameObject:
   - component: {fileID: 7728646861220199076}
   - component: {fileID: 4194521945310492348}
   m_Layer: 8
-  m_Name: Collision
+  m_Name: Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

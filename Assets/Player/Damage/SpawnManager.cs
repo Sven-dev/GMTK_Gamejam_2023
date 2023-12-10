@@ -20,8 +20,8 @@ public class SpawnManager : MonoBehaviour
         Instance = this;
 
         //Temp code, replace this with a hardcoded list of checkpoint before release.
-        Checkpoints = new List<Checkpoint>();
-        Checkpoints.AddRange(FindObjectsOfType<Checkpoint>());
+        //Checkpoints = new List<Checkpoint>();
+        //Checkpoints.AddRange(FindObjectsOfType<Checkpoint>());
 
         //Load latest respawn position from save file
         ActiveCheckpoint = SavefileManager.Instance.Checkpoint;

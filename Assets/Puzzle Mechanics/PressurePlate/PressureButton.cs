@@ -99,7 +99,8 @@ public class PressureButton : MonoBehaviour
 public abstract class Powerable: MonoBehaviour
 {
     [Tooltip("For debugging, not meant to be changed manually")]
-    protected float PowerLevel = 0;
+    [SerializeField] protected float PowerLevel = 0;
+    [SerializeField] protected bool AutoPower = false;
 
     protected void Start()
     {
@@ -110,4 +111,18 @@ public abstract class Powerable: MonoBehaviour
     {
         PowerLevel += power;
     }
+}
+
+public enum Face
+{
+    Up,
+    Down,
+    Left,
+    Right
+}
+
+public enum Direction
+{
+    Left,
+    Right,
 }

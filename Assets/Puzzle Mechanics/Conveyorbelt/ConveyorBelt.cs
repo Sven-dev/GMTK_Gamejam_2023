@@ -9,13 +9,6 @@ public class ConveyorBelt : Powerable
     [SerializeField] [Range(25, 100)] [Tooltip("Note: player characters run at about 63 speed.")] 
     private float Speed = 1f;
     [SerializeField] private Direction Facing = Direction.Right;
-
-    private enum Direction
-    {
-        Left,
-        Right,
-    }
-
     [Space]
     [SerializeField] private SpriteRenderer Renderer;
     [SerializeField] private Animator Animator;
@@ -23,15 +16,31 @@ public class ConveyorBelt : Powerable
     public override void UpdatePower(float power)
     {
         base.UpdatePower(power);
-        if (PowerLevel > 0)
+        if (AutoPower == false)
         {
-            Renderer.color = ColorDictionary.Instance.Powered;
-            Animator.SetBool("Moving", true);
+            if (PowerLevel > 0)
+            {
+                Renderer.color = ColorDictionary.Instance.Powered;
+                Animator.SetBool("Moving", true);
+            }
+            else
+            {
+                Renderer.color = ColorDictionary.Instance.Unpowered;
+                Animator.SetBool("Moving", false);
+            }
         }
-        else
+        else //if (AutoPower == true)
         {
-            Renderer.color = ColorDictionary.Instance.Unpowered;
-            Animator.SetBool("Moving", false);
+            if (PowerLevel > 0)
+            {
+                Renderer.color = ColorDictionary.Instance.Unpowered;
+                Animator.SetBool("Moving", false);
+            }
+            else
+            {
+                Renderer.color = ColorDictionary.Instance.Powered;
+                Animator.SetBool("Moving", true);
+            }
         }
     }
 

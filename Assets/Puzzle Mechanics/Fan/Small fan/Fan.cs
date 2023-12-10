@@ -18,17 +18,35 @@ public class Fan : Powerable
     public override void UpdatePower(float power)
     {
         base.UpdatePower(power);
-        if (PowerLevel > 0)
+        if (AutoPower == false)
         {
-            Renderer.color = ColorDictionary.Instance.Powered;
-            Animator.SetBool("Moving", true);
-            WindAnimation.enabled = true;
+            if (PowerLevel > 0)
+            {
+                Renderer.color = ColorDictionary.Instance.Powered;
+                Animator.SetBool("Moving", true);
+                WindAnimation.enabled = true;
+            }
+            else
+            {
+                Renderer.color = ColorDictionary.Instance.Unpowered;
+                Animator.SetBool("Moving", false);
+                WindAnimation.enabled = false;
+            }
         }
-        else
+        else //if (AutoPower == true)
         {
-            Renderer.color = ColorDictionary.Instance.Unpowered;
-            Animator.SetBool("Moving", false);
-            WindAnimation.enabled = false;
+            if (PowerLevel > 0)
+            {
+                Renderer.color = ColorDictionary.Instance.Unpowered;
+                Animator.SetBool("Moving", false);
+                WindAnimation.enabled = false;
+            }
+            else
+            {
+                Renderer.color = ColorDictionary.Instance.Powered;
+                Animator.SetBool("Moving", true);
+                WindAnimation.enabled = true;
+            }
         }
     }
 
@@ -58,12 +76,4 @@ public class Fan : Powerable
             rigidbody.AddForce(dir * Strength * Time.deltaTime, ForceMode2D.Impulse);
         }
     }
-}
-
-public enum Face
-{
-    Up,
-    Down,
-    Left,
-    Right
 }

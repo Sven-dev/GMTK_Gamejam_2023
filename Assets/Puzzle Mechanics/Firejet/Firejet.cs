@@ -21,7 +21,7 @@ public class Firejet : Powerable
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (PowerLevel > 0)
+        if (JetRenderer.gameObject.activeInHierarchy)
         {
             RaycastHit2D[] hits = Physics2D.RaycastAll(RaycastPivot.position, transform.right, Range, 1 << LayerMask.NameToLayer("Ground"));
 
@@ -61,15 +61,31 @@ public class Firejet : Powerable
     public override void UpdatePower(float power)
     {
         base.UpdatePower(power);
-        if (PowerLevel > 0)
+        if (AutoPower == false)
         {
-            JetRenderer.gameObject.SetActive(true);
-            //BlockRenderer.color = ColorDictionary.Instance.Powered;
+            if (PowerLevel > 0)
+            {
+                JetRenderer.gameObject.SetActive(true);
+                //BlockRenderer.color = ColorDictionary.Instance.Powered;
+            }
+            else
+            {
+                JetRenderer.gameObject.SetActive(false);
+                //BlockRenderer.color = ColorDictionary.Instance.Unpowered;
+            }
         }
-        else
+        else if (AutoPower == true)
         {
-            JetRenderer.gameObject.SetActive(false);
-            //BlockRenderer.color = ColorDictionary.Instance.Unpowered;
+            if (PowerLevel > 0)
+            {
+                JetRenderer.gameObject.SetActive(false);
+                //BlockRenderer.color = ColorDictionary.Instance.Unpowered;
+            }
+            else
+            {
+                JetRenderer.gameObject.SetActive(true);
+                //BlockRenderer.color = ColorDictionary.Instance.Powered;
+            }
         }
     }
 

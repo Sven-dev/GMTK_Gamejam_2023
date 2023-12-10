@@ -13,14 +13,6 @@ public class MoveBlock : Powerable
     [SerializeField] private Transform Block;
     [SerializeField] private Tilemap Renderer;
 
-    private enum Face
-    {
-        Up,
-        Down,
-        Left,
-        Right
-    }
-
     public override void UpdatePower(float power)
     {
         if (PowerLevel + power > PowerLevel)
