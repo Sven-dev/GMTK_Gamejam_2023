@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PressureButton : MonoBehaviour
+public class PowerPlate : MonoBehaviour
 {
     [Range(1, 10)] public int Height = 2;
     [Range(1, 10)] public int PlatformSize;
@@ -96,11 +96,11 @@ public class PressureButton : MonoBehaviour
     }
 }
 
-public abstract class Powerable: MonoBehaviour
+public abstract class Powerable : MonoBehaviour
 {
     [Tooltip("For debugging, not meant to be changed manually")]
-    [SerializeField] protected float PowerLevel = 0;
-    [SerializeField] protected bool AutoPower = false;
+    [HideInInspector] public float PowerLevel = 0;
+    [HideInInspector] public bool AutoPower = false;
 
     protected void Start()
     {

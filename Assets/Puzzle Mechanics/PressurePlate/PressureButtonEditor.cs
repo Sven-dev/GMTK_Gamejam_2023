@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 [ExecuteInEditMode]
 public class PressureButtonEditor : MonoBehaviour
 {
-    [SerializeField] private PressureButton PressureButton;
+    [SerializeField] private PowerPlate PressureButton;
     [Space]
     [SerializeField] private SpriteRenderer Platform;
     [SerializeField] private Transform UnpressedPivot;

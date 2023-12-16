@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 2964309097215665511}
   - component: {fileID: 875165391498479532}
   m_Layer: 0
-  m_Name: Pressure button
+  m_Name: PowerPlate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,13 +105,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7657988274959567377}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 762be7e71298da14590a8a8efe7d4ef0, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b86617b75eb6804bb5357d2d4321970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Height: 1
-  PlatformSize: 4
-  PressSpeed: 0.5
-  UnpressSpeed: 0.5
+  PlatformSize: 3
+  PressSpeed: 1
+  UnpressSpeed: 1
   PoweredObjects: []
   DetectionLayer:
     serializedVersion: 2
@@ -185,6 +185,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -268,6 +269,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -298,7 +300,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 4, y: 1}
+  m_Size: {x: 3, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -322,13 +324,13 @@ BoxCollider2D:
     border: {x: 0.5, y: 0, z: 0.5, w: 0}
     pivot: {x: 0.5, y: 0}
     oldSize: {x: 2, y: 1}
-    newSize: {x: 4, y: 1}
+    newSize: {x: 3, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4, y: 1}
+  m_Size: {x: 3, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &8821469628529619246
 GameObject:

@@ -6,12 +6,36 @@ using UnityEngine.Tilemaps;
 public class MoveBlock : Powerable
 {
     [Header("Moveblock variables")]
-    [SerializeField] [Range(1, 10)] private int Length = 3;
+    [SerializeField] [Range(1, 20)] private int Length = 3;
     [SerializeField] private Face Direction = Face.Right;
 
     [Header("System variables")]
     [SerializeField] private Transform Block;
     [SerializeField] private Tilemap Renderer;
+
+    private void FixedUpdate()
+    {
+        if (!AutoPower)
+        {
+            Block.position = Vector2.MoveTowards(
+                Block.position,
+                Vector2.Lerp(
+                    transform.position,
+                    transform.position + FaceToVector(Direction) * Length,
+                    PowerLevel),
+                0.01f * Length);
+        }
+        else //if (AutoPower)
+        {
+            Block.position = Vector2.MoveTowards(
+                Block.position,
+                    Vector2.Lerp(                     
+                        transform.position + FaceToVector(Direction) * Length,
+                        transform.position,
+                        PowerLevel),
+                    0.01f * Length);
+        }
+    }
 
     public override void UpdatePower(float power)
     {
@@ -25,7 +49,6 @@ public class MoveBlock : Powerable
         }
 
         base.UpdatePower(power);
-        Block.position = Vector3.Lerp(transform.position, transform.position + FaceToVector(Direction) * Length, PowerLevel);
     }
 
     private Vector3 FaceToVector(Face face)
