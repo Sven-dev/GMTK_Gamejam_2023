@@ -49,6 +49,7 @@ public class HealthManager : MonoBehaviour
             }
         }
 
+        /*
         if (rayA.transform != null)
         {
             print("Ray up: " + rayA.transform.name + ", Distance: " + rayA.distance);
@@ -58,6 +59,7 @@ public class HealthManager : MonoBehaviour
         {
             print("Ray down: " + rayB.transform.name + ", Distance: " + rayB.distance);
         }
+        */
 
         //upleft-upright detection 1
         rayA = Physics2D.BoxCast(UpLeftPivot.position, new Vector2(0.5f, 0.01f), 0, Vector2.up, 0.5f, Mask.value);
@@ -75,6 +77,7 @@ public class HealthManager : MonoBehaviour
             }
         }
 
+        /*
         if (rayA.transform != null)
         {
             print("Ray upleft: " + rayA.transform.name + ", Distance: " + rayA.distance);
@@ -84,6 +87,7 @@ public class HealthManager : MonoBehaviour
         {
             print("Ray upright: " + rayB.transform.name + ", Distance: " + rayB.distance);
         }
+        */
 
         if (DownLeftPivot != null && DownRightPivot != null)
         {
@@ -103,6 +107,7 @@ public class HealthManager : MonoBehaviour
                 }
             }
 
+            /*
             if (rayA.transform != null)
             {
                 print("Ray downleft: " + rayA.transform.name + ", Distance: " + rayA.distance);
@@ -112,6 +117,7 @@ public class HealthManager : MonoBehaviour
             {
                 print("Ray downright: " + rayB.transform.name + ", Distance: " + rayB.distance);
             }
+            */
         }
     }
 

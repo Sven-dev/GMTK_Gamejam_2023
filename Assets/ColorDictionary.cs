@@ -7,6 +7,7 @@ public class ColorDictionary : MonoBehaviour
     public static ColorDictionary Instance;
 
     public Color Background;
+    public Color BackgroundPowered;
     public Color Unpowered;
     public Color Powered;
     public Color Highlight;

@@ -12,6 +12,7 @@ public class Room : MonoBehaviour
     [SerializeField] private List<PowerButton> Buttons;
     [SerializeField] private List<PowerPlate> Plates;
     [Space]
+    [SerializeField] private SpriteRenderer Background;
     [SerializeField] private List<Tilemap> Tilemaps;
 
     // Start is called before the first frame update
@@ -23,10 +24,14 @@ public class Room : MonoBehaviour
         Plates = transform.GetComponentsInChildren<PowerPlate>(true).ToList();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Enter()
     {
-        
+        gameObject.SetActive(true);
+    }
+
+    public void Leave()
+    {
+        gameObject.SetActive(false);
     }
 
     public void TurnOn()
@@ -34,6 +39,7 @@ public class Room : MonoBehaviour
         Powered = true;
 
         //Make room green
+        Background.color = ColorDictionary.Instance.BackgroundPowered;
         foreach (Tilemap tilemap in Tilemaps)
         {
             tilemap.color = ColorDictionary.Instance.Powered;
@@ -64,9 +70,11 @@ public class Room : MonoBehaviour
         Powered = false;
 
         //Make room pink
+        Background.color = ColorDictionary.Instance.Background;
         foreach (Tilemap tilemap in Tilemaps)
         {
             tilemap.color = ColorDictionary.Instance.Unpowered;
+            
         }
 
         //Unpower all powerables

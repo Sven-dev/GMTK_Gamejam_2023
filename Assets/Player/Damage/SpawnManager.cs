@@ -6,14 +6,14 @@ public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager Instance;
 
+    [HideInInspector] public BodyController Body;
+    [HideInInspector] public HeadController Head;
+
     [SerializeField] private List<Checkpoint> Checkpoints;
     private int ActiveCheckpoint = 0;
 
     [SerializeField] private BodyController PlayerPrefab;
     [SerializeField] private CameraManager Camera;
-
-    private BodyController Body;
-    private HeadController Head;
 
     private void Awake()
     {
@@ -65,7 +65,7 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
-        Camera.SetTarget(Head.transform);
+        //Camera.SetTarget(Head.transform);
     }
 
     public void UpdateCheckPoints(Checkpoint activeCheckpoint)

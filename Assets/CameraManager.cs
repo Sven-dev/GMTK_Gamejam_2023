@@ -8,6 +8,7 @@ public class CameraManager : MonoBehaviour
 
     [Range(1, 20f)]
     [SerializeField] private float MovementSmoothing = 0.5f;
+    [SerializeField] private CameraBounds Bounds;
     [SerializeField] private Transform Target;
 
     private void Awake()
@@ -17,7 +18,11 @@ public class CameraManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Target != null)
+        if (Target == null)
+        {
+            Target = SpawnManager.Instance.Head.transform;
+        }
+        else //if (Target != null)
         {
             FollowCharacter();
         }
@@ -37,5 +42,7 @@ public class CameraManager : MonoBehaviour
         {
             transform.position += (characterPosition - transform.position) / MovementSmoothing;
         }
+
+        transform.position = Bounds.RestrictCamera(transform.position);
     }
 }

@@ -83,6 +83,9 @@ TextureImporter:
   - first:
       213: -2988235184516314985
     second: Ruletiles_26
+  - first:
+      213: -3289250383264126007
+    second: Ruletiles_27
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -209,7 +212,7 @@ TextureImporter:
       name: Ruletiles_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 17
         y: 112
         width: 16
         height: 16
@@ -230,7 +233,7 @@ TextureImporter:
       name: Ruletiles_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 34
         y: 112
         width: 16
         height: 16
@@ -251,7 +254,7 @@ TextureImporter:
       name: Ruletiles_3
       rect:
         serializedVersion: 2
-        x: 48
+        x: 51
         y: 112
         width: 16
         height: 16
@@ -272,8 +275,8 @@ TextureImporter:
       name: Ruletiles_4
       rect:
         serializedVersion: 2
-        x: 64
-        y: 112
+        x: 51
+        y: 44
         width: 16
         height: 16
       alignment: 0
@@ -294,7 +297,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
+        y: 95
         width: 16
         height: 16
       alignment: 0
@@ -314,8 +317,8 @@ TextureImporter:
       name: Ruletiles_6
       rect:
         serializedVersion: 2
-        x: 32
-        y: 96
+        x: 34
+        y: 95
         width: 16
         height: 16
       alignment: 0
@@ -335,8 +338,8 @@ TextureImporter:
       name: Ruletiles_7
       rect:
         serializedVersion: 2
-        x: 48
-        y: 96
+        x: 51
+        y: 95
         width: 16
         height: 16
       alignment: 0
@@ -356,8 +359,8 @@ TextureImporter:
       name: Ruletiles_8
       rect:
         serializedVersion: 2
-        x: 64
-        y: 96
+        x: 34
+        y: 44
         width: 16
         height: 16
       alignment: 0
@@ -378,7 +381,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 80
+        y: 78
         width: 16
         height: 16
       alignment: 0
@@ -398,8 +401,8 @@ TextureImporter:
       name: Ruletiles_10
       rect:
         serializedVersion: 2
-        x: 16
-        y: 80
+        x: 17
+        y: 78
         width: 16
         height: 16
       alignment: 0
@@ -419,8 +422,8 @@ TextureImporter:
       name: Ruletiles_11
       rect:
         serializedVersion: 2
-        x: 32
-        y: 80
+        x: 34
+        y: 78
         width: 16
         height: 16
       alignment: 0
@@ -440,8 +443,8 @@ TextureImporter:
       name: Ruletiles_12
       rect:
         serializedVersion: 2
-        x: 48
-        y: 80
+        x: 51
+        y: 78
         width: 16
         height: 16
       alignment: 0
@@ -461,8 +464,8 @@ TextureImporter:
       name: Ruletiles_13
       rect:
         serializedVersion: 2
-        x: 64
-        y: 80
+        x: 17
+        y: 44
         width: 16
         height: 16
       alignment: 0
@@ -483,7 +486,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 61
         width: 16
         height: 16
       alignment: 0
@@ -503,8 +506,8 @@ TextureImporter:
       name: Ruletiles_15
       rect:
         serializedVersion: 2
-        x: 16
-        y: 64
+        x: 17
+        y: 61
         width: 16
         height: 16
       alignment: 0
@@ -524,8 +527,8 @@ TextureImporter:
       name: Ruletiles_16
       rect:
         serializedVersion: 2
-        x: 32
-        y: 64
+        x: 34
+        y: 61
         width: 16
         height: 16
       alignment: 0
@@ -545,8 +548,8 @@ TextureImporter:
       name: Ruletiles_17
       rect:
         serializedVersion: 2
-        x: 48
-        y: 64
+        x: 51
+        y: 61
         width: 16
         height: 16
       alignment: 0
@@ -566,8 +569,8 @@ TextureImporter:
       name: Ruletiles_18
       rect:
         serializedVersion: 2
-        x: 64
-        y: 64
+        x: 0
+        y: 44
         width: 16
         height: 16
       alignment: 0
@@ -587,12 +590,12 @@ TextureImporter:
       name: Ruletiles_19
       rect:
         serializedVersion: 2
-        x: 80
+        x: 68
         y: 112
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -608,12 +611,12 @@ TextureImporter:
       name: Ruletiles_20
       rect:
         serializedVersion: 2
-        x: 80
-        y: 96
+        x: 68
+        y: 95
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -629,12 +632,12 @@ TextureImporter:
       name: Ruletiles_21
       rect:
         serializedVersion: 2
-        x: 80
-        y: 80
+        x: 68
+        y: 78
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -650,12 +653,12 @@ TextureImporter:
       name: Ruletiles_22
       rect:
         serializedVersion: 2
-        x: 80
-        y: 64
+        x: 68
+        y: 61
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -671,12 +674,12 @@ TextureImporter:
       name: Ruletiles_23
       rect:
         serializedVersion: 2
-        x: 96
+        x: 85
         y: 112
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -692,12 +695,12 @@ TextureImporter:
       name: Ruletiles_24
       rect:
         serializedVersion: 2
-        x: 112
+        x: 103
         y: 112
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -713,12 +716,12 @@ TextureImporter:
       name: Ruletiles_25
       rect:
         serializedVersion: 2
-        x: 112
-        y: 96
+        x: 103
+        y: 95
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -734,8 +737,29 @@ TextureImporter:
       name: Ruletiles_26
       rect:
         serializedVersion: 2
-        x: 96
-        y: 96
+        x: 85
+        y: 95
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 798c4999ee7a786d0800000000000000
+      internalID: -2988235184516314985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ruletiles_27
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 95
         width: 16
         height: 16
       alignment: 0
@@ -745,8 +769,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 798c4999ee7a786d0800000000000000
-      internalID: -2988235184516314985
+      spriteID: 9cb6930243c3a52d0800000000000000
+      internalID: -3289250383264126007
       vertices: []
       indices: 
       edges: []

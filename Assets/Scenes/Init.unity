@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a70a6614d72dc64d9c1fc563cf5f184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Reset: 1
+  Reset: 0
 --- !u!4 &112281404
 Transform:
   m_ObjectHideFlags: 0
@@ -936,7 +936,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d0666c06e6efb409fd85321a039e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Background: {r: 0.16470589, g: 0.05882353, b: 0.13725491, a: 1}
+  Background: {r: 0.29411766, g: 0.1137255, b: 0.24313727, a: 1}
+  BackgroundPowered: {r: 0, g: 0.4745098, b: 0.3254902, a: 1}
   Unpowered: {r: 0.58431375, g: 0.22352941, b: 0.48235294, a: 1}
   Powered: {r: 0.003921569, g: 0.9490196, b: 0.64705884, a: 1}
   Highlight: {r: 1, g: 1, b: 1, a: 1}
