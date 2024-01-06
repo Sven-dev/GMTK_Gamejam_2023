@@ -154,9 +154,8 @@ MonoBehaviour:
   AutoPower: 0
   Direction: 3
   Range: 1
-  Strength: 3
+  Strength: 40
   Renderer: {fileID: 7728646861220199076}
-  Animator: {fileID: 4194521945310492348}
   WindTrigger: {fileID: 7069715487805311988}
   WindAnimation: {fileID: 6340783651124541550}
 --- !u!114 &6274870125629503291

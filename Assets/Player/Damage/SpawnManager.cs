@@ -45,13 +45,15 @@ public class SpawnManager : MonoBehaviour
         }
 
         SpawnPlayer();
+        
     }
 
     public void SpawnPlayer()
     {
         //Spawn the player prefab at the loaded checkpoint
         //Keep reference to both controllers so we can destroy them when one gets damaged
-        Body = Instantiate(PlayerPrefab, Checkpoints[ActiveCheckpoint].RespawnPivot.position, Quaternion.identity);
+        Checkpoint checkpoint = Checkpoints[ActiveCheckpoint];
+        Body = Instantiate(PlayerPrefab, checkpoint.RespawnPivot.position, Quaternion.identity);
         
         //For some reason I can't get the headcontroller out of body easily.
         //This could be improved but works for now.
@@ -65,6 +67,7 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
+        checkpoint.Spawn();
         //Camera.SetTarget(Head.transform);
     }
 

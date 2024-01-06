@@ -12,6 +12,13 @@ public class Checkpoint : MonoBehaviour
     [Space]
     [SerializeField] private SpriteRenderer Renderer;
 
+    private Room Room;
+
+    private void Awake()
+    {
+        Room = transform.GetComponentInParent<Room>();
+    }
+
     private void FixedUpdate()
     {
         if (Active)
@@ -37,6 +44,11 @@ public class Checkpoint : MonoBehaviour
     {
         Active = false;
         Renderer.color = Renderer.color = ColorDictionary.Instance.Unpowered;
+    }
+
+    public void Spawn()
+    {
+        Room.Enter();
     }
 
     private void OnDrawGizmosSelected()
