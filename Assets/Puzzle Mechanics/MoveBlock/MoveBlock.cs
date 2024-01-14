@@ -18,16 +18,16 @@ public class MoveBlock : Powerable
         if (!AutoPower)
         {
             Block.position = Vector2.Lerp(
-            transform.position + FaceToVector(Direction) * Length,
-            transform.position,
-            PowerLevel);
+                transform.position,
+                transform.position + FaceToVector(Direction) * Length,
+                PowerLevel);
         }
         else //if (AutoPower)
         {
             Block.position = Vector2.Lerp(
-                    transform.position,
-                    transform.position + FaceToVector(Direction) * Length,
-                    PowerLevel);
+                transform.position + FaceToVector(Direction) * Length,
+                transform.position,
+                PowerLevel);
         }
     }
 
