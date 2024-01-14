@@ -22,6 +22,8 @@ public class Room : MonoBehaviour
         Powerables = transform.GetComponentsInChildren<Powerable>(true).ToList();
         Buttons = transform.GetComponentsInChildren<PowerButton>(true).ToList();
         Plates = transform.GetComponentsInChildren<PowerPlate>(true).ToList();
+
+        //gameObject.SetActive(false);
     }
 
     public void Enter()

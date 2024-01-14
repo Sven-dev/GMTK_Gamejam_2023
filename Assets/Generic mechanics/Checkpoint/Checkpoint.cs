@@ -11,13 +11,7 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] private Transform DetectionPivot;
     [Space]
     [SerializeField] private SpriteRenderer Renderer;
-
-    private Room Room;
-
-    private void Awake()
-    {
-        Room = transform.GetComponentInParent<Room>();
-    }
+    [SerializeField] private Room Room;
 
     private void FixedUpdate()
     {
