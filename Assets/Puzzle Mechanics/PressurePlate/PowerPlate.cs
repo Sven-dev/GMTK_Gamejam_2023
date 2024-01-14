@@ -89,6 +89,11 @@ public class PowerPlate : MonoBehaviour
         }
     }
 
+    public void Reset()
+    {
+        PowerValue = 0;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;

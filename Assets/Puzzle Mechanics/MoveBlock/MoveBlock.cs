@@ -17,23 +17,17 @@ public class MoveBlock : Powerable
     {
         if (!AutoPower)
         {
-            Block.position = Vector2.MoveTowards(
-                Block.position,
-                Vector2.Lerp(
-                    transform.position,
-                    transform.position + FaceToVector(Direction) * Length,
-                    PowerLevel),
-                0.01f * Length);
+            Block.position = Vector2.Lerp(
+            transform.position + FaceToVector(Direction) * Length,
+            transform.position,
+            PowerLevel);
         }
         else //if (AutoPower)
         {
-            Block.position = Vector2.MoveTowards(
-                Block.position,
-                    Vector2.Lerp(                     
-                        transform.position + FaceToVector(Direction) * Length,
-                        transform.position,
-                        PowerLevel),
-                    0.01f * Length);
+            Block.position = Vector2.Lerp(
+                    transform.position,
+                    transform.position + FaceToVector(Direction) * Length,
+                    PowerLevel);
         }
     }
 

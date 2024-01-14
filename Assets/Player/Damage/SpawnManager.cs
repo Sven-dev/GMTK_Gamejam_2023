@@ -53,6 +53,7 @@ public class SpawnManager : MonoBehaviour
 
         foreach (Room room in Rooms)
         {
+            room.Reset();
             room.Leave();
         }
 

@@ -22,8 +22,6 @@ public class Room : MonoBehaviour
         Powerables = transform.GetComponentsInChildren<Powerable>(true).ToList();
         Buttons = transform.GetComponentsInChildren<PowerButton>(true).ToList();
         Plates = transform.GetComponentsInChildren<PowerPlate>(true).ToList();
-
-        //gameObject.SetActive(false);
     }
 
     public void Enter()
@@ -34,6 +32,14 @@ public class Room : MonoBehaviour
     public void Leave()
     {
         gameObject.SetActive(false);
+    }
+
+    public void Reset()
+    {
+        foreach (PowerPlate plate in Plates)
+        {
+            //plate.Reset();
+        }
     }
 
     public void TurnOn()
@@ -96,14 +102,6 @@ public class Room : MonoBehaviour
             {
                 button.Depress();
             }
-        }
-    }
-
-    public void ResetRoom()
-    {
-        foreach (PowerPlate plate in Plates)
-        {
-            //plate.
         }
     }
 }
