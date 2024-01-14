@@ -13,7 +13,8 @@ public class SpawnManager : MonoBehaviour
     private int ActiveCheckpoint = 0;
 
     [SerializeField] private BodyController PlayerPrefab;
-    [SerializeField] private CameraManager Camera;
+
+    private Room[] Rooms;
 
     private void Awake()
     {
@@ -29,6 +30,12 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
+        Rooms = transform.GetComponentsInChildren<Room>(true);
+        foreach(Room room in Rooms)
+        {
+            room.Leave();
+        }
+
         SpawnPlayer();
     }
 
@@ -44,8 +51,12 @@ public class SpawnManager : MonoBehaviour
             Destroy(Head.gameObject);
         }
 
-        SpawnPlayer();
-        
+        foreach (Room room in Rooms)
+        {
+            room.Leave();
+        }
+
+        SpawnPlayer();        
     }
 
     public void SpawnPlayer()
@@ -68,7 +79,6 @@ public class SpawnManager : MonoBehaviour
         }
 
         checkpoint.Spawn();
-        //Camera.SetTarget(Head.transform);
     }
 
     public void UpdateCheckPoints(Checkpoint activeCheckpoint)

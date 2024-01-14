@@ -1570,7 +1570,6 @@ GameObject:
   - component: {fileID: 86637921}
   - component: {fileID: 86637919}
   - component: {fileID: 86637922}
-  - component: {fileID: 86637920}
   m_Layer: 0
   m_Name: Core
   m_TagString: Untagged
@@ -1592,26 +1591,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LeftMusic: A1
   RightMusic: B1
---- !u!114 &86637920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 86637918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee71ea7ed2154e64e91c5dee7664832c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Body: {fileID: 0}
-  Head: {fileID: 0}
-  Checkpoints:
-  - {fileID: 1558092020}
-  - {fileID: 1659912907}
-  PlayerPrefab: {fileID: 5214990456818611632, guid: 5fb6bec4d4d8f4846856b65c1d2e879c,
-    type: 3}
-  Camera: {fileID: 519420030}
 --- !u!4 &86637921
 Transform:
   m_ObjectHideFlags: 0
@@ -1928,6 +1907,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 108543253}
+  - component: {fileID: 108543254}
   m_Layer: 0
   m_Name: Rooms
   m_TagString: Untagged
@@ -1962,6 +1942,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &108543254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108543252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee71ea7ed2154e64e91c5dee7664832c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Body: {fileID: 0}
+  Head: {fileID: 0}
+  Checkpoints:
+  - {fileID: 1558092020}
+  - {fileID: 1659912907}
+  PlayerPrefab: {fileID: 5214990456818611632, guid: 5fb6bec4d4d8f4846856b65c1d2e879c,
+    type: 3}
+  Camera: {fileID: 519420030}
 --- !u!1 &120247080
 GameObject:
   m_ObjectHideFlags: 0
