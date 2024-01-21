@@ -20,7 +20,7 @@ public class CameraManager : MonoBehaviour
     {
         if (Target == null)
         {
-            Target = SpawnManager.Instance.Head.transform;
+            Target = SpawnManager.Instance.Body.transform;
         }
         else //if (Target != null)
         {

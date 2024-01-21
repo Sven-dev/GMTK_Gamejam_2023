@@ -10,10 +10,6 @@ public class Door : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         SpawnManager.Instance.Body.transform.parent = null;
-        if (SpawnManager.Instance.Head.transform.parent != SpawnManager.Instance.Body.transform)
-        {
-            SpawnManager.Instance.Head.transform.parent = null;
-        }
 
         Room.Leave();       
         SwitchesTo.Enter();

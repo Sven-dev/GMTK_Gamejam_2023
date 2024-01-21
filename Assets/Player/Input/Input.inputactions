@@ -24,13 +24,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Switch",
+                    "name": "Wind-up",
                     "type": "Button",
-                    "id": "e8a63758-ef2a-4f40-86ca-a7ecfe4abd02",
+                    "id": "0d219269-3ff3-4d0d-b2d0-0a6c8adf780c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -124,12 +124,23 @@
                 },
                 {
                     "name": "",
-                    "id": "fdc00e2b-c1a5-4b9a-8c16-ff87ff921f86",
+                    "id": "00ad55fc-9b59-40e1-af6c-49d59dba54bd",
                     "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Switch",
+                    "action": "Wind-up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0b96c44c-a0d5-4b5e-83de-416cb0686106",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Wind-up",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

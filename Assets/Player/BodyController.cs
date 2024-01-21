@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class BodyController : MonoBehaviour
 {
+	private float Windup = 0;
+	public Direction Facing = Direction.Right;
+	public bool WindingUp = false;
+
 	public bool Active = false;
 	public bool Grounded = false;
 
@@ -39,19 +43,19 @@ public class BodyController : MonoBehaviour
 	[SerializeField] private SpriteRenderer Renderer;
 
 	[Space]
-	[SerializeField] private Collider2D CombinedCollider;
-	[SerializeField] private Collider2D SplitCollider;
-
-	[Space]
-	[SerializeField] private HeadController LittleGuy;
-	[SerializeField] private float LaunchForce = 100f;
+	[SerializeField] private PlayerClockController ClockController;
+	[SerializeField] private Transform CrankPivot;
+	[SerializeField] private Animator CrankAnimator;
 
 	private void Start()
 	{
 		Input = new Input();
+
 		Input.Bigguy.Jump.started += OnJumpInput;
 		Input.Bigguy.Jump.canceled += OnJumpUpInput;
-		Input.Bigguy.Switch.started += OnSwitchCharacter;
+
+		Input.Bigguy.Windup.performed += OnWindupStart;
+		Input.Bigguy.Windup.canceled += OnWindupStop;
 
 		Input.Bigguy.Enable();
 	}
@@ -62,7 +66,9 @@ public class BodyController : MonoBehaviour
 
 		Input.Bigguy.Jump.started -= OnJumpInput;
 		Input.Bigguy.Jump.canceled -= OnJumpUpInput;
-		Input.Bigguy.Switch.started -= OnSwitchCharacter;
+
+		Input.Bigguy.Windup.performed -= OnWindupStart;
+		Input.Bigguy.Windup.canceled -= OnWindupStop;
 
 		Input = null;
 	}
@@ -77,17 +83,23 @@ public class BodyController : MonoBehaviour
 	{
 		GroundCheck();
 		Walk();
+
+		if (!WindingUp)
+		{
+			Windup -= Time.fixedDeltaTime;
+			CrankAnimator.SetFloat("Power", Windup);
+			ClockController.UpdateClock(Windup);
+		}
 	}
 
 	private void GroundCheck()
-    {
+	{
 		//Groundcheck
 		Collider2D ground = Physics2D.OverlapBox(GroundCheckTransform.position, GroundCheckSize, 0, GroundCheckLayer);
 
 		//Groundcheck (logic)
 		if (ground != null)
 		{
-
 			Grounded = true;
 
 			//Set the parent to the object it is grounded on so it moves with platforms and stuff
@@ -127,8 +139,35 @@ public class BodyController : MonoBehaviour
 
 	private void Walk()
 	{
+		float direction = 0;
+		if (Windup > 0 && !WindingUp)
+		{
+			//Calculate the direction
+			if (MovementInput > 0)
+			{
+				Facing = Direction.Right;
+				direction = 1;
+			}
+			else if (MovementInput < 0)
+			{
+				Facing = Direction.Left;
+				direction = -1;
+			}
+			else
+			{
+				if (Facing == Direction.Right)
+				{
+					direction = 1;
+				}
+				else //if (Facing == Direction.Left)
+				{
+					direction = -1;
+				}
+			}
+		}
+
 		//Calculate the direction we want to move in and our desired velocity
-		float targetSpeed = MovementInput * Speed;
+		float targetSpeed = direction * Speed;
 
 		// We can reduce our control using Lerp(). This smooths changes to our direction and speed
 		targetSpeed = Mathf.Lerp(Rigidbody.velocity.x, targetSpeed, MovementControl);
@@ -150,27 +189,39 @@ public class BodyController : MonoBehaviour
 	private void LateUpdate()
 	{
 		//Direction (flips the renderer if the player velocity is smaller than 0)
-		if (MovementInput > 0 || Rigidbody.velocity.x > 1)
+		if (Facing == Direction.Right)
 		{
 			Renderer.flipX = false;
+			CrankPivot.transform.localScale = new Vector3(1, 1, 1);
 		}
-		else if (MovementInput < 0 || Rigidbody.velocity.x < -1)
+		else if (Facing == Direction.Left)
 		{
 			Renderer.flipX = true;
+			CrankPivot.transform.localScale = new Vector3(-1, 1, 1);
 		}
 
-		//Animation
-		Animator.SetFloat("Vel X", Mathf.Abs(Rigidbody.velocity.x));
-		Animator.SetFloat("Vel Y", Rigidbody.velocity.y);
+		/*
+		if (WindingUp)
+		{
+			Animator.SetTrigger("Winding Up");
+		}
+		else
+		{
+		*/
 
-		//Reset triggers
-		Animator.ResetTrigger("Jump");
-		Animator.ResetTrigger("Land");
+			//Animation
+			Animator.SetFloat("Vel X", Mathf.Abs(Rigidbody.velocity.x));
+			Animator.SetFloat("Vel Y", Rigidbody.velocity.y);
+
+			//Reset triggers
+			Animator.ResetTrigger("Jump");
+			Animator.ResetTrigger("Land");
+		//}
 	}
 
 	public void OnJumpInput(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
 	{
-		if (LastTimeOnGround >= 0)
+		if (Windup > 0 && !WindingUp && LastTimeOnGround >= 0)
 		{
 			JustJumped = CoyoteTime;
 
@@ -194,6 +245,36 @@ public class BodyController : MonoBehaviour
 			Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, Rigidbody.velocity.y * JumpCutWhenLetGo);
 		}
 	}
+
+	public void OnWindupStart(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+    {
+		WindingUp = true;
+		StartCoroutine(_WindUp());
+		CrankAnimator.Play("WindUp");
+    }
+
+	public void OnWindupStop(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+    {
+		WindingUp = false;
+		CrankAnimator.Play("WindDown");
+	}
+
+	private IEnumerator _WindUp()
+    {
+		yield return new WaitForSeconds(0.5f);
+		while (WindingUp)
+        {
+			print("Wind up! Current wind: " + Windup);
+			Windup = Mathf.Clamp(Windup + 2, 0, 8);
+			ClockController.UpdateClock(Windup);
+
+			if (Windup >= 8)
+            {
+				CrankAnimator.Play("Off");
+            }
+			yield return new WaitForSeconds(1f);
+        }
+    }
 
 	public void ApplyPhysicsForce(Vector2 force)
 	{
@@ -232,37 +313,6 @@ public class BodyController : MonoBehaviour
 
 			yield return null;
 		}
-	}
-
-	public void OnSwitchCharacter(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
-	{
-		LittleGuy.ActivateCharacter();
-		LittleGuy.ApplyPhysicsForce(Vector2.up * LaunchForce);
-
-		DeactivateCharacter();
-	}
-
-	public void ActivateCharacter()
-    {		
-		Rigidbody.bodyType = RigidbodyType2D.Dynamic;
-		Input.Bigguy.Enable();
-		Animator.SetTrigger("Combine");
-
-		SplitCollider.enabled = false;
-		CombinedCollider.enabled = true;
-
-		Active = true;
-	}
-
-	public void DeactivateCharacter()
-    {
-		Input.Bigguy.Disable();
-		Animator.SetTrigger("Split");
-
-		CombinedCollider.enabled = false;
-		SplitCollider.enabled = true;
-
-		Active = false;		
 	}
 
     #region EDITOR METHODS

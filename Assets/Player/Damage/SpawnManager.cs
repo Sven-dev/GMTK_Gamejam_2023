@@ -67,18 +67,6 @@ public class SpawnManager : MonoBehaviour
         Checkpoint checkpoint = Checkpoints[ActiveCheckpoint];
         Body = Instantiate(PlayerPrefab, checkpoint.RespawnPivot.position, Quaternion.identity);
         
-        //For some reason I can't get the headcontroller out of body easily.
-        //This could be improved but works for now.
-        //Head = Body.GetComponentInChildren<HeadController>();
-        foreach(Transform child in Body.transform)
-        {
-            Head = child.GetComponent<HeadController>();
-            if (Head != null)
-            {
-                break;
-            }
-        }
-
         checkpoint.Spawn();
     }
 

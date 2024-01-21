@@ -92,7 +92,7 @@ public class HeadController : MonoBehaviour
 			transform.SetParent(player.transform);
 
 			BodyController Body = player.GetComponent<BodyController>();
-			Body.ActivateCharacter();
+			//Body.ActivateCharacter();
 			DeactivateCharacter();
         }
 	}

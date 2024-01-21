@@ -46,13 +46,13 @@ public partial class @Input : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Switch"",
+                    ""name"": ""Wind-up"",
                     ""type"": ""Button"",
-                    ""id"": ""e8a63758-ef2a-4f40-86ca-a7ecfe4abd02"",
+                    ""id"": ""0d219269-3ff3-4d0d-b2d0-0a6c8adf780c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -146,12 +146,23 @@ public partial class @Input : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""fdc00e2b-c1a5-4b9a-8c16-ff87ff921f86"",
+                    ""id"": ""00ad55fc-9b59-40e1-af6c-49d59dba54bd"",
                     ""path"": ""<Keyboard>/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Switch"",
+                    ""action"": ""Wind-up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b96c44c-a0d5-4b5e-83de-416cb0686106"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Wind-up"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -278,7 +289,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
         m_Bigguy = asset.FindActionMap("Big guy", throwIfNotFound: true);
         m_Bigguy_Movement = m_Bigguy.FindAction("Movement", throwIfNotFound: true);
         m_Bigguy_Jump = m_Bigguy.FindAction("Jump", throwIfNotFound: true);
-        m_Bigguy_Switch = m_Bigguy.FindAction("Switch", throwIfNotFound: true);
+        m_Bigguy_Windup = m_Bigguy.FindAction("Wind-up", throwIfNotFound: true);
         // Little guy
         m_Littleguy = asset.FindActionMap("Little guy", throwIfNotFound: true);
         m_Littleguy_Movement = m_Littleguy.FindAction("Movement", throwIfNotFound: true);
@@ -344,14 +355,14 @@ public partial class @Input : IInputActionCollection2, IDisposable
     private IBigguyActions m_BigguyActionsCallbackInterface;
     private readonly InputAction m_Bigguy_Movement;
     private readonly InputAction m_Bigguy_Jump;
-    private readonly InputAction m_Bigguy_Switch;
+    private readonly InputAction m_Bigguy_Windup;
     public struct BigguyActions
     {
         private @Input m_Wrapper;
         public BigguyActions(@Input wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Bigguy_Movement;
         public InputAction @Jump => m_Wrapper.m_Bigguy_Jump;
-        public InputAction @Switch => m_Wrapper.m_Bigguy_Switch;
+        public InputAction @Windup => m_Wrapper.m_Bigguy_Windup;
         public InputActionMap Get() { return m_Wrapper.m_Bigguy; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -367,9 +378,9 @@ public partial class @Input : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_BigguyActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_BigguyActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_BigguyActionsCallbackInterface.OnJump;
-                @Switch.started -= m_Wrapper.m_BigguyActionsCallbackInterface.OnSwitch;
-                @Switch.performed -= m_Wrapper.m_BigguyActionsCallbackInterface.OnSwitch;
-                @Switch.canceled -= m_Wrapper.m_BigguyActionsCallbackInterface.OnSwitch;
+                @Windup.started -= m_Wrapper.m_BigguyActionsCallbackInterface.OnWindup;
+                @Windup.performed -= m_Wrapper.m_BigguyActionsCallbackInterface.OnWindup;
+                @Windup.canceled -= m_Wrapper.m_BigguyActionsCallbackInterface.OnWindup;
             }
             m_Wrapper.m_BigguyActionsCallbackInterface = instance;
             if (instance != null)
@@ -380,9 +391,9 @@ public partial class @Input : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @Switch.started += instance.OnSwitch;
-                @Switch.performed += instance.OnSwitch;
-                @Switch.canceled += instance.OnSwitch;
+                @Windup.started += instance.OnWindup;
+                @Windup.performed += instance.OnWindup;
+                @Windup.canceled += instance.OnWindup;
             }
         }
     }
@@ -432,7 +443,7 @@ public partial class @Input : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnSwitch(InputAction.CallbackContext context);
+        void OnWindup(InputAction.CallbackContext context);
     }
     public interface ILittleguyActions
     {
