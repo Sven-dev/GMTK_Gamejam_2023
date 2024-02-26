@@ -48,6 +48,7 @@ public class BodyController : MonoBehaviour
 	[SerializeField] private Transform CrankPivot;
 	[SerializeField] private Animator CrankAnimator;
 	[SerializeField] private AudioSource CrankSound;
+	[SerializeField] private AudioSource TickSound;
 
 	private void Start()
 	{
@@ -252,13 +253,14 @@ public class BodyController : MonoBehaviour
     {
 		WindingUp = true;
 		StartCoroutine(_WindUp());
-		
-    }
+		TickSound.Stop();
+	}
 
 	public void OnWindupStop(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
     {
 		WindingUp = false;
 		CrankAnimator.Play("WindDown");
+		TickSound.Play();
 	}
 
 	private IEnumerator _WindUp()
@@ -271,12 +273,10 @@ public class BodyController : MonoBehaviour
 				if (Windup < 8)
 				{				
 					Windup = Mathf.Clamp(Windup + 2, 0, 8);
-					ClockController.UpdateClock(Windup);
+					ClockController.SetClock(Windup);
 
 					CrankAnimator.Play("WindUp");
 					CrankSound.Play();
-
-					print("Wind up! Current wind: " + Windup);
 				}
 				else
 				{

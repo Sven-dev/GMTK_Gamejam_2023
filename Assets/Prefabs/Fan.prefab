@@ -157,6 +157,7 @@ MonoBehaviour:
   Strength: 40
   Renderer: {fileID: 7728646861220199076}
   WindTrigger: {fileID: 7069715487805311988}
+  FanAnimator: {fileID: 4194521945310492348}
   WindAnimation: {fileID: 6340783651124541550}
 --- !u!114 &6274870125629503291
 MonoBehaviour:

@@ -12,6 +12,7 @@ public class Fan : Powerable
     [Header("System variables")]
     [SerializeField] private SpriteRenderer Renderer;
     [SerializeField] private Collider2D WindTrigger;
+    [SerializeField] private Animator FanAnimator;
     [SerializeField] private SpriteRenderer WindAnimation;
 
     public override void UpdatePower(float power)
@@ -22,11 +23,13 @@ public class Fan : Powerable
             if (PowerLevel > 0)
             {
                 Renderer.color = ColorDictionary.Instance.Powered;
+                FanAnimator.SetBool("Moving", true);
                 WindAnimation.enabled = true;
             }
             else
             {
                 Renderer.color = ColorDictionary.Instance.Unpowered;
+                FanAnimator.SetBool("Moving", false);
                 WindAnimation.enabled = false;
             }
         }
