@@ -6,7 +6,7 @@ public class Fan : Powerable
 {
     [Header("Fan variables")]
     public Face Direction = Face.Right;
-    [Range(1, 10)] public int Range = 3;
+    [Range(1, 15)] public int Range = 3;
     [SerializeField] private float Strength = 1f;
 
     [Header("System variables")]

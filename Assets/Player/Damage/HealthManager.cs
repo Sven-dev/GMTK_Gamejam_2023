@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HealthManager : MonoBehaviour
 {
+    [SerializeField] private GameObject Root;
+
     [Header("Crush checking")]
     [SerializeField] private LayerMask Mask;
     [Space]
@@ -24,8 +26,7 @@ public class HealthManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SpawnManager.Instance.Death();
-        Destroy(gameObject);
+        Death();
     }
 
     private void CrushCheck()
@@ -43,23 +44,10 @@ public class HealthManager : MonoBehaviour
                 if (rayA.distance == 0 && rayB.distance == 0)
                 {
                     print("Crush");
-                    SpawnManager.Instance.Death();
-                    Destroy(gameObject);
+                    Death();
                 }
             }
         }
-
-        /*
-        if (rayA.transform != null)
-        {
-            print("Ray up: " + rayA.transform.name + ", Distance: " + rayA.distance);
-        }
-
-        if (rayB.transform != null)
-        {
-            print("Ray down: " + rayB.transform.name + ", Distance: " + rayB.distance);
-        }
-        */
 
         //upleft-upright detection 1
         rayA = Physics2D.BoxCast(UpLeftPivot.position, new Vector2(0.5f, 0.01f), 0, Vector2.up, 0.5f, Mask.value);
@@ -71,23 +59,10 @@ public class HealthManager : MonoBehaviour
                 if (rayA.distance == 0 && rayB.distance == 0)
                 {
                     print("Crush");
-                    SpawnManager.Instance.Death();
-                    Destroy(gameObject);
+                    Death();
                 }
             }
         }
-
-        /*
-        if (rayA.transform != null)
-        {
-            print("Ray upleft: " + rayA.transform.name + ", Distance: " + rayA.distance);
-        }
-
-        if (rayB.transform != null)
-        {
-            print("Ray upright: " + rayB.transform.name + ", Distance: " + rayB.distance);
-        }
-        */
 
         if (DownLeftPivot != null && DownRightPivot != null)
         {
@@ -100,25 +75,20 @@ public class HealthManager : MonoBehaviour
                 {
                     if (rayA.distance == 0 && rayB.distance == 0)
                     {
+                        Death();
                         print("Crush");
-                        SpawnManager.Instance.Death();
-                        Destroy(gameObject);
                     }
                 }
             }
-
-            /*
-            if (rayA.transform != null)
-            {
-                print("Ray downleft: " + rayA.transform.name + ", Distance: " + rayA.distance);
-            }
-
-            if (rayB.transform != null)
-            {
-                print("Ray downright: " + rayB.transform.name + ", Distance: " + rayB.distance);
-            }
-            */
         }
+    }
+
+    private void Death()
+    {
+
+        //Play death animation
+        SpawnManager.Instance.Death();
+        Destroy(Root);
     }
 
     private void OnDrawGizmos()

@@ -38,7 +38,7 @@ public class Room : MonoBehaviour
     {
         foreach (PowerPlate plate in Plates)
         {
-            //plate.Reset();
+            plate.Reset();
         }
     }
 

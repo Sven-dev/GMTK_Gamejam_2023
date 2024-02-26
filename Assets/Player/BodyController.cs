@@ -26,6 +26,7 @@ public class BodyController : MonoBehaviour
 	[SerializeField] private float JumpForce = 1000f;
 	[Range(0, 1)]
 	[SerializeField] private float JumpCutWhenLetGo = .25f;
+	[SerializeField] private AudioSource JumpSound;
 	[Space]
 	[SerializeField] private LayerMask GroundCheckLayer;
 	[SerializeField] private Transform GroundCheckTransform;
@@ -42,10 +43,11 @@ public class BodyController : MonoBehaviour
 	[SerializeField] private Animator Animator;
 	[SerializeField] private SpriteRenderer Renderer;
 
-	[Space]
+	[Header("Winding up")]
 	[SerializeField] private PlayerClockController ClockController;
 	[SerializeField] private Transform CrankPivot;
 	[SerializeField] private Animator CrankAnimator;
+	[SerializeField] private AudioSource CrankSound;
 
 	private void Start()
 	{
@@ -233,8 +235,8 @@ public class BodyController : MonoBehaviour
 			Animator.SetTrigger("Jump");
 
 			//Sound
-			AudioManager.Instance.RandomizePitch("Jump", 0.9f, 1.1f);
-			AudioManager.Instance.Play("Jump");
+			JumpSound.pitch = Random.Range(0.95f, 1.05f);
+			JumpSound.Play();
 		}
 	}
 
@@ -250,7 +252,7 @@ public class BodyController : MonoBehaviour
     {
 		WindingUp = true;
 		StartCoroutine(_WindUp());
-		CrankAnimator.Play("WindUp");
+		
     }
 
 	public void OnWindupStop(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
@@ -261,19 +263,32 @@ public class BodyController : MonoBehaviour
 
 	private IEnumerator _WindUp()
     {
-		yield return new WaitForSeconds(0.5f);
+		float timer = 0.5f;		
 		while (WindingUp)
-        {
-			print("Wind up! Current wind: " + Windup);
-			Windup = Mathf.Clamp(Windup + 2, 0, 8);
-			ClockController.UpdateClock(Windup);
-
-			if (Windup >= 8)
+        {		
+			if (timer <= 0)
             {
-				CrankAnimator.Play("Off");
+				if (Windup < 8)
+				{				
+					Windup = Mathf.Clamp(Windup + 2, 0, 8);
+					ClockController.UpdateClock(Windup);
+
+					CrankAnimator.Play("WindUp");
+					CrankSound.Play();
+
+					print("Wind up! Current wind: " + Windup);
+				}
+				else
+				{
+					CrankAnimator.Play("Off");
+				}
+
+				timer = 1f;
             }
-			yield return new WaitForSeconds(1f);
-        }
+
+			timer -= Time.deltaTime;
+			yield return null;
+		}
     }
 
 	public void ApplyPhysicsForce(Vector2 force)

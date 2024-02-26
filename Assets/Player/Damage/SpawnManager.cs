@@ -41,6 +41,13 @@ public class SpawnManager : MonoBehaviour
 
     public void Death()
     {
+        StartCoroutine(_Death());
+    }
+
+    private IEnumerator _Death()
+    {
+        yield return new WaitForSeconds(1);
+
         if (Body != null)
         {
             Destroy(Body.gameObject);
@@ -57,7 +64,7 @@ public class SpawnManager : MonoBehaviour
             room.Leave();
         }
 
-        SpawnPlayer();        
+        SpawnPlayer();
     }
 
     public void SpawnPlayer()

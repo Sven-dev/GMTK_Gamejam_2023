@@ -9,6 +9,7 @@ public class PowerButton : MonoBehaviour
     [Space]
     [SerializeField] private BoxCollider2D Trigger;
     [SerializeField] private Animator Animator;
+    [SerializeField] private AudioSource ClickSound;
 
     private Room Room;
 
@@ -37,6 +38,7 @@ public class PowerButton : MonoBehaviour
     {
         Trigger.enabled = false;
         Animator.Play("On");
+        ClickSound.Play();
     }
 
     public void Depress()
