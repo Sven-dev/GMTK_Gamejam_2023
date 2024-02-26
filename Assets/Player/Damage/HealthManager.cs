@@ -26,6 +26,7 @@ public class HealthManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        print(collision.transform.name);
         Death();
     }
 
@@ -43,7 +44,7 @@ public class HealthManager : MonoBehaviour
             {
                 if (rayA.distance == 0 && rayB.distance == 0)
                 {
-                    print("Crush");
+                    print("Crush vertical");
                     Death();
                 }
             }
@@ -58,7 +59,7 @@ public class HealthManager : MonoBehaviour
             {
                 if (rayA.distance == 0 && rayB.distance == 0)
                 {
-                    print("Crush");
+                    print("Crush up horizontal");
                     Death();
                 }
             }
@@ -76,7 +77,7 @@ public class HealthManager : MonoBehaviour
                     if (rayA.distance == 0 && rayB.distance == 0)
                     {
                         Death();
-                        print("Crush");
+                        print("Crush down horizontal");
                     }
                 }
             }
@@ -85,7 +86,6 @@ public class HealthManager : MonoBehaviour
 
     private void Death()
     {
-
         //Play death animation
         SpawnManager.Instance.Death();
         Destroy(Root);
