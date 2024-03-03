@@ -355,6 +355,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4989836045423086356, guid: 776fc9e671bb2504abca7ee04e2417bd,
         type: 3}
+      propertyPath: SfxGroup
+      value: 
+      objectReference: {fileID: -8469710172485014695, guid: d2e3a0f3f8a224c4fb1184702f234980,
+        type: 2}
+    - target: {fileID: 4989836045423086356, guid: 776fc9e671bb2504abca7ee04e2417bd,
+        type: 3}
+      propertyPath: MusicGroup
+      value: 
+      objectReference: {fileID: 1032865714442117264, guid: d2e3a0f3f8a224c4fb1184702f234980,
+        type: 2}
+    - target: {fileID: 4989836045423086356, guid: 776fc9e671bb2504abca7ee04e2417bd,
+        type: 3}
       propertyPath: _MusicVolume
       value: 0.6
       objectReference: {fileID: 0}

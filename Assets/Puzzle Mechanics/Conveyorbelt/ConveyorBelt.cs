@@ -12,6 +12,7 @@ public class ConveyorBelt : Powerable
     [Space]
     [SerializeField] private SpriteRenderer Renderer;
     [SerializeField] private Animator Animator;
+    [SerializeField] private AudioSource Audio;
 
     public override void UpdatePower(float power)
     {
@@ -28,6 +29,15 @@ public class ConveyorBelt : Powerable
                 Renderer.color = ColorDictionary.Instance.Unpowered;
                 Animator.SetBool("Moving", false);
             }
+
+            if (!Audio.isPlaying && PowerLevel > 0)
+            {
+                Audio.Play();
+            }
+            else if (Audio.isPlaying && PowerLevel <= 0)
+            {
+                Audio.Stop();
+            }
         }
         else //if (AutoPower == true)
         {
@@ -40,6 +50,15 @@ public class ConveyorBelt : Powerable
             {
                 Renderer.color = ColorDictionary.Instance.Powered;
                 Animator.SetBool("Moving", true);
+            }
+
+            if (!Audio.isPlaying && PowerLevel > 0)
+            {
+                Audio.Stop();
+            }
+            else if (Audio.isPlaying && PowerLevel <= 0)
+            {
+                Audio.Play();
             }
         }
     }

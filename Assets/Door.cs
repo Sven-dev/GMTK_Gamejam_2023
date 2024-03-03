@@ -12,6 +12,6 @@ public class Door : MonoBehaviour
         SpawnManager.Instance.Body.transform.parent = null;
 
         Room.Leave();       
-        SwitchesTo.Enter();
+        SwitchesTo.Enter(this);
     }
 }

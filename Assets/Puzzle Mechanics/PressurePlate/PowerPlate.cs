@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class PowerPlate : MonoBehaviour
     [Space]
     [SerializeField] private List<Powerable> PoweredObjects;
     
-    private float PowerValue = 0;
+    [SerializeField] private float PowerValue = 0;
 
     [Header("Detection")]
     [SerializeField] private LayerMask DetectionLayer;
@@ -25,6 +26,21 @@ public class PowerPlate : MonoBehaviour
     [Header("Visual")]
     [SerializeField] private SpriteRenderer Renderer;
     [SerializeField] private SpriteRenderer Background;
+
+    private DateTime LastRoomTime = DateTime.Now;
+
+    private void OnEnable()
+    {
+        PowerValue = Mathf.Clamp01(PowerValue - (float)(DateTime.Now - LastRoomTime).TotalSeconds);
+        Platform.position = Vector2.Lerp(UnpressedPivot.position, PressedPivot.position, PowerValue);
+        foreach (Powerable obj in PoweredObjects)
+        {
+            obj.SetPower(PowerValue);
+        }
+
+        //Update the pole connecting the platform to the floor
+        Background.size = new Vector2(Background.size.x, Mathf.Lerp(Height, 0, PowerValue));
+    }
 
     private void FixedUpdate()
     {
@@ -89,6 +105,11 @@ public class PowerPlate : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        LastRoomTime = DateTime.Now;
+    }
+
     public void Reset()
     {
         PowerValue = 0;
@@ -112,6 +133,12 @@ public abstract class Powerable : MonoBehaviour
         UpdatePower(PowerLevel);
     }
 
+    public virtual void SetPower(float power)
+    {
+        PowerLevel = power;
+        UpdatePower(0);
+    }
+
     public virtual void UpdatePower(float power)
     {
         PowerLevel += power;
@@ -129,5 +156,5 @@ public enum Face
 public enum Direction
 {
     Left,
-    Right,
+    Right
 }

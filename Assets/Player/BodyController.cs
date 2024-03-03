@@ -203,23 +203,13 @@ public class BodyController : MonoBehaviour
 			CrankPivot.transform.localScale = new Vector3(-1, 1, 1);
 		}
 
-		/*
-		if (WindingUp)
-		{
-			Animator.SetTrigger("Winding Up");
-		}
-		else
-		{
-		*/
+		//Animation
+		Animator.SetFloat("Vel X", Mathf.Abs(Rigidbody.velocity.x));
+		Animator.SetFloat("Vel Y", Rigidbody.velocity.y);
 
-			//Animation
-			Animator.SetFloat("Vel X", Mathf.Abs(Rigidbody.velocity.x));
-			Animator.SetFloat("Vel Y", Rigidbody.velocity.y);
-
-			//Reset triggers
-			Animator.ResetTrigger("Jump");
-			Animator.ResetTrigger("Land");
-		//}
+		//Reset triggers
+		Animator.ResetTrigger("Jump");
+		Animator.ResetTrigger("Land");
 	}
 
 	public void OnJumpInput(UnityEngine.InputSystem.InputAction.CallbackContext ctx)

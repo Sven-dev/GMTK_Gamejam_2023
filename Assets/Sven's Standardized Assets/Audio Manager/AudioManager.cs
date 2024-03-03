@@ -50,6 +50,10 @@ public class AudioManager : MonoBehaviour
     [Header("Dialogue")]
     [SerializeField] private List<Sound> Dialogue;
 
+    [SerializeField] private UnityEngine.Audio.AudioMixerGroup SfxGroup;
+    [SerializeField] private UnityEngine.Audio.AudioMixerGroup MusicGroup;
+    [SerializeField] private UnityEngine.Audio.AudioMixerGroup DialogueGroup;
+
     #region Private
     private bool Playing = false;
 
@@ -159,6 +163,19 @@ public class AudioManager : MonoBehaviour
 
         sound.MaxVolume = sound.Volume;
         sound.Volume = MasterVolume * typeVolume * sound.Volume;
+
+        switch (type)
+        {
+            case SoundType.Sound:
+                sound.Source.outputAudioMixerGroup = SfxGroup;
+                break;
+            case SoundType.Music:
+                sound.Source.outputAudioMixerGroup = MusicGroup;
+                break;
+            case SoundType.Dialogue:
+                sound.Source.outputAudioMixerGroup = DialogueGroup;
+                break;
+        }
 
         sound.ApplyValues();
         if (sound.PlayOnAwake)

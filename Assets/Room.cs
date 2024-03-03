@@ -8,6 +8,9 @@ public class Room : MonoBehaviour
 {
     public bool Powered = false;
 
+    [SerializeField] private Camera Camera;
+    [SerializeField] private CameraBounds Bounds;
+    [Space]
     [SerializeField] private List<Powerable> Powerables;
     [SerializeField] private List<PowerButton> Buttons;
     [SerializeField] private List<PowerPlate> Plates;
@@ -29,8 +32,22 @@ public class Room : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    public void Enter(Door door)
+    {
+        gameObject.SetActive(true);
+        Camera.transform.position = Bounds.RestrictCamera(door.transform.position - Vector3.forward * 10);
+    }
+
     public void Leave()
     {
+        Reset();
+        gameObject.SetActive(false);
+    }
+
+    public void DeathLeave()
+    {
+        Reset();
+        TurnOff();
         gameObject.SetActive(false);
     }
 
@@ -81,8 +98,7 @@ public class Room : MonoBehaviour
         Background.color = ColorDictionary.Instance.Background;
         foreach (Tilemap tilemap in Tilemaps)
         {
-            tilemap.color = ColorDictionary.Instance.Unpowered;
-            
+            tilemap.color = ColorDictionary.Instance.Unpowered;          
         }
 
         //Unpower all powerables
