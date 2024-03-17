@@ -55,24 +55,16 @@ public class PowerPlate : MonoBehaviour
             foreach (Collider2D col in playerColliders)
             {
                 BodyController body = col.GetComponent<BodyController>();
-                if (body != null && body.Grounded)
+                if (body != null && body.Grounded & body.transform.parent == Platform)
                 {
                     pressMultiplier++;
-                }
-                else
-                {
-                    HeadController head = col.GetComponent<HeadController>();
-                    if (head != null && head.Grounded)
-                    {
-                        pressMultiplier++;
-                    }
+                    Renderer.color = ColorDictionary.Instance.Powered;
+                    Background.color = ColorDictionary.Instance.Powered;
                 }
             }
 
             //Increase PressValue based on the amount of characters pressing onto it until it reaches 1
             currentPressValue = Mathf.Clamp01(currentPressValue + PressSpeed * pressMultiplier * Time.fixedDeltaTime);
-            Renderer.color = ColorDictionary.Instance.Powered;
-            Background.color = ColorDictionary.Instance.Powered;
         }
         else if (Platform.position != UnpressedPivot.position)
         {
@@ -100,6 +92,12 @@ public class PowerPlate : MonoBehaviour
 
             //Update the pole connecting the platform to the floor
             Background.size = new Vector2(Background.size.x, Mathf.Lerp(Height, 0, currentPressValue));
+
+            if (currentPressValue == 0)
+            {
+                Renderer.color = ColorDictionary.Instance.Unpowered;
+                Background.color = ColorDictionary.Instance.Unpowered;
+            }
 
             PowerValue = currentPressValue;
         }
