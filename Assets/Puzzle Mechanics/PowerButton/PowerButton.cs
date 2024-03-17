@@ -31,7 +31,40 @@ public class PowerButton : MonoBehaviour
         {
             Room.TurnOff();
         }
-        
+    }
+
+    /// <summary>
+    /// Sets the state of the button with causing any effects
+    /// </summary>
+    public void SetState(bool value)
+    {
+        if (AutoPower)
+        {
+            if (value == true)
+            {
+                Trigger.enabled = false;
+                Animator.Play("On");
+
+            }
+            else
+            {
+                Trigger.enabled = true;
+                Animator.Play("Off");
+            }
+        }
+        else
+        {
+            if (value == true)
+            {
+                Trigger.enabled = true;
+                Animator.Play("Off");
+            }
+            else
+            {
+                Trigger.enabled = false;
+                Animator.Play("On");
+            }
+        }
     }
 
     public void Press()

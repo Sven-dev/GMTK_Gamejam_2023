@@ -27,14 +27,20 @@ public class Room : MonoBehaviour
         Plates = transform.GetComponentsInChildren<PowerPlate>(true).ToList();
     }
 
+    /// <summary>
+    /// Enter a room through a checkpoint (respawning/fasttravelling)
+    /// </summary>
     public void Enter()
     {
-        gameObject.SetActive(true);
+        SetupRoom();
     }
 
+    /// <summary>
+    /// Enter a room through a door
+    /// </summary>
     public void Enter(Door door)
     {
-        gameObject.SetActive(true);
+        SetupRoom();
         Camera.transform.position = Bounds.RestrictCamera(door.transform.position - Vector3.forward * 10);
     }
 
@@ -118,6 +124,15 @@ public class Room : MonoBehaviour
             {
                 button.Depress();
             }
+        }
+    }
+
+    private void SetupRoom()
+    {
+        gameObject.SetActive(true);
+        foreach (PowerButton button in Buttons)
+        {
+            button.SetState(Powered);
         }
     }
 }
