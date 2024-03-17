@@ -20,11 +20,7 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         float MovementInput = Input.Bigguy.Movement.ReadValue<Vector2>().y;
-        print(Input.Bigguy.Movement.ReadValue<Vector2>());
-        print(MovementInput);
-
         if (PlayerOnPlatform && MovementInput < 0)
         {
             Collider.enabled = false;
