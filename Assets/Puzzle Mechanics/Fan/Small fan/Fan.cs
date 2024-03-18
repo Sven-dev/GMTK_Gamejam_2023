@@ -14,6 +14,9 @@ public class Fan : Powerable
     [SerializeField] private Collider2D WindTrigger;
     [SerializeField] private Animator FanAnimator;
     [SerializeField] private SpriteRenderer WindAnimation;
+    [SerializeField] private AudioSource Audio;
+
+    private bool Powered = false;
 
     public override void UpdatePower(float power)
     {
@@ -22,28 +25,51 @@ public class Fan : Powerable
         {
             if (PowerLevel > 0)
             {
-                Renderer.color = ColorDictionary.Instance.Powered;
-                FanAnimator.SetBool("Moving", true);
-                WindAnimation.enabled = true;
+                if (!Powered)
+                {
+                    Powered = true;
+                    Renderer.color = ColorDictionary.Instance.Powered;
+                    FanAnimator.SetBool("Moving", true);
+                    WindAnimation.enabled = true;
+                    Audio.Play();
+                }
+
             }
             else
             {
-                Renderer.color = ColorDictionary.Instance.Unpowered;
-                FanAnimator.SetBool("Moving", false);
-                WindAnimation.enabled = false;
+                if (Powered)
+                {
+                    Powered = false;
+                    Renderer.color = ColorDictionary.Instance.Unpowered;
+                    FanAnimator.SetBool("Moving", false);
+                    WindAnimation.enabled = false;
+                    Audio.Stop();
+                }
             }
         }
         else //if (AutoPower == true)
         {
             if (PowerLevel > 0)
             {
-                Renderer.color = ColorDictionary.Instance.Unpowered;
-                WindAnimation.enabled = false;
+                if (Powered)
+                {
+                    Powered = false;
+                    Renderer.color = ColorDictionary.Instance.Unpowered;
+                    FanAnimator.SetBool("Moving", false);
+                    WindAnimation.enabled = false;
+                    Audio.Stop();
+                }
             }
             else
             {
-                Renderer.color = ColorDictionary.Instance.Powered;
-                WindAnimation.enabled = true;
+                if (!Powered)
+                {
+                    Powered = true;
+                    Renderer.color = ColorDictionary.Instance.Powered;
+                    FanAnimator.SetBool("Moving", true);
+                    WindAnimation.enabled = true;
+                    Audio.Play();
+                }
             }
         }
     }

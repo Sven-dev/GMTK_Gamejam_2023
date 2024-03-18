@@ -8,6 +8,7 @@ public class ConveyorBeltEditor : MonoBehaviour
     [SerializeField] private SpriteRenderer SpriteRenderer;
     [SerializeField] private BoxCollider2D BaseCollider;
     [SerializeField] private BoxCollider2D MovementTrigger;
+    [SerializeField] private AudioSource Audio;
     [Space]
     [SerializeField] private ConveyorBelt ConveyorBelt;
 
@@ -27,18 +28,10 @@ public class ConveyorBeltEditor : MonoBehaviour
 
             MovementTrigger.size = new Vector2(Length, MovementTrigger.size.y);
             MovementTrigger.offset = new Vector2(Length/2f, MovementTrigger.offset.y);
-        }
 
-        /*
-        if (ConveyorBelt.transform.position != Position)
-        {
-            ConveyorBelt.transform.position = new Vector3(
-                    (int)ConveyorBelt.transform.position.x,
-                    (int)ConveyorBelt.transform.position.y,
-                    (int)ConveyorBelt.transform.position.z);
-
-            Position = ConveyorBelt.transform.position;
+            Audio.transform.localPosition = new Vector2(Length / 2f, 0.35f);
+            Audio.minDistance = Length / 2f;
+            Audio.maxDistance = Length / 2f + 1;
         }
-        */
     }
 }

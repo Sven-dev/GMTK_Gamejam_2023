@@ -20,7 +20,11 @@ public class CameraManager : MonoBehaviour
     {
         if (Target == null)
         {
-            Target = SpawnManager.Instance.Body.transform;
+            if (SpawnManager.Instance.Body != null)
+            {
+                Target = SpawnManager.Instance.Body.transform;
+                transform.position = new Vector3(transform.position.x, transform.position.y, -1);
+            }
         }
         else //if (Target != null)
         {
